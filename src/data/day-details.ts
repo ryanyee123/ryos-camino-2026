@@ -1,0 +1,102 @@
+export type DayDetail = {
+  day: number;
+  elevation: string;
+  journal: string[];
+  albergue: { name: string; location: string; note: string };
+  meals: { eyebrow: string; name: string; location: string; note: string }[];
+};
+
+export const dayDetails: Record<number, DayDetail> = {
+  1: {
+    day: 1,
+    elevation: '1,200 ft',
+    journal: [
+      'Started walking at 7:15am from Sarria. The air was cool and the town was still mostly asleep — just a few other pilgrims loading up at the café near the trailhead. Café con leche, tortilla slice, out the door.',
+      'The first few kilometers wound through eucalyptus forest, damp and quiet. The trail markers are everywhere — yellow arrows on stone walls, trees, the occasional spray-painted reminder on asphalt. Hard to get lost.',
+      'The descent into Portomarín is dramatic. You cross a long bridge over the Belesar reservoir and climb stone stairs into a town that was literally moved uphill when the dam flooded the original village in the 1960s. The church was relocated stone by stone.',
+      'Checked into the albergue by 2pm. Shower, laundry line, siesta. Dinner was a pilgrim menu at Casa Curro — three courses, bottle of Ribeiro, €13. The dining room was loud and full of languages I couldn\'t place.',
+    ],
+    albergue: {
+      name: 'Albergue Ferramenteiro',
+      location: 'Portomarín',
+      note: 'Large municipal-style place with terraces overlooking the Miño river. The shower line was no joke.',
+    },
+    meals: [
+      { eyebrow: 'DINNER', name: 'Pilgrim Menu at Casa Curro', location: 'Portomarín', note: 'Three courses and a bottle of wine for €13. Lentil stew, pork, flan. Slept hard after.' },
+    ],
+  },
+  2: {
+    day: 2,
+    elevation: '1,400 ft',
+    journal: [
+      'Left Portomarín early, climbing out of the river valley on a paved road before the trail cut back into farmland. Rolling hills, stone walls, cows watching you pass. Classic Galician countryside.',
+      'Today felt longer than the numbers suggested. The terrain between Portomarín and Palas de Rei is deceptively hilly — nothing steep, but constant up-and-down that wears on the legs. I started counting hamlets: Gonzar, Castromaior, Ventas de Narón.',
+      'Stopped for a bocadillo and Aquarius at a tiny bar in Hospital de la Cruz. The bartender had a stamp for the credencial and a dog that followed pilgrims to the edge of the village before turning back.',
+      'Arrived in Palas de Rei around 3pm. Small, quiet town. The albergue was clean and half-empty — apparently most people push further to Melide. Glad I didn\'t. The evening was warm and I sat on a bench reading until dark.',
+    ],
+    albergue: {
+      name: 'Albergue de Palas de Rei',
+      location: 'Palas de Rei',
+      note: 'Municipal albergue on the main road. Clean, quiet, half-empty by late afternoon.',
+    },
+    meals: [
+      { eyebrow: 'LUNCH', name: 'Bocadillo at Hospital de la Cruz', location: 'Hospital de la Cruz', note: 'Ham and cheese on crusty bread, bottle of Aquarius. The bartender\'s dog followed me to the edge of town.' },
+    ],
+  },
+  3: {
+    day: 3,
+    elevation: '1,600 ft',
+    journal: [
+      'The longest day. Left Palas de Rei at 6:45am knowing I had 18.6 miles ahead. The morning was misty — not rain, just Galician fog that clings to everything and soaks through your shirt by 8am.',
+      'Passed through a string of tiny villages before reaching Melide around noon. This is the town famous for pulpo — octopus cooked in copper pots and served on wooden plates with paprika, olive oil, and coarse salt. Stopped at Ezequiel, which has been doing it since 1950-something. Worth every minute of the detour.',
+      'The afternoon stretch from Melide to Arzúa was tough. My feet were starting to complain and the trail alternated between forest paths and asphalt road walking. Arzúa appeared just when I needed it — a real town with pharmacies and supermarkets.',
+      'Collapsed into the albergue, took an ice-cold shower (the hot water was gone), and ate a quiet dinner alone at a restaurant on the main square. Tetilla cheese and bread. Galicia does simple food better than anywhere.',
+    ],
+    albergue: {
+      name: 'Albergue San Antonio de Padua',
+      location: 'Melide',
+      note: 'Convent-run, all stone walls. Lights out at 10pm, no negotiation.',
+    },
+    meals: [
+      { eyebrow: 'LUNCH', name: 'Pulpo at Ezequiel', location: 'Melide', note: 'The pulpo is the reason you stop in Melide. Tender, paprika, olive oil, salt. Don\'t overthink it.' },
+      { eyebrow: 'DINNER', name: 'Tetilla cheese and bread', location: 'Arzúa', note: 'Quiet dinner alone on the main square. Galicia does simple food better than anywhere.' },
+    ],
+  },
+  4: {
+    day: 4,
+    elevation: '900 ft',
+    journal: [
+      'Short day — only 11.8 miles. Left Arzúa late, around 8am, because my legs needed the extra sleep. The trail out of town drops into a eucalyptus forest and stays there for a while.',
+      'Today\'s walking felt different. The path is getting busier — more pilgrims who started from Sarria just a day or two ago, tour groups, people with clean backpacks. The last 100km is the minimum for the Compostela certificate, so the trail fills up.',
+      'Stopped in Santa Irene for coffee and a stamp at a small chapel. The hospitalera was an older woman who\'d walked the Camino four times. She said the fifth time was just living next to it.',
+      'O Pedrouzo is not a pretty town — it\'s basically a highway stop that exists because pilgrims need somewhere to sleep before the final push to Santiago. But the albergue was fine, and the anticipation of tomorrow made everything feel charged.',
+    ],
+    albergue: {
+      name: 'Albergue O Pino',
+      location: 'O Pedrouzo',
+      note: 'The last bunk before Santiago. Slept like a stone, woke up nervous.',
+    },
+    meals: [
+      { eyebrow: 'LUNCH', name: 'Tortilla and coffee at Santa Irene', location: 'Santa Irene', note: 'Small chapel café. The hospitalera had walked the Camino four times.' },
+    ],
+  },
+  5: {
+    day: 5,
+    elevation: '1,100 ft',
+    journal: [
+      'Woke up at 5:30am. Nobody needed an alarm — the whole albergue was rustling in the dark, headlamps bobbing, dry bags being stuffed. Everyone wanted to reach Santiago early.',
+      'The first hour was forest walking in pre-dawn light. Then the trail crossed the airport perimeter — planes taking off overhead while you walk through eucalyptus. A surreal transition from medieval pilgrimage to modern infrastructure.',
+      'Monte do Gozo — the Hill of Joy — is where you first see Santiago\'s cathedral spires in the distance. I stood there for a few minutes. Two German pilgrims were crying. A Korean couple took a selfie. I just looked.',
+      'Walked into the old city through the Porta do Camiño and followed the brass scallop shells embedded in the sidewalk to the cathedral. Arrived at 10:15am. The Praza do Obradoiro was full of pilgrims sitting on the ground, boots off, staring up at the facade. I joined them.',
+    ],
+    albergue: {
+      name: 'Seminario Menor',
+      location: 'Santiago de Compostela',
+      note: 'Enormous seminary converted to albergue. 200 beds. Worth it for the location — 5 minutes from the cathedral.',
+    },
+    meals: [
+      { eyebrow: 'CELEBRATION', name: 'Lunch at O Curro da Parra', location: 'Santiago', note: 'Proper sit-down lunch after five days of pilgrim menus. Galician beef, Albariño wine, tarta de Santiago. Earned every bite.' },
+      { eyebrow: 'MORNING', name: 'Last café con leche', location: 'O Pedrouzo', note: 'The final 5am coffee before the last push. €1.50. Same as every other morning.' },
+    ],
+  },
+};
