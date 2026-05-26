@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import mapboxgl from 'mapbox-gl';
-import { towns, days, ROUTE_COLOR, type Day, type Town } from '@/data/days';
+import { towns, days, ROUTE_COLOR, type Day } from '@/data/days';
 
 mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
 
@@ -12,18 +12,15 @@ type RouteSegment = {
 };
 
 type RouteMapProps = {
-  scopedToDay?: number;
+  activeDay?: number | 'full';
+  className?: string;
 };
 
-export default function RouteMap({ scopedToDay }: RouteMapProps) {
+export default function RouteMap({ activeDay = 'full', className }: RouteMapProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const mapRef = useRef<mapboxgl.Map | null>(null);
   const markersRef = useRef<mapboxgl.Marker[]>([]);
   const [segments, setSegments] = useState<RouteSegment[]>([]);
-  const [activeDay, setActiveDay] = useState<number | null>(null);
-  const [hoveredTown, setHoveredTown] = useState<Town | null>(null);
-
-  const isScoped = scopedToDay != null;
 
   const fetchRoute = useCallback(async (day: Day): Promise<RouteSegment | null> => {
     const waypoints: [number, number][] = [];
@@ -46,6 +43,7 @@ export default function RouteMap({ scopedToDay }: RouteMapProps) {
     return null;
   }, []);
 
+  // Initialize map + fetch all routes
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
@@ -54,18 +52,17 @@ export default function RouteMap({ scopedToDay }: RouteMapProps) {
       style: 'mapbox://styles/mapbox/light-v11',
       center: [-7.95, 42.87],
       zoom: 9.1,
+      pitchWithRotate: false,
+      dragRotate: false,
     });
 
+    map.scrollZoom.disable();
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 
     mapRef.current = map;
 
     map.on('load', async () => {
-      const daysToFetch = isScoped
-        ? days.filter((d) => d.day === scopedToDay)
-        : days;
-
-      const results = await Promise.all(daysToFetch.map(fetchRoute));
+      const results = await Promise.all(days.map(fetchRoute));
       const validSegments = results.filter((s): s is RouteSegment => s !== null);
       setSegments(validSegments);
 
@@ -88,29 +85,8 @@ export default function RouteMap({ scopedToDay }: RouteMapProps) {
         });
       });
 
-      // Fit bounds for scoped view
-      if (isScoped && validSegments.length > 0) {
-        const seg = validSegments[0];
-        const coords = seg.geometry.coordinates as [number, number][];
-        const bounds = coords.reduce(
-          (b, c) => b.extend(c),
-          new mapboxgl.LngLatBounds(coords[0], coords[0])
-        );
-        map.fitBounds(bounds, { padding: 60, duration: 0 });
-      }
-
       // Add markers
-      const townsToShow = isScoped
-        ? (() => {
-            const day = days.find((d) => d.day === scopedToDay);
-            if (!day) return [];
-            const ids = [day.from, day.to];
-            if (day.via) ids.push(day.via);
-            return ids.map((id) => towns[id]);
-          })()
-        : Object.values(towns);
-
-      townsToShow.forEach((town) => {
+      Object.values(towns).forEach((town) => {
         const isEndpoint = town.type === 'start' || town.type === 'end';
         const isLunch = town.type === 'lunch';
 
@@ -127,12 +103,6 @@ export default function RouteMap({ scopedToDay }: RouteMapProps) {
         el.style.cursor = 'pointer';
         el.style.boxShadow = '0 1px 3px rgba(0,0,0,0.3)';
 
-        if (!isScoped) {
-          el.addEventListener('mouseenter', () => setHoveredTown(town));
-          el.addEventListener('mouseleave', () => setHoveredTown(null));
-          el.addEventListener('click', () => setHoveredTown(town));
-        }
-
         const marker = new mapboxgl.Marker({ element: el })
           .setLngLat(town.coords)
           .addTo(map);
@@ -147,32 +117,33 @@ export default function RouteMap({ scopedToDay }: RouteMapProps) {
       map.remove();
       mapRef.current = null;
     };
-  }, [fetchRoute, scopedToDay]);
+  }, [fetchRoute]);
 
-  // Handle day filtering (homepage only)
+  // React to activeDay changes
   useEffect(() => {
-    if (isScoped) return;
     const map = mapRef.current;
     if (!map || segments.length === 0) return;
+
+    const selectedDay = typeof activeDay === 'number' ? activeDay : null;
 
     segments.forEach((seg) => {
       const layerId = `route-line-${seg.day}`;
       if (!map.getLayer(layerId)) return;
 
-      if (activeDay === null) {
+      if (selectedDay === null) {
         map.setPaintProperty(layerId, 'line-opacity', 0.9);
         map.setPaintProperty(layerId, 'line-width', 4);
-      } else if (seg.day === activeDay) {
+      } else if (seg.day === selectedDay) {
         map.setPaintProperty(layerId, 'line-opacity', 1);
         map.setPaintProperty(layerId, 'line-width', 5);
       } else {
-        map.setPaintProperty(layerId, 'line-opacity', 0.15);
+        map.setPaintProperty(layerId, 'line-opacity', 0.12);
         map.setPaintProperty(layerId, 'line-width', 3);
       }
     });
 
-    if (activeDay !== null) {
-      const day = days.find((d) => d.day === activeDay);
+    if (selectedDay !== null) {
+      const day = days.find((d) => d.day === selectedDay);
       if (day) {
         const coords: [number, number][] = [towns[day.from].coords, towns[day.to].coords];
         if (day.via) coords.push(towns[day.via].coords);
@@ -180,73 +151,14 @@ export default function RouteMap({ scopedToDay }: RouteMapProps) {
           (b, c) => b.extend(c),
           new mapboxgl.LngLatBounds(coords[0], coords[0])
         );
-        map.fitBounds(bounds, { padding: 80, duration: 800 });
+        map.fitBounds(bounds, { padding: 60, duration: 800 });
       }
+    } else {
+      map.flyTo({ center: [-7.95, 42.87], zoom: 9.1, duration: 800 });
     }
-  }, [activeDay, segments, scopedToDay]);
-
-  const resetView = () => {
-    setActiveDay(null);
-    mapRef.current?.flyTo({ center: [-7.95, 42.87], zoom: 9.1, duration: 800 });
-  };
-
-  // Scoped view: just the map, no chips or info bar
-  if (isScoped) {
-    return (
-      <div ref={containerRef} className="h-[480px] w-full rounded-xl overflow-hidden" />
-    );
-  }
+  }, [activeDay, segments]);
 
   return (
-    <div className="flex flex-col gap-3">
-      {/* Day filter chips */}
-      <div className="flex flex-wrap gap-2">
-        <button
-          onClick={resetView}
-          className={`rounded-full px-3 py-1.5 text-[13px] font-medium border transition-colors ${
-            activeDay === null
-              ? 'bg-ink text-surface border-ink'
-              : 'bg-surface-raised text-ink-muted border-border hover:border-border-strong'
-          }`}
-        >
-          Full route
-        </button>
-        {days.map((d) => (
-          <button
-            key={d.day}
-            onClick={() => setActiveDay(d.day === activeDay ? null : d.day)}
-            className={`rounded-full px-3 py-1.5 text-[13px] font-medium border transition-colors ${
-              activeDay === d.day
-                ? 'bg-ink text-surface border-ink'
-                : 'bg-surface-raised text-ink-muted border-border hover:border-border-strong'
-            }`}
-          >
-            Day {d.day}
-          </button>
-        ))}
-      </div>
-
-      {/* Map */}
-      <div ref={containerRef} className="h-[500px] w-full rounded-xl overflow-hidden" />
-
-      {/* Info bar */}
-      <div className="h-8 flex items-center text-body-sm text-ink-muted">
-        {hoveredTown ? (
-          <span>
-            <span className="font-medium text-ink">{hoveredTown.name}</span>
-            {hoveredTown.note && <span className="ml-2">· {hoveredTown.note}</span>}
-            {hoveredTown.type === 'start' && <span className="ml-2">· Starting point</span>}
-            {hoveredTown.type === 'end' && <span className="ml-2">· Destination</span>}
-          </span>
-        ) : activeDay !== null ? (
-          <span>
-            {days.find((d) => d.day === activeDay)?.title} ·{' '}
-            {days.find((d) => d.day === activeDay)?.miles} mi
-          </span>
-        ) : (
-          <span>Hover over a town for details · 72 mi total</span>
-        )}
-      </div>
-    </div>
+    <div ref={containerRef} className={`w-full rounded-xl overflow-hidden ${className ?? 'h-[500px]'}`} />
   );
 }
