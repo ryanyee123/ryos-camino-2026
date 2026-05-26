@@ -34,4 +34,4 @@ export const days: Day[] = [
   { day: 5, date: '2026-05-22', from: 'pedrouzo',   to: 'santiago',   miles: 12.4, title: 'O Pedrouzo → Santiago' },
 ];
 
-export const ROUTE_COLOR = '#D85A30';
+export const ROUTE_COLOR = '#C7521D';
