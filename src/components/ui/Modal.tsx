@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useState, useCallback, useRef } from 'react';
 import { X } from 'lucide-react';
 
 type ModalProps = {
@@ -10,38 +10,77 @@ type ModalProps = {
 };
 
 export default function Modal({ hashName, title, children }: ModalProps) {
-  const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const backdropRef = useRef<HTMLDivElement>(null);
 
   const close = useCallback(() => {
-    setOpen(false);
+    setVisible(false);
     history.replaceState(null, '', window.location.pathname + window.location.search);
   }, []);
 
+  // Listen for hash changes to open
   useEffect(() => {
-    const check = () => setOpen(window.location.hash === `#${hashName}`);
+    const check = () => {
+      const shouldOpen = window.location.hash === `#${hashName}`;
+      if (shouldOpen) {
+        setMounted(true);
+      } else {
+        setVisible(false);
+      }
+    };
     check();
     window.addEventListener('hashchange', check);
     return () => window.removeEventListener('hashchange', check);
   }, [hashName]);
 
+  // When mounted, trigger visible on next frame
   useEffect(() => {
-    if (!open) return;
+    if (!mounted) return;
+    const raf = requestAnimationFrame(() => setVisible(true));
+    return () => cancelAnimationFrame(raf);
+  }, [mounted]);
+
+  // When invisible after being mounted, unmount after transition
+  useEffect(() => {
+    if (visible || !mounted) return;
+    const el = backdropRef.current;
+    if (!el) { setMounted(false); return; }
+    const onEnd = () => setMounted(false);
+    el.addEventListener('transitionend', onEnd, { once: true });
+    // Fallback in case transitionend doesn't fire
+    const timeout = setTimeout(onEnd, 250);
+    return () => { el.removeEventListener('transitionend', onEnd); clearTimeout(timeout); };
+  }, [visible, mounted]);
+
+  // Lock body scroll while modal is open
+  useEffect(() => {
+    if (!mounted) return;
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, [mounted]);
+
+  // ESC to close
+  useEffect(() => {
+    if (!mounted) return;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Escape') close();
     };
     document.addEventListener('keydown', onKey);
     return () => document.removeEventListener('keydown', onKey);
-  }, [open, close]);
+  }, [mounted, close]);
 
-  if (!open) return null;
+  if (!mounted) return null;
 
   return (
     <div
-      className="fixed inset-0 z-50 bg-black/40 backdrop-blur-sm transition-opacity duration-200"
+      ref={backdropRef}
+      className={`fixed inset-0 z-50 flex items-end md:items-start justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-200 ${visible ? 'opacity-100' : 'opacity-0'}`}
       onClick={close}
     >
+      {/* Desktop: centered modal */}
       <div
-        className="bg-surface-raised rounded-2xl max-w-3xl mx-auto my-12 p-8 shadow-2xl max-h-[85vh] overflow-y-auto relative"
+        className={`hidden md:block bg-surface-raised rounded-2xl w-full max-w-3xl mt-12 mb-12 p-8 max-h-[85vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-6">
@@ -54,6 +93,28 @@ export default function Modal({ hashName, title, children }: ModalProps) {
           </button>
         </div>
         {children}
+      </div>
+
+      {/* Mobile: bottom sheet */}
+      <div
+        className={`md:hidden bg-surface-raised rounded-t-2xl w-full max-h-[90vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="sticky top-0 z-10 bg-surface-raised pt-3 pb-4 px-6">
+          <div className="w-10 h-1 rounded-full bg-stone-300 mx-auto mb-4" />
+          <div className="flex items-start justify-between">
+            <h2 className="text-h2">{title}</h2>
+            <button
+              onClick={close}
+              className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-stone-100 transition-colors"
+            >
+              <X size={18} className="text-ink-muted" />
+            </button>
+          </div>
+        </div>
+        <div className="px-6 pb-10">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -5,24 +5,50 @@
   --color-accent-light: #E8A57F;
   --color-surface: #FAFAF9;
   --color-surface-raised: #FFFFFF;
-  --color-border: rgba(0,0,0,0.08);
+  --color-border: rgba(0,0,0,0.06);
   --color-border-strong: rgba(0,0,0,0.14);
   --color-ink: #1C1917;
   --color-ink-muted: #57534E;
   --color-ink-faint: #A8A29E;
   --font-sans: var(--font-geist-sans);
   --animate-fade-in: fade-in 200ms ease-out;
+  --shadow-card:
+    0 1px 2px rgba(0, 0, 0, 0.04),
+    0 1px 4px rgba(0, 0, 0, 0.04),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover:
+    0 2px 4px rgba(0, 0, 0, 0.06),
+    0 4px 8px rgba(0, 0, 0, 0.06),
+    0 8px 16px rgba(0, 0, 0, 0.06);
+  --shadow-nav:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 2px 8px rgba(0, 0, 0, 0.06),
+    0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 @keyframes fade-in {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+*:focus { outline: none; }
+*:focus-visible { outline: 2px solid #C7521D; outline-offset: 2px; border-radius: inherit; }
+
+::selection { background: rgba(199, 82, 29, 0.18); color: #1C1917; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
 }
 
 body {
   background: var(--color-surface);
   color: var(--color-ink);
   font-family: var(--font-sans), system-ui, sans-serif;
+}
+
+@theme inline {
+  --ease-smooth: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 @layer components {
