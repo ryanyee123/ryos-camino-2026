@@ -9,7 +9,7 @@ const geistSans = Geist({
 });
 
 export const metadata: Metadata = {
-  title: "Camino Francés 2026",
+  title: "Ryan's Trip on the Camino Francés",
   description: "Sarria to Santiago de Compostela, May 2026",
 };
 

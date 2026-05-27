@@ -15,7 +15,7 @@ type StatCardProps = {
 
 export function StatCard({ label, value, sublabel, icon: Icon }: StatCardProps) {
   return (
-    <div className="relative bg-surface-raised border border-border rounded-xl p-5">
+    <div className="relative bg-surface-raised shadow-card rounded-xl p-5">
       {Icon && (
         <Icon size={16} className="absolute top-5 right-5 text-ink-faint" />
       )}
@@ -75,9 +75,9 @@ export function PlaceCard({
     </>
   );
 
-  const classes = `bg-surface-raised border border-border rounded-xl overflow-hidden${
+  const classes = `bg-surface-raised shadow-card rounded-xl overflow-hidden${
     interactive
-      ? ' transition-all duration-200 ease-out hover:border-border-strong hover:-translate-y-px'
+      ? ' transition-[box-shadow,transform] duration-200 ease-out hover:shadow-card-hover hover:-translate-y-px'
       : ''
   }`;
 
@@ -104,9 +104,9 @@ type MediaCardProps = {
 export function MediaCard({ children, href }: MediaCardProps) {
   const interactive = !!href;
 
-  const classes = `bg-surface-raised border border-border rounded-xl overflow-hidden${
+  const classes = `bg-surface-raised shadow-card rounded-xl overflow-hidden${
     interactive
-      ? ' transition-all duration-200 ease-out hover:border-border-strong hover:-translate-y-px'
+      ? ' transition-[box-shadow,transform] duration-200 ease-out hover:shadow-card-hover hover:-translate-y-px'
       : ''
   }`;
 

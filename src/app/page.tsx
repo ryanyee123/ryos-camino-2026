@@ -65,11 +65,11 @@ export default function Home() {
       <CredencialModal />
 
       {/* Hero */}
-      <section className="py-12 md:py-20 text-center">
+      <section className="py-12 md:py-20">
         <div className="max-w-6xl mx-auto px-6">
-          <p className="text-caption">CAMINO FRANCÉS · MAY 2026</p>
-          <h1 className="text-display mt-3">Camino Francés</h1>
-          <p className="text-h3 font-normal leading-relaxed text-ink-muted mt-4 mx-auto max-w-2xl">
+          <p className="text-[13px] uppercase tracking-[0.06em] text-ink-muted">Camino de Santiago · May 2026 · 71 miles</p>
+          <h1 className="mt-6 text-[44px] leading-[1.05] tracking-[-0.03em] font-semibold text-ink max-w-3xl">Five days on the Camino Francés</h1>
+          <p className="mt-6 text-[17px] leading-[1.6] text-ink-muted max-w-2xl">
             {tripOverview.lead}
           </p>
         </div>

@@ -51,13 +51,12 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
       container: containerRef.current,
       style: 'mapbox://styles/mapbox/light-v11',
       center: [-7.95, 42.87],
-      zoom: 9.1,
+      zoom: 9,
       pitchWithRotate: false,
       dragRotate: false,
     });
 
     map.scrollZoom.disable();
-    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 
     mapRef.current = map;
 
@@ -72,6 +71,20 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
           data: { type: 'Feature', geometry: seg.geometry, properties: {} },
         });
 
+        // Shadow layer underneath
+        map.addLayer({
+          id: `route-shadow-${seg.day}`,
+          type: 'line',
+          source: `route-${seg.day}`,
+          layout: { 'line-cap': 'round', 'line-join': 'round' },
+          paint: {
+            'line-color': '#000',
+            'line-width': 8,
+            'line-opacity': 0.12,
+            'line-blur': 1,
+          },
+        });
+
         map.addLayer({
           id: `route-line-${seg.day}`,
           type: 'line',
@@ -79,7 +92,7 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
           layout: { 'line-cap': 'round', 'line-join': 'round' },
           paint: {
             'line-color': ROUTE_COLOR,
-            'line-width': 4,
+            'line-width': 3.5,
             'line-opacity': 0.9,
           },
         });
@@ -88,20 +101,26 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
       // Add markers
       Object.values(towns).forEach((town) => {
         const isEndpoint = town.type === 'start' || town.type === 'end';
-        const isLunch = town.type === 'lunch';
+        const isSlept = town.type === 'start' || town.type === 'end' || town.type === 'stop';
 
-        const size = isEndpoint ? 16 : 12;
-        const bgColor = isLunch ? '#E8A57F' : '#FFFFFF';
-        const borderColor = isEndpoint ? ROUTE_COLOR : '#78716C';
+        const size = isEndpoint ? 12 : 8;
+        const bgColor = isSlept ? ROUTE_COLOR : '#FFFFFF';
+        const strokeColor = isSlept ? '#FFFFFF' : ROUTE_COLOR;
+        const strokeWidth = isEndpoint ? 2.5 : 1.5;
 
         const el = document.createElement('div');
         el.style.width = `${size}px`;
         el.style.height = `${size}px`;
         el.style.borderRadius = '50%';
         el.style.backgroundColor = bgColor;
-        el.style.border = `2.5px solid ${borderColor}`;
+        el.style.border = `${strokeWidth}px solid ${strokeColor}`;
         el.style.cursor = 'pointer';
-        el.style.boxShadow = '0 1px 3px rgba(0,0,0,0.3)';
+        el.style.boxShadow = '0 1px 3px rgba(0,0,0,0.15)';
+
+        if (isEndpoint) {
+          el.style.outline = '1px solid rgba(0,0,0,0.1)';
+          el.style.outlineOffset = '1px';
+        }
 
         const marker = new mapboxgl.Marker({ element: el })
           .setLngLat(town.coords)
@@ -109,6 +128,14 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
 
         markersRef.current.push(marker);
       });
+
+      // Fit to full route on initial load
+      const allCoords = Object.values(towns).map((t) => t.coords);
+      const fullBounds = allCoords.reduce(
+        (b, c) => b.extend(c),
+        new mapboxgl.LngLatBounds(allCoords[0], allCoords[0])
+      );
+      map.fitBounds(fullBounds, { padding: 40 });
     });
 
     return () => {
@@ -127,18 +154,28 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
     const selectedDay = typeof activeDay === 'number' ? activeDay : null;
 
     segments.forEach((seg) => {
-      const layerId = `route-line-${seg.day}`;
-      if (!map.getLayer(layerId)) return;
+      const lineId = `route-line-${seg.day}`;
+      const shadowId = `route-shadow-${seg.day}`;
+      if (!map.getLayer(lineId)) return;
 
       if (selectedDay === null) {
-        map.setPaintProperty(layerId, 'line-opacity', 0.9);
-        map.setPaintProperty(layerId, 'line-width', 4);
+        map.setPaintProperty(lineId, 'line-opacity', 0.9);
+        map.setPaintProperty(lineId, 'line-width', 3.5);
+        if (map.getLayer(shadowId)) {
+          map.setPaintProperty(shadowId, 'line-opacity', 0.12);
+        }
       } else if (seg.day === selectedDay) {
-        map.setPaintProperty(layerId, 'line-opacity', 1);
-        map.setPaintProperty(layerId, 'line-width', 5);
+        map.setPaintProperty(lineId, 'line-opacity', 1);
+        map.setPaintProperty(lineId, 'line-width', 4.5);
+        if (map.getLayer(shadowId)) {
+          map.setPaintProperty(shadowId, 'line-opacity', 0.18);
+        }
       } else {
-        map.setPaintProperty(layerId, 'line-opacity', 0.12);
-        map.setPaintProperty(layerId, 'line-width', 3);
+        map.setPaintProperty(lineId, 'line-opacity', 0.12);
+        map.setPaintProperty(lineId, 'line-width', 2);
+        if (map.getLayer(shadowId)) {
+          map.setPaintProperty(shadowId, 'line-opacity', 0.04);
+        }
       }
     });
 
@@ -154,11 +191,16 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
         map.fitBounds(bounds, { padding: 60, duration: 800 });
       }
     } else {
-      map.flyTo({ center: [-7.95, 42.87], zoom: 9.1, duration: 800 });
+      const allCoords = Object.values(towns).map((t) => t.coords);
+      const fullBounds = allCoords.reduce(
+        (b, c) => b.extend(c),
+        new mapboxgl.LngLatBounds(allCoords[0], allCoords[0])
+      );
+      map.fitBounds(fullBounds, { padding: 40, duration: 800 });
     }
   }, [activeDay, segments]);
 
   return (
-    <div ref={containerRef} className={`w-full rounded-xl overflow-hidden ${className ?? 'h-[500px]'}`} />
+    <div ref={containerRef} className={`w-full rounded-lg border border-black/[0.06] overflow-hidden ${className ?? 'h-[500px]'}`} />
   );
 }

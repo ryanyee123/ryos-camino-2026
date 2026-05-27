@@ -75,12 +75,14 @@ export default function Modal({ hashName, title, children }: ModalProps) {
   return (
     <div
       ref={backdropRef}
-      className={`fixed inset-0 z-50 flex items-end md:items-start justify-center bg-black/40 backdrop-blur-sm transition-opacity duration-200 ${visible ? 'opacity-100' : 'opacity-0'}`}
+      className={`fixed inset-0 z-50 flex items-end md:items-start justify-center bg-black/30 backdrop-blur-md backdrop-saturate-150 transition-opacity duration-200 ${visible ? 'opacity-100' : 'opacity-0'}`}
       onClick={close}
     >
       {/* Desktop: centered modal */}
       <div
-        className={`hidden md:block bg-surface-raised rounded-2xl w-full max-w-3xl mt-12 mb-12 p-8 max-h-[85vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
+        role="dialog"
+        aria-modal="true"
+        className={`hidden md:block bg-white rounded-xl border border-black/[0.05] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)] w-full max-w-[640px] mt-12 mb-12 p-8 max-h-[85vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-start justify-between mb-6">
@@ -97,7 +99,9 @@ export default function Modal({ hashName, title, children }: ModalProps) {
 
       {/* Mobile: bottom sheet */}
       <div
-        className={`md:hidden bg-surface-raised rounded-t-2xl w-full max-h-[90vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
+        role="dialog"
+        aria-modal="true"
+        className={`md:hidden bg-white rounded-t-2xl w-full max-h-[90vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 z-10 bg-surface-raised pt-3 pb-4 px-6">
