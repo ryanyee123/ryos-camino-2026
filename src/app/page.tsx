@@ -11,6 +11,7 @@ import StatCardRow from '@/components/StatCardRow';
 import TripOverviewContent from '@/components/TripOverviewContent';
 import DayContent from '@/components/DayContent';
 import RouteMap from '@/components/RouteMap';
+import HeroRoute from '@/components/HeroRoute';
 import { days, tripOverview } from '@/data/days';
 
 type ActiveDay = number | 'full';
@@ -65,9 +66,9 @@ export default function Home() {
       <CredencialModal />
 
       {/* Hero */}
-      <section className="relative pt-12 md:pt-20 pb-6 md:pb-8">
-        <span className="absolute -top-4 -left-4 text-[180px] font-semibold text-black/[0.03] leading-none tracking-tighter pointer-events-none select-none hidden md:block" aria-hidden>01</span>
-        <div className="max-w-6xl mx-auto px-6">
+      <section className="relative pt-12 md:pt-20 pb-6 md:pb-8 overflow-hidden">
+        <HeroRoute />
+        <div className="relative max-w-6xl mx-auto px-6">
           <p className="text-[13px] uppercase tracking-[0.06em] text-ink-muted">Camino de Santiago · May 2026 · 71 miles</p>
           <h1 className="mt-6 text-[44px] leading-[1.05] tracking-[-0.03em] font-semibold text-ink max-w-3xl">Ryan&apos;s Camino Francés</h1>
           <p className="mt-6 text-[17px] leading-[1.6] text-ink-muted max-w-2xl">
@@ -80,8 +81,7 @@ export default function Home() {
       <DayChips activeDay={activeDay} onSelect={handleSelect} />
 
       {/* Split section */}
-      <div className="relative max-w-6xl mx-auto px-6 py-10">
-        <span className="absolute -top-4 -left-4 text-[180px] font-semibold text-black/[0.03] leading-none tracking-tighter pointer-events-none select-none hidden md:block" aria-hidden>02</span>
+      <div className="max-w-6xl mx-auto px-6 py-10">
         {/* Desktop: 60/40 split */}
         <div className="hidden md:grid grid-cols-5 gap-8">
           {/* Left column — scrollable content */}
@@ -123,8 +123,7 @@ export default function Home() {
       </div>
 
       {/* About */}
-      <section className="relative border-t border-border">
-        <span className="absolute -top-4 -left-4 text-[180px] font-semibold text-black/[0.03] leading-none tracking-tighter pointer-events-none select-none hidden md:block" aria-hidden>03</span>
+      <section className="border-t border-border">
         <div className="max-w-6xl mx-auto px-6 pt-20 pb-12">
           <h2 className="text-h2">About this site</h2>
           <p className="text-body text-ink-muted max-w-2xl mt-6">
