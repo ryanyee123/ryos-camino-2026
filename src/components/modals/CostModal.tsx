@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { PiggyBank, TrendingUp, BedDouble, Utensils } from 'lucide-react';
+import { PiggyBank, TrendingUp, BedDouble, Utensils, Backpack } from 'lucide-react';
 import Modal from '@/components/ui/Modal';
 import { StatCard } from '@/components/ui/Card';
 import { cost } from '@/data/cost';
@@ -11,10 +11,14 @@ function fmt(value: number, currency: 'EUR' | 'USD') {
   return `€${value}`;
 }
 
+const tripCategories = cost.categories.filter((c) => c.name !== 'Gear');
+const gearCategory = cost.categories.find((c) => c.name === 'Gear')!;
+const tripTotalEur = tripCategories.reduce((sum, c) => sum + c.totalEur, 0);
+
 const lodgingCategory = cost.categories.find((c) => c.name === 'Lodging')!;
 const foodCategory = cost.categories.find((c) => c.name === 'Food')!;
 
-const perDayEur = Math.round(cost.totalEur / 6);
+const perDayEur = Math.round(tripTotalEur / 6);
 const bedPerNightEur = Math.round(lodgingCategory.totalEur / lodgingCategory.items.length);
 const foodPerDayEur = Math.round(foodCategory.totalEur / foodCategory.items.length);
 
@@ -38,13 +42,14 @@ export default function CostModal() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-        <StatCard label="TOTAL" value={fmt(cost.totalEur, currency)} sublabel="on-trip" icon={PiggyBank} />
-        <StatCard label="PER DAY" value={fmt(perDayEur, currency)} sublabel="average" icon={TrendingUp} />
+        <StatCard label="TOTAL" value={fmt(cost.totalEur, currency)} sublabel="trip + gear" icon={PiggyBank} />
+        <StatCard label="ON-TRIP" value={fmt(tripTotalEur, currency)} sublabel="6 days" icon={TrendingUp} />
         <StatCard label="BED" value={fmt(bedPerNightEur, currency)} sublabel="avg per night" icon={BedDouble} />
-        <StatCard label="FOOD" value={fmt(foodPerDayEur, currency)} sublabel="avg per day" icon={Utensils} />
+        <StatCard label="GEAR" value={fmt(gearCategory.totalEur, currency)} sublabel="one-time" icon={Backpack} />
       </div>
 
-      {cost.categories.map((cat) => (
+      {/* On-trip categories */}
+      {tripCategories.map((cat) => (
         <div key={cat.name} className="mb-6">
           <div className="flex items-baseline justify-between border-b border-border-strong pb-2 mb-2">
             <h3 className="text-body-sm font-semibold">{cat.name}</h3>
@@ -61,17 +66,31 @@ export default function CostModal() {
         </div>
       ))}
 
-      <div className="border-t border-border-strong pt-4 mb-6 flex items-baseline justify-between">
-        <span className="text-body font-semibold">Total</span>
-        <span className="text-body font-semibold tabular-nums">{fmt(cost.totalEur, currency)}</span>
+      <div className="border-t border-border-strong pt-4 mb-8 flex items-baseline justify-between">
+        <span className="text-body font-semibold">On-trip subtotal</span>
+        <span className="text-body font-semibold tabular-nums">{fmt(tripTotalEur, currency)}</span>
       </div>
 
-      <p className="text-body-sm text-ink-muted">
-        Gear tracked separately.{' '}
-        <a href="#gear" className="text-accent-text underline underline-offset-2 hover:text-accent">
-          See what I carried →
-        </a>
-      </p>
+      {/* Gear category */}
+      <div className="mb-6">
+        <div className="flex items-baseline justify-between border-b border-border-strong pb-2 mb-2">
+          <h3 className="text-body-sm font-semibold">{gearCategory.name}</h3>
+          <span className="text-body-sm font-semibold tabular-nums">{fmt(gearCategory.totalEur, currency)}</span>
+        </div>
+        <div className="space-y-1">
+          {gearCategory.items.map((item) => (
+            <div key={item.name} className="flex items-baseline justify-between text-body-sm">
+              <span className="text-ink-muted">{item.name}</span>
+              <span className="tabular-nums ml-4 flex-shrink-0">{fmt(item.amountEur, currency)}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="border-t border-border-strong pt-4 flex items-baseline justify-between">
+        <span className="text-body font-semibold">Grand total</span>
+        <span className="text-body font-semibold tabular-nums">{fmt(cost.totalEur, currency)}</span>
+      </div>
     </Modal>
   );
 }

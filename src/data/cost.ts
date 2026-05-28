@@ -12,10 +12,9 @@ export type CostCategory = {
 };
 
 export const cost = {
-  totalEur: 572.5,
+  totalEur: 2059.5,
   conversionRate: 1.08,
   narrative: '[Placeholder — Ryan to write]',
-  gearTotalEur: null as number | null,
   categories: [
     {
       name: 'Lodging',
@@ -59,6 +58,28 @@ export const cost = {
         { name: 'Laundry', amountEur: 10 },
         { name: 'Donations (churches, stamps)', amountEur: 10 },
         { name: 'Snacks & convenience items', amountEur: 10 },
+      ],
+    },
+    {
+      name: 'Gear',
+      totalEur: 1487,
+      items: [
+        { name: 'Osprey Stratos 34', amountEur: 185 },
+        { name: 'Salomon Genesis Trail-Running Shoes', amountEur: 139 },
+        { name: 'Darn Tough Hiker Micro Crew Socks ×3', amountEur: 72 },
+        { name: 'Smartwool Merino Short Sleeve', amountEur: 60 },
+        { name: 'REI Merino Long Sleeve', amountEur: 60 },
+        { name: 'REI Rainier Rain Jacket', amountEur: 93 },
+        { name: 'Gramicci Nylon Paneled Trek Pants', amountEur: 137 },
+        { name: 'Snow Peak Bucket Hat', amountEur: 46 },
+        { name: 'Silk Sleeping Bag Liner', amountEur: 88 },
+        { name: 'Anker Portable Charger', amountEur: 43 },
+        { name: 'Olympus Stylus TG-6', amountEur: 351 },
+        { name: 'Water Bladder / Camelback', amountEur: 32 },
+        { name: 'Miller Sunglasses', amountEur: 125 },
+        { name: 'Journal + Pens', amountEur: 23 },
+        { name: 'Eunzel Microfiber Quick-Dry Towel', amountEur: 14 },
+        { name: 'First Aid Pouch', amountEur: 19 },
       ],
     },
   ] as CostCategory[],
