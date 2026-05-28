@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import { Home, Backpack, Euro, Stamp } from 'lucide-react';
+import { Backpack, Euro, Stamp } from 'lucide-react';
 
 const ITEM_SIZE = 40;
 const GAP = 4;
 const PADDING = 8;
 
 const items = [
-  { icon: Home, label: 'Home', action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
   { icon: Backpack, label: 'Gear', action: () => { window.location.hash = 'gear'; } },
   { icon: Euro, label: 'Cost', action: () => { window.location.hash = 'cost'; } },
   { icon: Stamp, label: 'Credencial', action: () => { window.location.hash = 'credencial'; } },

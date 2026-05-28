@@ -57,8 +57,29 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
     });
 
     map.scrollZoom.disable();
+    map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 
     mapRef.current = map;
+
+    map.on('load', () => {
+      // Increase place label readability
+      const style = map.getStyle();
+      if (style?.layers) {
+        for (const layer of style.layers) {
+          if (layer.type === 'symbol' && layer.id.startsWith('place-')) {
+            map.setLayoutProperty(layer.id, 'text-size', [
+              'interpolate', ['linear'], ['zoom'],
+              6, 13,
+              10, 16,
+              14, 20,
+            ]);
+            map.setPaintProperty(layer.id, 'text-color', '#57534E');
+            map.setPaintProperty(layer.id, 'text-halo-color', '#FFFFFF');
+            map.setPaintProperty(layer.id, 'text-halo-width', 1.5);
+          }
+        }
+      }
+    });
 
     map.on('load', async () => {
       const results = await Promise.all(days.map(fetchRoute));
@@ -188,7 +209,7 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
           (b, c) => b.extend(c),
           new mapboxgl.LngLatBounds(coords[0], coords[0])
         );
-        map.fitBounds(bounds, { padding: 60, duration: 800 });
+        map.fitBounds(bounds, { padding: 100, duration: 800 });
       }
     } else {
       const allCoords = Object.values(towns).map((t) => t.coords);
@@ -201,6 +222,6 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
   }, [activeDay, segments]);
 
   return (
-    <div ref={containerRef} className={`w-full rounded-lg border border-black/[0.06] overflow-hidden ${className ?? 'h-[500px]'}`} />
+    <div ref={containerRef} className={`w-full rounded-lg border border-black/[0.06] overflow-hidden bg-stone-100 ${className ?? 'h-[500px]'}`} />
   );
 }

@@ -11,7 +11,7 @@ function formatDate(iso: string) {
 export default function DayContent({ day }: { day: Day }) {
   return (
     <div>
-      <p className="text-caption text-accent mb-2">
+      <p className="text-caption text-accent-text mb-2">
         DAY {day.day} · {formatDate(day.date)}
       </p>
       <h2 className="text-h1">{day.title}</h2>

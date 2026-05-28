@@ -67,7 +67,7 @@ export function PlaceCard({
         )}
       </div>
       <div className="p-5">
-        <p className="text-caption text-accent">{eyebrow}</p>
+        <p className="text-caption text-accent-text">{eyebrow}</p>
         <h3 className="text-h3 mt-1">{name}</h3>
         {meta && <p className="text-body-sm text-ink-muted mt-1">{meta}</p>}
         {note && <p className="text-body-sm mt-3">{note}</p>}
