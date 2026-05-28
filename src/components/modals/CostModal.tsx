@@ -4,26 +4,19 @@ import { useState } from 'react';
 import { PiggyBank, TrendingUp, BedDouble, Utensils } from 'lucide-react';
 import Modal from '@/components/ui/Modal';
 import { StatCard } from '@/components/ui/Card';
-
-const EUR_TO_USD = 1.12;
-
-const breakdown = [
-  { category: 'Albergues', eur: 72, perDayEur: 14, notes: '5 nights, municipal + private mix' },
-  { category: 'Meals', eur: 92, perDayEur: 18, notes: 'Pilgrim menus + cafés' },
-  { category: 'Snacks & coffee', eur: 34, perDayEur: 7, notes: 'Coffee every morning, fruit, chocolate' },
-  { category: 'Transportation', eur: 68, perDayEur: null, notes: 'Madrid→Sarria train (one-way)' },
-  { category: 'Misc', eur: 46, perDayEur: 9, notes: 'Credencial, donations, blister care' },
-];
-
-const totalEur = 312;
-const perDayEur = 62;
-const bedEur = 14;
-const foodEur = 18;
+import { cost } from '@/data/cost';
 
 function fmt(value: number, currency: 'EUR' | 'USD') {
-  if (currency === 'USD') return `$${Math.round(value * EUR_TO_USD)}`;
+  if (currency === 'USD') return `$${Math.round(value * cost.conversionRate)}`;
   return `€${value}`;
 }
+
+const lodgingCategory = cost.categories.find((c) => c.name === 'Lodging')!;
+const foodCategory = cost.categories.find((c) => c.name === 'Food')!;
+
+const perDayEur = Math.round(cost.totalEur / 6);
+const bedPerNightEur = Math.round(lodgingCategory.totalEur / lodgingCategory.items.length);
+const foodPerDayEur = Math.round(foodCategory.totalEur / foodCategory.items.length);
 
 export default function CostModal() {
   const [currency, setCurrency] = useState<'EUR' | 'USD'>('EUR');
@@ -32,7 +25,7 @@ export default function CostModal() {
     <Modal hashName="cost" title="What it cost">
       <div className="flex items-center justify-between mb-6">
         <p className="text-body text-ink-muted">
-          Five days, all in. A budget reference for anyone planning this route.
+          Six days, all in. A budget reference for anyone planning this route.
         </p>
         <button
           onClick={() => setCurrency(currency === 'EUR' ? 'USD' : 'EUR')}
@@ -45,47 +38,40 @@ export default function CostModal() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-        <StatCard label="TOTAL" value={fmt(totalEur, currency)} sublabel="all five days" icon={PiggyBank} />
+        <StatCard label="TOTAL" value={fmt(cost.totalEur, currency)} sublabel="on-trip" icon={PiggyBank} />
         <StatCard label="PER DAY" value={fmt(perDayEur, currency)} sublabel="average" icon={TrendingUp} />
-        <StatCard label="BED" value={fmt(bedEur, currency)} sublabel="avg per night" icon={BedDouble} />
-        <StatCard label="FOOD" value={fmt(foodEur, currency)} sublabel="avg per day" icon={Utensils} />
+        <StatCard label="BED" value={fmt(bedPerNightEur, currency)} sublabel="avg per night" icon={BedDouble} />
+        <StatCard label="FOOD" value={fmt(foodPerDayEur, currency)} sublabel="avg per day" icon={Utensils} />
       </div>
 
-      <table className="w-full text-body-sm">
-        <thead>
-          <tr className="border-b border-border-strong">
-            <th className="text-left py-3 font-medium">Category</th>
-            <th className="text-right py-3 font-medium">Total</th>
-            <th className="text-right py-3 font-medium">Per day</th>
-            <th className="text-left py-3 pl-4 font-medium">Notes</th>
-          </tr>
-        </thead>
-        <tbody>
-          {breakdown.map((row) => (
-            <tr key={row.category} className="border-b border-border">
-              <td className="py-3">{row.category}</td>
-              <td className="text-right py-3 tabular-nums">{fmt(row.eur, currency)}</td>
-              <td className="text-right py-3 tabular-nums">{row.perDayEur ? fmt(row.perDayEur, currency) : '—'}</td>
-              <td className="text-left py-3 pl-4 text-ink-muted">{row.notes}</td>
-            </tr>
-          ))}
-          <tr className="font-semibold">
-            <td className="py-3">Total</td>
-            <td className="text-right py-3 tabular-nums">{fmt(totalEur, currency)}</td>
-            <td className="text-right py-3 tabular-nums">{fmt(perDayEur, currency)}</td>
-            <td className="py-3 pl-4" />
-          </tr>
-        </tbody>
-      </table>
+      {cost.categories.map((cat) => (
+        <div key={cat.name} className="mb-6">
+          <div className="flex items-baseline justify-between border-b border-border-strong pb-2 mb-2">
+            <h3 className="text-body-sm font-semibold">{cat.name}</h3>
+            <span className="text-body-sm font-semibold tabular-nums">{fmt(cat.totalEur, currency)}</span>
+          </div>
+          <div className="space-y-1">
+            {cat.items.map((item) => (
+              <div key={item.name} className="flex items-baseline justify-between text-body-sm">
+                <span className="text-ink-muted">{item.name}</span>
+                <span className="tabular-nums ml-4 flex-shrink-0">{fmt(item.amountEur, currency)}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
 
-      <div className="mt-8 max-w-2xl space-y-3">
-        <p className="text-body text-ink-muted">
-          If I were planning this again, I'd budget {fmt(65, currency)}/day as a comfortable baseline. Municipal albergues are cheaper ({fmt(8, currency)}–{fmt(10, currency)}) but fill up fast; private ones run {fmt(12, currency)}–{fmt(18, currency)} and usually have better showers. Pilgrim menus are the best value for dinner — expect three courses and wine for {fmt(10, currency)}–{fmt(14, currency)}.
-        </p>
-        <p className="text-body text-ink-muted">
-          The train from Madrid to Sarria was the single biggest expense. If you're already in Galicia, the total drops significantly. Coffee is non-negotiable at {fmt(1.5, currency)}/cup, and you'll drink two or three a day.
-        </p>
+      <div className="border-t border-border-strong pt-4 mb-6 flex items-baseline justify-between">
+        <span className="text-body font-semibold">Total</span>
+        <span className="text-body font-semibold tabular-nums">{fmt(cost.totalEur, currency)}</span>
       </div>
+
+      <p className="text-body-sm text-ink-muted">
+        Gear tracked separately.{' '}
+        <a href="#gear" className="text-accent-text underline underline-offset-2 hover:text-accent">
+          See what I carried →
+        </a>
+      </p>
     </Modal>
   );
 }

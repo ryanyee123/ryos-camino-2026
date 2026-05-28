@@ -86,13 +86,14 @@ export const days: Day[] = [
     ],
     photos: [],
     lodging: {
-      name: 'Albergue Ferramenteiro',
+      name: 'Novo Porto Albergue',
       town: 'Portomarín',
-      note: 'Large municipal-style place with terraces overlooking the Miño river. The shower line was no joke.',
-      googleMapsUrl: '',
+      note: '[Placeholder — Ryan to write]',
+      googleMapsUrl: 'https://maps.app.goo.gl/1pmaLY8iV38QBpoE8',
     },
     meals: [
-      { label: 'DINNER', name: 'Pilgrim Menu at Casa Curro', location: 'Portomarín', note: 'Three courses and a bottle of wine for €13. Lentil stew, pork, flan. Slept hard after.', googleMapsUrl: '' },
+      { label: 'LUNCH', name: 'Restaurante Pérez', location: 'Portomarín', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/am6mMswz5R1wJhgJA' },
+      { label: 'DINNER', name: 'Casa Cruz', location: 'Portomarín', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/gy4SAi8vqZLUNUp37' },
     ],
   },
   {
@@ -113,13 +114,14 @@ export const days: Day[] = [
     ],
     photos: [],
     lodging: {
-      name: 'Albergue de Palas de Rei',
+      name: 'Albergue Restaurante Castro',
       town: 'Palas de Rei',
-      note: 'Municipal albergue on the main road. Clean, quiet, half-empty by late afternoon.',
-      googleMapsUrl: '',
+      note: '[Placeholder — Ryan to write]',
+      googleMapsUrl: 'https://maps.app.goo.gl/dVxLwFcGSV3U3uWs6',
     },
     meals: [
-      { label: 'LUNCH', name: 'Bocadillo at Hospital de la Cruz', location: 'Hospital de la Cruz', note: 'Ham and cheese on crusty bread, bottle of Aquarius. The bartender\'s dog followed me to the edge of town.', googleMapsUrl: '' },
+      { label: 'LUNCH', name: 'Rectoral de Lestedo', location: 'Between Portomarín and Palas de Rei', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/smvaGibXDVQ1eiVk9' },
+      { label: 'DINNER', name: 'Pulpería A Nosa Terra', location: 'Palas de Rei', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/9oz3Nhw3RqpXKaG7A' },
     ],
   },
   {
@@ -141,14 +143,14 @@ export const days: Day[] = [
     ],
     photos: [],
     lodging: {
-      name: 'Albergue Don Quijote',
+      name: 'O Albergue deSelmo',
       town: 'Arzúa',
-      note: 'Private albergue, small and well-run. Hot showers (if you arrive early). Good kitchen.',
-      googleMapsUrl: '',
+      note: '[Placeholder — Ryan to write]',
+      googleMapsUrl: 'https://maps.app.goo.gl/rYkE9vr8WCEdXYs79',
     },
     meals: [
-      { label: 'LUNCH', name: 'Pulpo at Ezequiel', location: 'Melide', note: 'The pulpo is the reason you stop in Melide. Tender, paprika, olive oil, salt. Don\'t overthink it.', googleMapsUrl: '' },
-      { label: 'DINNER', name: 'Tetilla cheese and bread', location: 'Arzúa', note: 'Quiet dinner alone on the main square. Galicia does simple food better than anywhere.', googleMapsUrl: '' },
+      { label: 'LUNCH', name: 'Pulpería A Garnacha', location: 'Melide', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/3LHxTiQDMbnqyT4X6' },
+      { label: 'DINNER', name: 'Bar Galicia', location: 'Arzúa', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/ReneJg7mKtQmFvAr8' },
     ],
   },
   {
@@ -169,13 +171,14 @@ export const days: Day[] = [
     ],
     photos: [],
     lodging: {
-      name: 'Albergue O Pino',
+      name: 'Pensión Spa Cruceiro de Pedouzo',
       town: 'O Pedrouzo',
-      note: 'The last bunk before Santiago. Slept like a stone, woke up nervous.',
-      googleMapsUrl: '',
+      note: '[Placeholder — Ryan to write]',
+      googleMapsUrl: 'https://maps.app.goo.gl/eEDHBME73Ap3FG9Z6',
     },
     meals: [
-      { label: 'LUNCH', name: 'Tortilla and coffee at Santa Irene', location: 'Santa Irene', note: 'Small chapel café. The hospitalera had walked the Camino four times.', googleMapsUrl: '' },
+      { label: 'LUNCH', name: 'Café-bar pensión Tasaga', location: 'On-trail', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/uiYY5WyRxScZEBY2A' },
+      { label: 'DINNER', name: 'Ch Pizza', location: 'O Pedrouzo', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/tKCZU1jzBPPPWVuL8' },
     ],
   },
   {
@@ -196,14 +199,14 @@ export const days: Day[] = [
     ],
     photos: [],
     lodging: {
-      name: 'Seminario Menor',
+      name: 'Albergue SP 55 by Bossh! Hotels',
       town: 'Santiago de Compostela',
-      note: 'Enormous seminary converted to albergue. 200 beds. Worth it for the location — 5 minutes from the cathedral.',
-      googleMapsUrl: '',
+      note: '[Placeholder — Ryan to write]',
+      googleMapsUrl: 'https://maps.app.goo.gl/rMYgYeVTjr9h4dAp8',
     },
     meals: [
-      { label: 'CELEBRATION', name: 'Lunch at O Curro da Parra', location: 'Santiago', note: 'Proper sit-down lunch after five days of pilgrim menus. Galician beef, Albariño wine, tarta de Santiago. Earned every bite.', googleMapsUrl: '' },
-      { label: 'MORNING', name: 'Last café con leche', location: 'O Pedrouzo', note: 'The final 5am coffee before the last push. €1.50. Same as every other morning.', googleMapsUrl: '' },
+      { label: 'LUNCH', name: 'Restaurante O Tangueiro', location: 'Santiago de Compostela', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/xifzcPoPFJMfJFDGA' },
+      { label: 'DINNER', name: 'Restaurante Sant Yago', location: 'Santiago de Compostela', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/E7qhAp7ofDjDGA478' },
     ],
   },
   {
@@ -222,14 +225,14 @@ export const days: Day[] = [
     ],
     photos: [],
     lodging: {
-      name: 'TBD',
+      name: 'Studio Apartment',
       town: 'Santiago de Compostela',
-      note: '',
+      note: '[Placeholder — Ryan to write]',
       googleMapsUrl: '',
     },
     meals: [
-      { label: 'LUNCH', name: 'TBD', location: 'Santiago de Compostela', note: '', googleMapsUrl: '' },
-      { label: 'DINNER', name: 'TBD', location: 'Santiago de Compostela', note: '', googleMapsUrl: '' },
+      { label: 'LUNCH', name: 'Koa Poke', location: 'Santiago de Compostela', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/pzYcL7cUoedjocLr8' },
+      { label: 'DINNER', name: 'Lúcuma', location: 'Santiago de Compostela', note: '[Placeholder — Ryan to write]', googleMapsUrl: 'https://maps.app.goo.gl/CM5dMojqrryJa4KX9' },
     ],
   },
 ];
@@ -275,14 +278,22 @@ export const tripOverview = {
 };
 
 export const gear: GearItem[] = [
-  { category: 'PACK', name: 'Osprey Talon 33', weight: '950g', note: 'The whole life on my back.' },
-  { category: 'FOOTWEAR', name: 'Hoka Speedgoat 5', note: 'Trail runners, not boots. Controversial. Right call.' },
-  { category: 'BASE LAYER', name: 'Smartwool merino long sleeve', note: 'Worn five days straight. Hand-washed twice. Didn\'t smell.' },
-  { category: 'TREKKING', name: 'Black Diamond trekking poles', note: 'Saved my knees on the descent into Portomarín.' },
-  { category: 'SHELL', name: 'Patagonia Houdini', weight: '100g', note: 'Packs to nothing. Used it once, glad I had it.' },
-  { category: 'BASE', name: 'Saxx Kinetic boxers (×2)', note: 'Two pairs. Hand-wash rotation. No chafing, ever.' },
-  { category: 'SLEEP', name: 'Sea to Summit silk liner', note: 'Lighter than a sleeping bag, warmer than nothing.' },
-  { category: 'ELECTRONICS', name: 'Anker 10000mAh battery', note: 'Charged the phone every night. Never died.' },
+  { category: 'PACK', name: 'Osprey Stratos 34', note: '[Placeholder — Ryan to write]', photo: 'osprey-stratos-34.jpg' },
+  { category: 'FOOTWEAR', name: 'Salomon Genesis Trail-Running Shoes', note: '[Placeholder — Ryan to write]', photo: 'salomon-genesis.jpg' },
+  { category: 'FOOTWEAR', name: 'Darn Tough Hiker Micro Crew Socks ×3', note: '[Placeholder — Ryan to write]', photo: 'darn-tough-socks.jpg' },
+  { category: 'BASE LAYER', name: 'Smartwool Merino Short Sleeve', note: '[Placeholder — Ryan to write]', photo: 'smartwool-short-sleeve.jpg' },
+  { category: 'BASE LAYER', name: 'REI Merino Long Sleeve', note: '[Placeholder — Ryan to write]', photo: 'rei-long-sleeve.jpg' },
+  { category: 'SHELL', name: 'REI Rainier Rain Jacket', note: '[Placeholder — Ryan to write]', photo: 'rei-rainier.jpg' },
+  { category: 'PANTS', name: 'Gramicci Nylon Paneled Trek Pants', note: '[Placeholder — Ryan to write]', photo: 'gramicci-pants.jpg' },
+  { category: 'HEADWEAR', name: 'Snow Peak Bucket Hat', note: '[Placeholder — Ryan to write]', photo: 'snowpeak-bucket-hat.jpg' },
+  { category: 'SLEEP', name: 'Silk Sleeping Bag Liner', note: '[Placeholder — Ryan to write]', photo: 'silk-liner.jpg' },
+  { category: 'ELECTRONICS', name: 'Anker Portable Charger', note: '[Placeholder — Ryan to write]', photo: 'anker-charger.jpg' },
+  { category: 'ELECTRONICS', name: 'Olympus Stylus Tough Camera', note: '[Placeholder — Ryan to write]', photo: 'olympus-stylus.jpg' },
+  { category: 'HYDRATION', name: 'Water Bladder / Camelback', note: '[Placeholder — Ryan to write]', photo: 'water-bladder.jpg' },
+  { category: 'ACCESSORIES', name: 'Miller Sunglasses', note: '[Placeholder — Ryan to write]', photo: 'miller-sunglasses.jpg' },
+  { category: 'ACCESSORIES', name: 'Journal + Pens', note: '[Placeholder — Ryan to write]', photo: 'journal.jpg' },
+  { category: 'TOILETRIES', name: 'Eunzel Microfiber Quick-Dry Towel', note: '[Placeholder — Ryan to write]', photo: 'quickdry-towel.jpg' },
+  { category: 'HEALTH', name: 'First Aid Pouch', note: '[Placeholder — Ryan to write]', photo: 'first-aid-pouch.jpg' },
 ];
 
 export const stamps: CredencialStamp[] = [
