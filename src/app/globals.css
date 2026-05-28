@@ -1,8 +1,14 @@
 @import "tailwindcss";
 
 @theme inline {
+  /* Primary accent — Camino orange */
   --color-accent: #C7521D;
+  --color-accent-text: #A3431A;
+  --color-accent-hover: #B0481A;
   --color-accent-light: #E8A57F;
+
+  /* Secondary accent — reserved for credencial/stamps */
+  --color-ink-blue: #3D4D6B;
   --color-surface: #FAFAF9;
   --color-surface-raised: #FFFFFF;
   --color-border: rgba(0,0,0,0.06);
@@ -32,17 +38,20 @@
 }
 
 *:focus { outline: none; }
-*:focus-visible { outline: 2px solid #C7521D; outline-offset: 2px; border-radius: inherit; }
+*:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: inherit; }
 
 ::selection { background: rgba(199, 82, 29, 0.18); color: #1C1917; }
+
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
 
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 96px;
+  background: var(--color-surface);
 }
 
 body {
-  background: var(--color-surface);
   color: var(--color-ink);
   font-family: var(--font-sans), system-ui, sans-serif;
 }
@@ -61,6 +70,21 @@ body {
   .text-caption { font-size: 13px; line-height: 1.4; font-weight: 500; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-ink-muted); }
   .text-stat-number { font-size: 28px; line-height: 1; font-weight: 600; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
   .text-stat-label { font-size: 12px; line-height: 1.2; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ink-muted); }
+}
+
+@keyframes umboFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes ribUnfold {
+  from { opacity: 0; transform: scale(0); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @keyframes umboFadeIn { from { opacity: 1; } to { opacity: 1; } }
+  @keyframes ribUnfold { from { opacity: 1; transform: scale(1); } to { opacity: 1; transform: scale(1); } }
 }
 
 /* Print: 1-page summary */

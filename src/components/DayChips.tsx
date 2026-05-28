@@ -11,8 +11,10 @@ type DayChipsProps = {
 
 export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
   return (
-    <div className="sticky top-0 z-40 -mx-4 px-4 bg-surface/72 backdrop-blur-md backdrop-saturate-150 border-b border-black/[0.04] py-4">
-      <div className="max-w-6xl mx-auto px-6 flex gap-2 flex-wrap">
+    <div className="sticky top-0 z-40 py-4">
+      <div className="absolute inset-0 bg-surface/80 backdrop-blur-md backdrop-saturate-150" />
+      <div className="absolute inset-x-0 -bottom-6 h-6 bg-gradient-to-b from-surface/60 to-transparent pointer-events-none" />
+      <div className="relative max-w-6xl mx-auto px-6 flex gap-2 overflow-x-auto no-scrollbar md:flex-wrap">
         <button
           onClick={() => onSelect('full')}
           className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-medium border transition-colors ${

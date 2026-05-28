@@ -59,14 +59,14 @@ export default function Home() {
     : [];
 
   return (
-    <div className="bg-surface text-ink">
+    <div className="text-ink pb-20 md:pb-0">
       <NavRail />
       <GearModal />
       <CostModal />
       <CredencialModal />
 
       {/* Hero */}
-      <section className="relative pt-12 md:pt-20 pb-6 md:pb-8 overflow-hidden">
+      <section className="relative pt-12 md:pt-20 pb-6 md:pb-8 overflow-clip">
         <HeroRoute />
         <div className="relative max-w-6xl mx-auto px-6">
           <p className="text-[13px] uppercase tracking-[0.06em] text-ink-muted">Camino de Santiago · May 2026 · 71 miles</p>

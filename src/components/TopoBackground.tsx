@@ -1,90 +1,313 @@
-// PLACEHOLDER topo pattern — generated procedurally. Swap in a designed SVG asset
-// later by replacing the <svg> contents. Keep the wrapper + parallax logic intact.
+// PLACEHOLDER topo pattern — generated via noise field + marching squares.
+// Swap in a designed SVG asset later by replacing the <svg> contents.
+// Keep the wrapper + parallax logic intact.
 'use client';
 
 import { useEffect, useRef, useCallback } from 'react';
 
 // ---------------------------------------------------------------------------
-// Procedural contour generation
+// Parameters (tuned via dev panel, now hardcoded)
 // ---------------------------------------------------------------------------
 
-/** Generate an irregular closed ring (bezier path) around a center point. */
-function generateRing(
-  cx: number,
-  cy: number,
-  radius: number,
-  points: number,
-  seed: number,
-): string {
-  const pts: [number, number][] = [];
-  for (let i = 0; i < points; i++) {
-    const angle = (Math.PI * 2 * i) / points;
-    // Organic wobble using layered sine waves seeded per ring
-    const wobble =
-      1 +
-      0.18 * Math.sin(angle * 3 + seed) +
-      0.12 * Math.sin(angle * 5 + seed * 1.7) +
-      0.06 * Math.sin(angle * 7 + seed * 2.3);
-    pts.push([cx + radius * wobble * Math.cos(angle), cy + radius * wobble * Math.sin(angle)]);
+const OPACITY = 0.04;
+const STROKE_WIDTH = 1.2;
+const NOISE_SCALE = 3.3;
+const CONTOUR_LEVELS = 14;
+const OCTAVES = 4;
+const SMOOTHING = 0.25;
+
+// ---------------------------------------------------------------------------
+// 2D Value noise (deterministic, no dependencies)
+// ---------------------------------------------------------------------------
+
+function hashInt(x: number, y: number): number {
+  let h = (x * 374761393 + y * 668265263 + 1013904223) | 0;
+  h = Math.imul(h ^ (h >>> 13), 1274126177);
+  h = h ^ (h >>> 16);
+  return h;
+}
+
+function noise2d(x: number, y: number): number {
+  const ix = Math.floor(x);
+  const iy = Math.floor(y);
+  const fx = x - ix;
+  const fy = y - iy;
+
+  const sx = fx * fx * (3 - 2 * fx);
+  const sy = fy * fy * (3 - 2 * fy);
+
+  const v00 = (hashInt(ix, iy) & 0xffff) / 0xffff;
+  const v10 = (hashInt(ix + 1, iy) & 0xffff) / 0xffff;
+  const v01 = (hashInt(ix, iy + 1) & 0xffff) / 0xffff;
+  const v11 = (hashInt(ix + 1, iy + 1) & 0xffff) / 0xffff;
+
+  const a = v00 + (v10 - v00) * sx;
+  const b = v01 + (v11 - v01) * sx;
+  return a + (b - a) * sy;
+}
+
+function fbm(x: number, y: number, octaves: number): number {
+  let value = 0;
+  let amplitude = 1;
+  let frequency = 1;
+  let maxAmp = 0;
+
+  for (let i = 0; i < octaves; i++) {
+    value += noise2d(x * frequency, y * frequency) * amplitude;
+    maxAmp += amplitude;
+    amplitude *= 0.5;
+    frequency *= 2;
   }
 
-  // Build a smooth closed cubic bezier through the points
-  const segs: string[] = [];
-  for (let i = 0; i < pts.length; i++) {
-    const p0 = pts[(i - 1 + pts.length) % pts.length];
-    const p1 = pts[i];
-    const p2 = pts[(i + 1) % pts.length];
-    const p3 = pts[(i + 2) % pts.length];
+  return value / maxAmp;
+}
 
-    // Catmull-Rom → cubic bezier control points
-    const tension = 6;
-    const cp1x = p1[0] + (p2[0] - p0[0]) / tension;
-    const cp1y = p1[1] + (p2[1] - p0[1]) / tension;
-    const cp2x = p2[0] - (p3[0] - p1[0]) / tension;
-    const cp2y = p2[1] - (p3[1] - p1[1]) / tension;
+// ---------------------------------------------------------------------------
+// Marching squares — extract iso-lines from a scalar field
+// ---------------------------------------------------------------------------
 
-    if (i === 0) {
-      segs.push(`M${p1[0].toFixed(1)},${p1[1].toFixed(1)}`);
+type Point = [number, number];
+type Segment = [Point, Point];
+
+function sampleField(gridW: number, gridH: number): number[][] {
+  const field: number[][] = [];
+  for (let j = 0; j <= gridH; j++) {
+    const row: number[] = [];
+    for (let i = 0; i <= gridW; i++) {
+      row.push(fbm((i / gridW) * NOISE_SCALE, (j / gridH) * NOISE_SCALE, OCTAVES));
     }
-    segs.push(
+    field.push(row);
+  }
+  return field;
+}
+
+function extractSegments(field: number[][], threshold: number, cellW: number, cellH: number): Segment[] {
+  const rows = field.length - 1;
+  const cols = field[0].length - 1;
+  const segments: Segment[] = [];
+
+  for (let j = 0; j < rows; j++) {
+    for (let i = 0; i < cols; i++) {
+      const bl = field[j][i];
+      const br = field[j][i + 1];
+      const tr = field[j + 1][i + 1];
+      const tl = field[j + 1][i];
+
+      const caseIdx =
+        (bl >= threshold ? 1 : 0) |
+        (br >= threshold ? 2 : 0) |
+        (tr >= threshold ? 4 : 0) |
+        (tl >= threshold ? 8 : 0);
+
+      if (caseIdx === 0 || caseIdx === 15) continue;
+
+      const t = (v1: number, v2: number) => {
+        const d = v2 - v1;
+        return Math.abs(d) < 1e-8 ? 0.5 : (threshold - v1) / d;
+      };
+
+      const x0 = i * cellW;
+      const y0 = j * cellH;
+
+      const bottom: Point = [x0 + t(bl, br) * cellW, y0];
+      const right: Point = [x0 + cellW, y0 + t(br, tr) * cellH];
+      const top: Point = [x0 + t(tl, tr) * cellW, y0 + cellH];
+      const left: Point = [x0, y0 + t(bl, tl) * cellH];
+
+      switch (caseIdx) {
+        case 1: case 14: segments.push([left, bottom]); break;
+        case 2: case 13: segments.push([bottom, right]); break;
+        case 3: case 12: segments.push([left, right]); break;
+        case 4: case 11: segments.push([right, top]); break;
+        case 6: case 9: segments.push([bottom, top]); break;
+        case 7: case 8: segments.push([left, top]); break;
+        case 5: {
+          const center = (bl + br + tr + tl) / 4;
+          if (center >= threshold) {
+            segments.push([left, top]);
+            segments.push([bottom, right]);
+          } else {
+            segments.push([left, bottom]);
+            segments.push([right, top]);
+          }
+          break;
+        }
+        case 10: {
+          const center = (bl + br + tr + tl) / 4;
+          if (center >= threshold) {
+            segments.push([left, bottom]);
+            segments.push([right, top]);
+          } else {
+            segments.push([left, top]);
+            segments.push([bottom, right]);
+          }
+          break;
+        }
+      }
+    }
+  }
+
+  return segments;
+}
+
+// ---------------------------------------------------------------------------
+// Chain segments into polylines
+// ---------------------------------------------------------------------------
+
+function chainSegments(segments: Segment[]): Point[][] {
+  if (segments.length === 0) return [];
+
+  const EPS = 0.01;
+  const key = (p: Point) => `${(p[0] / EPS) | 0},${(p[1] / EPS) | 0}`;
+
+  const adj = new Map<string, number[]>();
+  for (let i = 0; i < segments.length; i++) {
+    for (const p of segments[i]) {
+      const k = key(p);
+      const list = adj.get(k) ?? [];
+      list.push(i);
+      adj.set(k, list);
+    }
+  }
+
+  const used = new Set<number>();
+  const chains: Point[][] = [];
+
+  for (let startIdx = 0; startIdx < segments.length; startIdx++) {
+    if (used.has(startIdx)) continue;
+    used.add(startIdx);
+
+    const chain: Point[] = [segments[startIdx][0], segments[startIdx][1]];
+
+    let extended = true;
+    while (extended) {
+      extended = false;
+      const tail = chain[chain.length - 1];
+      const k = key(tail);
+      const neighbors = adj.get(k);
+      if (!neighbors) break;
+      for (const ni of neighbors) {
+        if (used.has(ni)) continue;
+        const seg = segments[ni];
+        const k0 = key(seg[0]);
+        const k1 = key(seg[1]);
+        if (k0 === k) {
+          chain.push(seg[1]);
+          used.add(ni);
+          extended = true;
+          break;
+        } else if (k1 === k) {
+          chain.push(seg[0]);
+          used.add(ni);
+          extended = true;
+          break;
+        }
+      }
+    }
+
+    extended = true;
+    while (extended) {
+      extended = false;
+      const head = chain[0];
+      const k = key(head);
+      const neighbors = adj.get(k);
+      if (!neighbors) break;
+      for (const ni of neighbors) {
+        if (used.has(ni)) continue;
+        const seg = segments[ni];
+        const k0 = key(seg[0]);
+        const k1 = key(seg[1]);
+        if (k0 === k) {
+          chain.unshift(seg[1]);
+          used.add(ni);
+          extended = true;
+          break;
+        } else if (k1 === k) {
+          chain.unshift(seg[0]);
+          used.add(ni);
+          extended = true;
+          break;
+        }
+      }
+    }
+
+    if (chain.length >= 3) chains.push(chain);
+  }
+
+  return chains;
+}
+
+// ---------------------------------------------------------------------------
+// Polyline → smooth SVG path (Catmull-Rom → cubic bezier)
+// ---------------------------------------------------------------------------
+
+function polylineToPath(pts: Point[]): string {
+  if (pts.length < 2) return '';
+  if (pts.length === 2) {
+    return `M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)} L${pts[1][0].toFixed(1)},${pts[1][1].toFixed(1)}`;
+  }
+
+  const d: string[] = [`M${pts[0][0].toFixed(1)},${pts[0][1].toFixed(1)}`];
+
+  for (let i = 0; i < pts.length - 1; i++) {
+    const p0 = pts[Math.max(i - 1, 0)];
+    const p1 = pts[i];
+    const p2 = pts[i + 1];
+    const p3 = pts[Math.min(i + 2, pts.length - 1)];
+
+    const cp1x = p1[0] + (p2[0] - p0[0]) * SMOOTHING;
+    const cp1y = p1[1] + (p2[1] - p0[1]) * SMOOTHING;
+    const cp2x = p2[0] - (p3[0] - p1[0]) * SMOOTHING;
+    const cp2y = p2[1] - (p3[1] - p1[1]) * SMOOTHING;
+
+    d.push(
       `C${cp1x.toFixed(1)},${cp1y.toFixed(1)} ${cp2x.toFixed(1)},${cp2y.toFixed(1)} ${p2[0].toFixed(1)},${p2[1].toFixed(1)}`,
     );
   }
-  segs.push('Z');
-  return segs.join(' ');
+
+  return d.join(' ');
 }
 
-type Island = { cx: number; cy: number; baseRadius: number; rings: number; seed: number };
+// ---------------------------------------------------------------------------
+// Pre-generate contour paths at module level (deterministic)
+// ---------------------------------------------------------------------------
 
-/** Deterministic set of contour islands spread across the canvas. */
-const islands: Island[] = [
-  { cx: 160, cy: 180, baseRadius: 40, rings: 6, seed: 1.2 },
-  { cx: 520, cy: 120, baseRadius: 55, rings: 7, seed: 3.1 },
-  { cx: 880, cy: 280, baseRadius: 48, rings: 5, seed: 5.4 },
-  { cx: 1280, cy: 160, baseRadius: 62, rings: 8, seed: 7.8 },
-  { cx: 300, cy: 520, baseRadius: 50, rings: 6, seed: 2.5 },
-  { cx: 720, cy: 600, baseRadius: 44, rings: 5, seed: 4.9 },
-  { cx: 1100, cy: 500, baseRadius: 58, rings: 7, seed: 6.3 },
-  { cx: 1440, cy: 650, baseRadius: 42, rings: 5, seed: 8.1 },
-  { cx: 200, cy: 800, baseRadius: 52, rings: 6, seed: 0.7 },
-  { cx: 600, cy: 880, baseRadius: 46, rings: 5, seed: 9.2 },
-];
+const VB_W = 1600;
+const VB_H = 1000;
+const GRID_W = 100;
+const GRID_H = 62;
 
-function generateAllPaths(): string[] {
-  const paths: string[] = [];
-  for (const island of islands) {
-    const points = 12; // vertices per ring — enough for organic feel
-    for (let r = 0; r < island.rings; r++) {
-      const radius = island.baseRadius + r * 18;
-      const seed = island.seed + r * 0.6;
-      paths.push(generateRing(island.cx, island.cy, radius, points, seed));
+function generateContours(): string[] {
+  const field = sampleField(GRID_W, GRID_H);
+  const cellW = VB_W / GRID_W;
+  const cellH = VB_H / GRID_H;
+
+  let min = Infinity;
+  let max = -Infinity;
+  for (const row of field) {
+    for (const v of row) {
+      if (v < min) min = v;
+      if (v > max) max = v;
     }
   }
+
+  const paths: string[] = [];
+  const margin = (max - min) * 0.05;
+
+  for (let i = 1; i <= CONTOUR_LEVELS; i++) {
+    const threshold = min + margin + ((max - min - 2 * margin) * i) / (CONTOUR_LEVELS + 1);
+    const segments = extractSegments(field, threshold, cellW, cellH);
+    const chains = chainSegments(segments);
+    for (const chain of chains) {
+      const path = polylineToPath(chain);
+      if (path) paths.push(path);
+    }
+  }
+
   return paths;
 }
 
-// Pre-generate once at module level (deterministic, no randomness)
-const contourPaths = generateAllPaths();
+const contourPaths = generateContours();
 
 // ---------------------------------------------------------------------------
 // Component
@@ -94,11 +317,10 @@ export default function TopoBackground() {
   const innerRef = useRef<SVGSVGElement>(null);
 
   const setup = useCallback(() => {
-    // Guard: desktop with fine pointer + no reduced-motion preference
     const hasFinePointer = window.matchMedia('(pointer: fine)').matches;
     const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    if (!hasFinePointer || prefersReduced) return; // static render, no parallax
+    if (!hasFinePointer || prefersReduced) return;
 
     let targetX = 0;
     let targetY = 0;
@@ -109,7 +331,6 @@ export default function TopoBackground() {
     const MAX_TRANSLATE = 12;
 
     const onMouseMove = (e: MouseEvent) => {
-      // Offset from viewport center, normalized to [-1, 1]
       const nx = (e.clientX / window.innerWidth - 0.5) * 2;
       const ny = (e.clientY / window.innerHeight - 0.5) * 2;
       targetX = nx * MAX_TRANSLATE;
@@ -144,14 +365,14 @@ export default function TopoBackground() {
   return (
     <div
       aria-hidden="true"
-      className="fixed inset-0 -z-10 pointer-events-none overflow-hidden"
+      className="fixed inset-0 z-0 pointer-events-none overflow-hidden"
     >
       <svg
         ref={innerRef}
-        viewBox="0 0 1600 1000"
+        viewBox={`0 0 ${VB_W} ${VB_H}`}
         preserveAspectRatio="xMidYMid slice"
         className="absolute inset-0 w-[calc(100%+24px)] h-[calc(100%+24px)] -top-3 -left-3"
-        style={{ opacity: 0.04, willChange: 'transform' }}
+        style={{ opacity: OPACITY, willChange: 'transform' }}
       >
         {contourPaths.map((d, i) => (
           <path
@@ -159,7 +380,9 @@ export default function TopoBackground() {
             d={d}
             fill="none"
             stroke="#1C1917"
-            strokeWidth={1.2}
+            strokeWidth={STROKE_WIDTH}
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
         ))}
       </svg>

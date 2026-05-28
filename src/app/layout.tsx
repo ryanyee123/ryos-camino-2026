@@ -23,7 +23,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <TopoBackground />
-        {children}
+        <div className="relative z-10 min-h-full">{children}</div>
       </body>
     </html>
   );
