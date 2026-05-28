@@ -6,6 +6,39 @@ export type Town = {
   note?: string;
 };
 
+export type Albergue = {
+  name: string;
+  town: string;
+  note: string;
+  googleMapsUrl: string;
+  photo?: string;
+};
+
+export type Meal = {
+  label: string;
+  name: string;
+  location: string;
+  note: string;
+  googleMapsUrl: string;
+  photo?: string;
+};
+
+export type GearItem = {
+  category: string;
+  name: string;
+  weight?: string;
+  note: string;
+  photo?: string;
+};
+
+export type CredencialStamp = {
+  location: string;
+  date: string;
+  source: string;
+  note?: string;
+  photo?: string;
+};
+
 export type Day = {
   day: number;
   date: string;
@@ -18,17 +51,9 @@ export type Day = {
   elevation: number;
   townsCount: number;
   narrative: string[];
-  albergue: {
-    name: string;
-    town: string;
-    note: string;
-  };
-  meals: Array<{
-    label: string;
-    name: string;
-    location: string;
-    note: string;
-  }>;
+  photos: string[];
+  albergue: Albergue;
+  meals: Meal[];
 };
 
 export const towns: Record<string, Town> = {
@@ -58,13 +83,15 @@ export const days: Day[] = [
       'The descent into Portomarín is dramatic. You cross a long bridge over the Belesar reservoir and climb stone stairs into a town that was literally moved uphill when the dam flooded the original village in the 1960s. The church of San Nicolás was relocated stone by stone.',
       'Checked into the albergue by 2pm. Shower, laundry line, siesta. Dinner was a pilgrim menu at Casa Curro — three courses, bottle of Ribeiro, €13. The dining room was loud and full of languages I couldn\'t place.',
     ],
+    photos: [],
     albergue: {
       name: 'Albergue Ferramenteiro',
       town: 'Portomarín',
       note: 'Large municipal-style place with terraces overlooking the Miño river. The shower line was no joke.',
+      googleMapsUrl: '',
     },
     meals: [
-      { label: 'DINNER', name: 'Pilgrim Menu at Casa Curro', location: 'Portomarín', note: 'Three courses and a bottle of wine for €13. Lentil stew, pork, flan. Slept hard after.' },
+      { label: 'DINNER', name: 'Pilgrim Menu at Casa Curro', location: 'Portomarín', note: 'Three courses and a bottle of wine for €13. Lentil stew, pork, flan. Slept hard after.', googleMapsUrl: '' },
     ],
   },
   {
@@ -83,13 +110,15 @@ export const days: Day[] = [
       'Stopped for a bocadillo and Aquarius at a tiny bar in Hospital de la Cruz. The bartender had a stamp for the credencial and a dog that followed pilgrims to the edge of the village before turning back.',
       'Arrived in Palas de Rei around 3pm. Small, quiet town. The albergue was clean and half-empty — apparently most people push further to Melide. Glad I didn\'t. The evening was warm and I sat on a bench reading until dark.',
     ],
+    photos: [],
     albergue: {
       name: 'Albergue de Palas de Rei',
       town: 'Palas de Rei',
       note: 'Municipal albergue on the main road. Clean, quiet, half-empty by late afternoon.',
+      googleMapsUrl: '',
     },
     meals: [
-      { label: 'LUNCH', name: 'Bocadillo at Hospital de la Cruz', location: 'Hospital de la Cruz', note: 'Ham and cheese on crusty bread, bottle of Aquarius. The bartender\'s dog followed me to the edge of town.' },
+      { label: 'LUNCH', name: 'Bocadillo at Hospital de la Cruz', location: 'Hospital de la Cruz', note: 'Ham and cheese on crusty bread, bottle of Aquarius. The bartender\'s dog followed me to the edge of town.', googleMapsUrl: '' },
     ],
   },
   {
@@ -109,14 +138,16 @@ export const days: Day[] = [
       'The afternoon stretch from Melide to Arzúa was tough. My feet were starting to complain and the trail alternated between forest paths and asphalt road walking. Arzúa appeared just when I needed it — a real town with pharmacies and supermarkets.',
       'Collapsed into Albergue Don Quijote, took an ice-cold shower (the hot water was gone), and ate a quiet dinner alone at a restaurant on the main square. Tetilla cheese and bread. Galicia does simple food better than anywhere.',
     ],
+    photos: [],
     albergue: {
       name: 'Albergue Don Quijote',
       town: 'Arzúa',
       note: 'Private albergue, small and well-run. Hot showers (if you arrive early). Good kitchen.',
+      googleMapsUrl: '',
     },
     meals: [
-      { label: 'LUNCH', name: 'Pulpo at Ezequiel', location: 'Melide', note: 'The pulpo is the reason you stop in Melide. Tender, paprika, olive oil, salt. Don\'t overthink it.' },
-      { label: 'DINNER', name: 'Tetilla cheese and bread', location: 'Arzúa', note: 'Quiet dinner alone on the main square. Galicia does simple food better than anywhere.' },
+      { label: 'LUNCH', name: 'Pulpo at Ezequiel', location: 'Melide', note: 'The pulpo is the reason you stop in Melide. Tender, paprika, olive oil, salt. Don\'t overthink it.', googleMapsUrl: '' },
+      { label: 'DINNER', name: 'Tetilla cheese and bread', location: 'Arzúa', note: 'Quiet dinner alone on the main square. Galicia does simple food better than anywhere.', googleMapsUrl: '' },
     ],
   },
   {
@@ -135,13 +166,15 @@ export const days: Day[] = [
       'Stopped in Santa Irene for coffee and a stamp at a small chapel. The hospitalera was an older woman who\'d walked the Camino four times. She said the fifth time was just living next to it.',
       'O Pedrouzo is not a pretty town — it\'s basically a highway stop that exists because pilgrims need somewhere to sleep before the final push to Santiago. But the albergue was fine, and the anticipation of tomorrow made everything feel charged.',
     ],
+    photos: [],
     albergue: {
       name: 'Albergue O Pino',
       town: 'O Pedrouzo',
       note: 'The last bunk before Santiago. Slept like a stone, woke up nervous.',
+      googleMapsUrl: '',
     },
     meals: [
-      { label: 'LUNCH', name: 'Tortilla and coffee at Santa Irene', location: 'Santa Irene', note: 'Small chapel café. The hospitalera had walked the Camino four times.' },
+      { label: 'LUNCH', name: 'Tortilla and coffee at Santa Irene', location: 'Santa Irene', note: 'Small chapel café. The hospitalera had walked the Camino four times.', googleMapsUrl: '' },
     ],
   },
   {
@@ -160,14 +193,16 @@ export const days: Day[] = [
       'Monte do Gozo — the Hill of Joy — is where you first see Santiago\'s cathedral spires in the distance. I stood there for a few minutes. Two German pilgrims were crying. A Korean couple took a selfie. I just looked.',
       'Walked into the old city through the Porta do Camiño and followed the brass scallop shells embedded in the sidewalk to the cathedral. Arrived at 10:15am. The Praza do Obradoiro was full of pilgrims sitting on the ground, boots off, staring up at the facade. I joined them.',
     ],
+    photos: [],
     albergue: {
       name: 'Seminario Menor',
       town: 'Santiago de Compostela',
       note: 'Enormous seminary converted to albergue. 200 beds. Worth it for the location — 5 minutes from the cathedral.',
+      googleMapsUrl: '',
     },
     meals: [
-      { label: 'CELEBRATION', name: 'Lunch at O Curro da Parra', location: 'Santiago', note: 'Proper sit-down lunch after five days of pilgrim menus. Galician beef, Albariño wine, tarta de Santiago. Earned every bite.' },
-      { label: 'MORNING', name: 'Last café con leche', location: 'O Pedrouzo', note: 'The final 5am coffee before the last push. €1.50. Same as every other morning.' },
+      { label: 'CELEBRATION', name: 'Lunch at O Curro da Parra', location: 'Santiago', note: 'Proper sit-down lunch after five days of pilgrim menus. Galician beef, Albariño wine, tarta de Santiago. Earned every bite.', googleMapsUrl: '' },
+      { label: 'MORNING', name: 'Last café con leche', location: 'O Pedrouzo', note: 'The final 5am coffee before the last push. €1.50. Same as every other morning.', googleMapsUrl: '' },
     ],
   },
 ];
@@ -211,5 +246,31 @@ export const tripOverview = {
     'I walked it in late May 2026 over five days, averaging about 14 miles per day. The pace was comfortable but deliberate — enough time to eat well, sleep early, and arrive before the albergues filled up. This site is the record of that walk.',
   ],
 };
+
+export const gear: GearItem[] = [
+  { category: 'PACK', name: 'Osprey Talon 33', weight: '950g', note: 'The whole life on my back.' },
+  { category: 'FOOTWEAR', name: 'Hoka Speedgoat 5', note: 'Trail runners, not boots. Controversial. Right call.' },
+  { category: 'BASE LAYER', name: 'Smartwool merino long sleeve', note: 'Worn five days straight. Hand-washed twice. Didn\'t smell.' },
+  { category: 'TREKKING', name: 'Black Diamond trekking poles', note: 'Saved my knees on the descent into Portomarín.' },
+  { category: 'SHELL', name: 'Patagonia Houdini', weight: '100g', note: 'Packs to nothing. Used it once, glad I had it.' },
+  { category: 'BASE', name: 'Saxx Kinetic boxers (×2)', note: 'Two pairs. Hand-wash rotation. No chafing, ever.' },
+  { category: 'SLEEP', name: 'Sea to Summit silk liner', note: 'Lighter than a sleeping bag, warmer than nothing.' },
+  { category: 'ELECTRONICS', name: 'Anker 10000mAh battery', note: 'Charged the phone every night. Never died.' },
+];
+
+export const stamps: CredencialStamp[] = [
+  { location: 'Sarria', date: '2026-05-18', source: 'Albergue O Durmiñento' },
+  { location: 'Portomarín', date: '2026-05-18', source: 'Iglesia de San Nicolás' },
+  { location: 'Portomarín', date: '2026-05-18', source: 'Albergue Ferramenteiro' },
+  { location: 'Palas de Rei', date: '2026-05-19', source: 'Albergue de Peregrinos' },
+  { location: 'Palas de Rei', date: '2026-05-19', source: 'Pulpería Loly' },
+  { location: 'Melide', date: '2026-05-20', source: 'Pulpería Ezequiel' },
+  { location: 'Melide', date: '2026-05-20', source: 'Iglesia de Santa María' },
+  { location: 'Arzúa', date: '2026-05-20', source: 'Albergue Don Quijote' },
+  { location: 'Arzúa', date: '2026-05-21', source: 'Café Centro' },
+  { location: 'O Pedrouzo', date: '2026-05-21', source: 'Albergue O Pino' },
+  { location: 'Santiago', date: '2026-05-22', source: 'Catedral de Santiago' },
+  { location: 'Santiago', date: '2026-05-22', source: 'Oficina del Peregrino' },
+];
 
 export const ROUTE_COLOR = '#C7521D';

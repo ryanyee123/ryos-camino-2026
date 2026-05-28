@@ -4,21 +4,7 @@ import { useState } from 'react';
 import { Stamp } from 'lucide-react';
 import Modal from '@/components/ui/Modal';
 import PlaceholderImage from '@/components/ui/PlaceholderImage';
-
-const stamps = [
-  { location: 'Sarria', day: 'Day 0', source: 'Albergue O Durmiñento' },
-  { location: 'Portomarín', day: 'Day 1', source: 'Iglesia de San Nicolás' },
-  { location: 'Portomarín', day: 'Day 1', source: 'Albergue Ferramenteiro' },
-  { location: 'Palas de Rei', day: 'Day 2', source: 'Albergue de Peregrinos' },
-  { location: 'Palas de Rei', day: 'Day 2', source: 'Pulpería Loly' },
-  { location: 'Melide', day: 'Day 3', source: 'Pulpería Ezequiel' },
-  { location: 'Melide', day: 'Day 3', source: 'Iglesia de Santa María' },
-  { location: 'Arzúa', day: 'Day 3', source: 'Albergue Don Quijote' },
-  { location: 'Arzúa', day: 'Day 4', source: 'Café Centro' },
-  { location: 'O Pedrouzo', day: 'Day 4', source: 'Albergue O Pino' },
-  { location: 'Santiago', day: 'Day 5', source: 'Catedral de Santiago' },
-  { location: 'Santiago', day: 'Day 5', source: 'Oficina del Peregrino' },
-];
+import { stamps } from '@/data/days';
 
 /** Stable rotation from stamp index: -3deg to +3deg */
 function stampRotation(index: number): number {
@@ -46,7 +32,11 @@ export default function CredencialModal() {
                 className="w-full aspect-square rounded-lg border border-black/[0.08] bg-white/60 shadow-[inset_0_1px_3px_rgba(0,0,0,0.06)] overflow-hidden motion-safe:transition-transform motion-safe:duration-200"
                 style={{ transform: `rotate(${stampRotation(i)}deg)` }}
               >
-                <PlaceholderImage icon={Stamp} />
+                {stamp.photo ? (
+                  <img src={`/photos/credencial/${stamp.photo}`} alt={stamp.source} className="w-full h-full object-cover" />
+                ) : (
+                  <PlaceholderImage icon={Stamp} />
+                )}
               </div>
               <div
                 className="mt-2 overflow-hidden motion-safe:transition-[max-height,opacity] motion-safe:duration-200"
@@ -56,7 +46,7 @@ export default function CredencialModal() {
                 }}
               >
                 <p className="text-[12px] font-medium text-ink">{stamp.source}</p>
-                <p className="text-[11px] text-ink-muted">{stamp.location} · {stamp.day}</p>
+                <p className="text-[11px] text-ink-muted">{stamp.location} · {stamp.date}</p>
               </div>
             </button>
           ))}

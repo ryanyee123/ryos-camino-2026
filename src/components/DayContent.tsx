@@ -51,29 +51,27 @@ export default function DayContent({ day }: { day: Day }) {
 
       <div className="mt-10">
         <p className="text-caption mb-3">PHOTOS</p>
-        <div className="grid grid-cols-2 gap-3 grid-flow-dense">
-          {/* Hero photo — wider + taller */}
-          <MediaCard key={0}>
-            <div className="aspect-[3/4] col-span-1 row-span-2">
-              <PlaceholderImage icon={Camera} />
-            </div>
-          </MediaCard>
-          <MediaCard key={1}>
-            <div className="aspect-[3/2]">
-              <PlaceholderImage icon={Camera} />
-            </div>
-          </MediaCard>
-          <MediaCard key={2}>
-            <div className="aspect-square">
-              <PlaceholderImage icon={Camera} />
-            </div>
-          </MediaCard>
-          <MediaCard key={3}>
-            <div className="aspect-[4/5]">
-              <PlaceholderImage icon={Camera} />
-            </div>
-          </MediaCard>
-        </div>
+        {day.photos.length > 0 ? (
+          <div className="grid grid-cols-2 gap-3">
+            {day.photos.map((photo, i) => (
+              <MediaCard key={photo}>
+                <div className={i === 0 ? 'aspect-[3/4]' : 'aspect-[3/2]'}>
+                  <img src={`/photos/day-${day.day}/${photo}`} alt="" className="w-full h-full object-cover" />
+                </div>
+              </MediaCard>
+            ))}
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 gap-3">
+            {[0, 1, 2, 3].map((i) => (
+              <MediaCard key={i}>
+                <div className={i === 0 ? 'aspect-[3/4]' : 'aspect-[3/2]'}>
+                  <PlaceholderImage icon={Camera} />
+                </div>
+              </MediaCard>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );
