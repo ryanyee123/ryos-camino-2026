@@ -46,8 +46,8 @@ export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
             onClick={() => onSelect('full')}
             className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-medium border transition-colors ${
               activeDay === 'full'
-                ? 'bg-ink text-white border-ink'
-                : 'bg-transparent border-border text-ink-muted hover:border-border-strong hover:text-ink'
+                ? 'bg-accent text-white border-accent'
+                : 'bg-surface border-border text-ink-muted hover:border-border-strong hover:text-ink'
             }`}
           >
             Full route
@@ -58,8 +58,8 @@ export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
               onClick={() => onSelect(d.day)}
               className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-medium border transition-colors ${
                 activeDay === d.day
-                  ? 'bg-ink text-white border-ink'
-                  : 'bg-transparent border-border text-ink-muted hover:border-border-strong hover:text-ink'
+                  ? 'bg-accent text-white border-accent'
+                  : 'bg-surface border-border text-ink-muted hover:border-border-strong hover:text-ink'
               }`}
             >
               Day {d.day}
