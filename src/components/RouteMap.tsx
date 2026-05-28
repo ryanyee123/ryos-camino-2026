@@ -57,9 +57,12 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
       zoom: 9,
       pitchWithRotate: false,
       dragRotate: false,
+      dragPan: false,
+      touchPitch: false,
     });
 
     map.scrollZoom.disable();
+    map.touchZoomRotate.disableRotation();
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 
     mapRef.current = map;
