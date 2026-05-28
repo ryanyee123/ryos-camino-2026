@@ -66,9 +66,8 @@ export default function Home() {
       <CredencialModal />
 
       {/* Hero */}
-      <section className="relative pt-12 md:pt-20 pb-6 md:pb-8 overflow-clip">
-        <HeroRoute />
-        <div className="relative max-w-6xl mx-auto px-6">
+      <section className="pt-12 md:pt-20 pb-6 md:pb-8">
+        <div className="max-w-6xl mx-auto px-6">
           <p className="text-[13px] uppercase tracking-[0.06em] text-ink-muted">Camino de Santiago · May 2026 · 71 miles</p>
           <h1 className="mt-6 text-[44px] leading-[1.05] tracking-[-0.03em] font-semibold text-ink max-w-3xl">Ryan&apos;s Camino Francés</h1>
           <p className="mt-6 text-[17px] leading-[1.6] text-ink-muted max-w-2xl">
@@ -76,6 +75,9 @@ export default function Home() {
           </p>
         </div>
       </section>
+
+      {/* Route animation band */}
+      <HeroRoute />
 
       {/* Sticky day chips */}
       <DayChips activeDay={activeDay} onSelect={handleSelect} />
