@@ -60,7 +60,7 @@ export default function NavRail() {
       </nav>
 
       {/* Mobile: fixed bottom center bar */}
-      <nav className="flex md:hidden fixed bottom-6 pb-[env(safe-area-inset-bottom)] left-1/2 -translate-x-1/2 z-50 bg-surface-raised rounded-2xl p-2 gap-1 shadow-nav">
+      <nav className="flex md:hidden fixed bottom-[calc(1.5rem+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 z-50 bg-surface-raised rounded-2xl p-2 gap-1 shadow-nav">
         {items.map((item) => (
           <button
             key={item.label}
