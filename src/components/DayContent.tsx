@@ -26,10 +26,10 @@ export default function DayContent({ day }: { day: Day }) {
         <p className="text-caption mb-3">WHERE I SLEPT</p>
         <PlaceCard
           placeholderIcon={Bed}
-          eyebrow="ALBERGUE"
-          name={day.albergue.name}
-          meta={day.albergue.town}
-          note={day.albergue.note}
+          eyebrow="LODGING"
+          name={day.lodging.name}
+          meta={day.lodging.town}
+          note={day.lodging.note}
         />
       </div>
 

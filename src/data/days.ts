@@ -6,7 +6,7 @@ export type Town = {
   note?: string;
 };
 
-export type Albergue = {
+export type Lodging = {
   name: string;
   town: string;
   note: string;
@@ -50,9 +50,10 @@ export type Day = {
   hours: number;
   elevation: number;
   townsCount: number;
+  restDay?: boolean;
   narrative: string[];
   photos: string[];
-  albergue: Albergue;
+  lodging: Lodging;
   meals: Meal[];
 };
 
@@ -84,7 +85,7 @@ export const days: Day[] = [
       'Checked into the albergue by 2pm. Shower, laundry line, siesta. Dinner was a pilgrim menu at Casa Curro — three courses, bottle of Ribeiro, €13. The dining room was loud and full of languages I couldn\'t place.',
     ],
     photos: [],
-    albergue: {
+    lodging: {
       name: 'Albergue Ferramenteiro',
       town: 'Portomarín',
       note: 'Large municipal-style place with terraces overlooking the Miño river. The shower line was no joke.',
@@ -111,7 +112,7 @@ export const days: Day[] = [
       'Arrived in Palas de Rei around 3pm. Small, quiet town. The albergue was clean and half-empty — apparently most people push further to Melide. Glad I didn\'t. The evening was warm and I sat on a bench reading until dark.',
     ],
     photos: [],
-    albergue: {
+    lodging: {
       name: 'Albergue de Palas de Rei',
       town: 'Palas de Rei',
       note: 'Municipal albergue on the main road. Clean, quiet, half-empty by late afternoon.',
@@ -139,7 +140,7 @@ export const days: Day[] = [
       'Collapsed into Albergue Don Quijote, took an ice-cold shower (the hot water was gone), and ate a quiet dinner alone at a restaurant on the main square. Tetilla cheese and bread. Galicia does simple food better than anywhere.',
     ],
     photos: [],
-    albergue: {
+    lodging: {
       name: 'Albergue Don Quijote',
       town: 'Arzúa',
       note: 'Private albergue, small and well-run. Hot showers (if you arrive early). Good kitchen.',
@@ -167,7 +168,7 @@ export const days: Day[] = [
       'O Pedrouzo is not a pretty town — it\'s basically a highway stop that exists because pilgrims need somewhere to sleep before the final push to Santiago. But the albergue was fine, and the anticipation of tomorrow made everything feel charged.',
     ],
     photos: [],
-    albergue: {
+    lodging: {
       name: 'Albergue O Pino',
       town: 'O Pedrouzo',
       note: 'The last bunk before Santiago. Slept like a stone, woke up nervous.',
@@ -194,7 +195,7 @@ export const days: Day[] = [
       'Walked into the old city through the Porta do Camiño and followed the brass scallop shells embedded in the sidewalk to the cathedral. Arrived at 10:15am. The Praza do Obradoiro was full of pilgrims sitting on the ground, boots off, staring up at the facade. I joined them.',
     ],
     photos: [],
-    albergue: {
+    lodging: {
       name: 'Seminario Menor',
       town: 'Santiago de Compostela',
       note: 'Enormous seminary converted to albergue. 200 beds. Worth it for the location — 5 minutes from the cathedral.',
@@ -203,6 +204,32 @@ export const days: Day[] = [
     meals: [
       { label: 'CELEBRATION', name: 'Lunch at O Curro da Parra', location: 'Santiago', note: 'Proper sit-down lunch after five days of pilgrim menus. Galician beef, Albariño wine, tarta de Santiago. Earned every bite.', googleMapsUrl: '' },
       { label: 'MORNING', name: 'Last café con leche', location: 'O Pedrouzo', note: 'The final 5am coffee before the last push. €1.50. Same as every other morning.', googleMapsUrl: '' },
+    ],
+  },
+  {
+    day: 6,
+    date: '2026-05-23',
+    from: 'santiago',
+    to: 'santiago',
+    miles: 0,
+    title: 'Santiago de Compostela',
+    restDay: true,
+    hours: 0,
+    elevation: 0,
+    townsCount: 0,
+    narrative: [
+      '[Placeholder — Ryan will write this]',
+    ],
+    photos: [],
+    lodging: {
+      name: 'TBD',
+      town: 'Santiago de Compostela',
+      note: '',
+      googleMapsUrl: '',
+    },
+    meals: [
+      { label: 'LUNCH', name: 'TBD', location: 'Santiago de Compostela', note: '', googleMapsUrl: '' },
+      { label: 'DINNER', name: 'TBD', location: 'Santiago de Compostela', note: '', googleMapsUrl: '' },
     ],
   },
 ];

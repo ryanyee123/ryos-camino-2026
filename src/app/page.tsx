@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Footprints, CalendarDays, MapPin, Church, Clock, Mountain, Users } from 'lucide-react';
+import { Footprints, CalendarDays, MapPin, Church, Clock, Mountain, Users, Coffee } from 'lucide-react';
 import NavRail from '@/components/NavRail';
 import GearModal from '@/components/modals/GearModal';
 import CostModal from '@/components/modals/CostModal';
@@ -21,7 +21,7 @@ const MODAL_HASHES = new Set(['gear', 'cost', 'credencial']);
 function parseDayHash(hash: string): ActiveDay | null {
   if (!hash.startsWith('#day-')) return null;
   const n = parseInt(hash.slice(5), 10);
-  return n >= 1 && n <= 5 ? n : null;
+  return n >= 1 && n <= 6 ? n : null;
 }
 
 export default function Home() {
@@ -50,12 +50,16 @@ export default function Home() {
   const selectedDay = typeof activeDay === 'number' ? days.find((d) => d.day === activeDay) : null;
 
   const dayStats = selectedDay
-    ? [
-        { label: 'MILES', value: String(selectedDay.miles), sublabel: 'walked', icon: Footprints },
-        { label: 'HOURS', value: String(selectedDay.hours), sublabel: 'on foot', icon: Clock },
-        { label: 'ELEVATION', value: `${selectedDay.elevation} ft`, sublabel: 'gained', icon: Mountain },
-        { label: 'TOWNS', value: String(selectedDay.townsCount), sublabel: 'passed', icon: Users },
-      ]
+    ? selectedDay.restDay
+      ? [
+          { label: 'REST DAY', value: 'Santiago', sublabel: 'no walking', icon: Coffee },
+        ]
+      : [
+          { label: 'MILES', value: String(selectedDay.miles), sublabel: 'walked', icon: Footprints },
+          { label: 'HOURS', value: String(selectedDay.hours), sublabel: 'on foot', icon: Clock },
+          { label: 'ELEVATION', value: `${selectedDay.elevation} ft`, sublabel: 'gained', icon: Mountain },
+          { label: 'TOWNS', value: String(selectedDay.townsCount), sublabel: 'passed', icon: Users },
+        ]
     : [];
 
   return (
