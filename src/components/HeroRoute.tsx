@@ -4,16 +4,18 @@ import { useEffect, useRef, useState } from 'react';
 
 /**
  * Town coordinates mapped to SVG viewBox (0 0 900 80).
- * Left-to-right: Sarria → Santiago.
+ * Mirroring the map: Santiago on the left (west), Sarria on the right (east).
+ * Path defined Sarria → Santiago so the draw animation goes right-to-left.
+ * Y positions tuned to approximate the actual route's terrain profile.
  */
 const towns = [
-  { x: 60, y: 48, label: 'Sarria' },
-  { x: 185, y: 40, label: 'Portomarín' },
-  { x: 342, y: 30, label: 'Palas de Rei' },
-  { x: 432, y: 22, label: 'Melide' },
-  { x: 522, y: 20, label: 'Arzúa' },
-  { x: 652, y: 28, label: 'O Pedrouzo' },
-  { x: 840, y: 35, label: 'Santiago' },
+  { x: 840, y: 52, label: 'Sarria' },
+  { x: 710, y: 34, label: 'Portomarín' },
+  { x: 555, y: 28, label: 'Palas de Rei' },
+  { x: 450, y: 24, label: 'Melide' },
+  { x: 350, y: 32, label: 'Arzúa' },
+  { x: 210, y: 42, label: 'O Pedrouzo' },
+  { x: 60, y: 48, label: 'Santiago' },
 ];
 
 /** Build a smooth cubic bezier path through points (Catmull-Rom → cubic bezier) */
@@ -76,7 +78,7 @@ export default function HeroRoute() {
             opacity="0.08"
           />
 
-          {/* Animated route trace */}
+          {/* Animated route trace — draws right-to-left (Sarria → Santiago) */}
           <path
             ref={pathRef}
             d={d}
@@ -128,7 +130,7 @@ export default function HeroRoute() {
             );
           })}
 
-          {/* Sarria label (left endpoint) */}
+          {/* Sarria label (right endpoint) */}
           <text
             x={towns[0].x}
             y={towns[0].y - 12}
@@ -149,7 +151,7 @@ export default function HeroRoute() {
             Sarria
           </text>
 
-          {/* Santiago label (right endpoint) */}
+          {/* Santiago label (left endpoint) */}
           <text
             x={towns[towns.length - 1].x}
             y={towns[towns.length - 1].y - 12}
