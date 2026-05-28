@@ -1,6 +1,11 @@
 'use client';
 
+import { useState } from 'react';
 import { Home, Backpack, Euro, Stamp } from 'lucide-react';
+
+const ITEM_SIZE = 40;
+const GAP = 4;
+const PADDING = 8;
 
 const items = [
   { icon: Home, label: 'Home', action: () => window.scrollTo({ top: 0, behavior: 'smooth' }) },
@@ -10,25 +15,52 @@ const items = [
 ];
 
 export default function NavRail() {
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   return (
     <>
-      {/* Desktop: fixed left rail — bare icons, no container */}
-      <nav className="hidden md:flex fixed left-6 top-1/2 -translate-y-1/2 z-30 flex-col gap-1">
-        {items.map((item) => (
-          <a
-            key={item.label}
-            href="#"
-            onClick={(e) => { e.preventDefault(); item.action(); }}
-            className="group relative flex items-center justify-center w-9 h-9 rounded-md text-ink-faint hover:text-ink hover:bg-black/[0.04] transition-colors"
-          >
-            <item.icon className="w-4 h-4" aria-hidden />
-            <span className="sr-only">{item.label}</span>
-          </a>
-        ))}
+      {/* Desktop: fixed left rail */}
+      <nav
+        className="hidden md:flex fixed left-12 top-1/2 -translate-y-1/2 z-50 flex-col items-start"
+        onMouseLeave={() => setHoveredIndex(null)}
+      >
+        <div className="relative bg-surface-raised rounded-2xl p-2 flex flex-col gap-1 shadow-nav">
+          {/* Sliding hover indicator */}
+          <div
+            className="absolute left-2 right-2 h-10 rounded-xl bg-stone-100 transition-[transform,opacity] duration-200 ease-out"
+            style={{
+              opacity: hoveredIndex !== null ? 1 : 0,
+              transform: `translateY(${hoveredIndex !== null ? PADDING + hoveredIndex * (ITEM_SIZE + GAP) - PADDING : 0}px)`,
+              willChange: 'transform',
+            }}
+          />
+
+          {items.map((item, index) => (
+            <button
+              key={item.label}
+              onClick={item.action}
+              onMouseEnter={() => setHoveredIndex(index)}
+              className="relative flex items-center justify-center w-10 h-10 rounded-xl"
+            >
+              <item.icon
+                size={20}
+                className="text-ink-muted transition-[color] duration-200 ease-out"
+                style={{ color: hoveredIndex === index ? 'var(--color-ink)' : undefined }}
+              />
+              {/* Tooltip */}
+              <span
+                className="absolute left-full ml-3 px-3 py-1.5 rounded-lg bg-ink text-white text-body-sm whitespace-nowrap pointer-events-none transition-[opacity] duration-150 ease-out"
+                style={{ opacity: hoveredIndex === index ? 1 : 0 }}
+              >
+                {item.label}
+              </span>
+            </button>
+          ))}
+        </div>
       </nav>
 
       {/* Mobile: fixed bottom center bar */}
-      <nav className="flex md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-40 bg-surface-raised rounded-2xl p-2 gap-1 shadow-nav">
+      <nav className="flex md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-surface-raised rounded-2xl p-2 gap-1 shadow-nav">
         {items.map((item) => (
           <button
             key={item.label}

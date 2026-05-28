@@ -39,15 +39,15 @@ export default function CostModal() {
           {breakdown.map((row) => (
             <tr key={row.category} className="border-b border-border">
               <td className="py-3">{row.category}</td>
-              <td className="text-right py-3">{row.total}</td>
-              <td className="text-right py-3">{row.perDay}</td>
+              <td className="text-right py-3 tabular-nums">{row.total}</td>
+              <td className="text-right py-3 tabular-nums">{row.perDay}</td>
               <td className="text-left py-3 pl-4 text-ink-muted">{row.notes}</td>
             </tr>
           ))}
           <tr className="font-semibold">
             <td className="py-3">Total</td>
-            <td className="text-right py-3">€312</td>
-            <td className="text-right py-3">€62</td>
+            <td className="text-right py-3 tabular-nums">€312</td>
+            <td className="text-right py-3 tabular-nums">€62</td>
             <td className="py-3 pl-4" />
           </tr>
         </tbody>

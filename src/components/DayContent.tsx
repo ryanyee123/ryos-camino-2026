@@ -51,14 +51,28 @@ export default function DayContent({ day }: { day: Day }) {
 
       <div className="mt-10">
         <p className="text-caption mb-3">PHOTOS</p>
-        <div className="grid grid-cols-2 gap-3">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <MediaCard key={i}>
-              <div className="aspect-square">
-                <PlaceholderImage icon={Camera} />
-              </div>
-            </MediaCard>
-          ))}
+        <div className="grid grid-cols-2 gap-3 grid-flow-dense">
+          {/* Hero photo — wider + taller */}
+          <MediaCard key={0}>
+            <div className="aspect-[3/4] col-span-1 row-span-2">
+              <PlaceholderImage icon={Camera} />
+            </div>
+          </MediaCard>
+          <MediaCard key={1}>
+            <div className="aspect-[3/2]">
+              <PlaceholderImage icon={Camera} />
+            </div>
+          </MediaCard>
+          <MediaCard key={2}>
+            <div className="aspect-square">
+              <PlaceholderImage icon={Camera} />
+            </div>
+          </MediaCard>
+          <MediaCard key={3}>
+            <div className="aspect-[4/5]">
+              <PlaceholderImage icon={Camera} />
+            </div>
+          </MediaCard>
         </div>
       </div>
     </div>

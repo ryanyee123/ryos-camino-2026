@@ -62,3 +62,24 @@ body {
   .text-stat-number { font-size: 28px; line-height: 1; font-weight: 600; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
   .text-stat-label { font-size: 12px; line-height: 1.2; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-ink-muted); }
 }
+
+/* Print: 1-page summary */
+@media print {
+  nav, .sticky, footer, [data-map], button {
+    display: none !important;
+  }
+  body {
+    background: white;
+    color: black;
+    font-size: 11pt;
+  }
+  section, div {
+    break-inside: avoid;
+  }
+  h1 {
+    font-size: 24pt;
+  }
+  * {
+    box-shadow: none !important;
+  }
+}
