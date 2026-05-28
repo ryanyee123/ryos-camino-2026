@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Backpack, Euro, Stamp } from 'lucide-react';
+import { Backpack, Euro, Home } from 'lucide-react';
 
 const ITEM_SIZE = 40;
 const GAP = 4;
@@ -10,11 +10,12 @@ const PADDING = 8;
 const items = [
   { icon: Backpack, label: 'Gear', action: () => { window.location.hash = 'gear'; } },
   { icon: Euro, label: 'Cost', action: () => { window.location.hash = 'cost'; } },
-  { icon: Stamp, label: 'Credencial', action: () => { window.location.hash = 'credencial'; } },
+  { icon: Home, label: 'Lodging', action: () => { window.location.hash = 'lodging'; } },
 ];
 
 export default function NavRail() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [lastIndex, setLastIndex] = useState(0);
 
   return (
     <>
@@ -29,7 +30,7 @@ export default function NavRail() {
             className="absolute left-2 right-2 h-10 rounded-xl bg-stone-100 transition-[transform,opacity] duration-200 ease-out"
             style={{
               opacity: hoveredIndex !== null ? 1 : 0,
-              transform: `translateY(${hoveredIndex !== null ? PADDING + hoveredIndex * (ITEM_SIZE + GAP) - PADDING : 0}px)`,
+              transform: `translateY(${PADDING + (hoveredIndex ?? lastIndex) * (ITEM_SIZE + GAP) - PADDING}px)`,
               willChange: 'transform',
             }}
           />
@@ -38,7 +39,7 @@ export default function NavRail() {
             <button
               key={item.label}
               onClick={item.action}
-              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseEnter={() => { setHoveredIndex(index); setLastIndex(index); }}
               className="relative flex items-center justify-center w-10 h-10 rounded-xl"
             >
               <item.icon
@@ -59,7 +60,7 @@ export default function NavRail() {
       </nav>
 
       {/* Mobile: fixed bottom center bar */}
-      <nav className="flex md:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-surface-raised rounded-2xl p-2 gap-1 shadow-nav">
+      <nav className="flex md:hidden fixed bottom-6 pb-[env(safe-area-inset-bottom)] left-1/2 -translate-x-1/2 z-50 bg-surface-raised rounded-2xl p-2 gap-1 shadow-nav">
         {items.map((item) => (
           <button
             key={item.label}

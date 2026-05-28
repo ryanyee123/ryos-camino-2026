@@ -21,7 +21,7 @@ export default function CredencialModal() {
         Two stamps a day, from churches, albergues, and cafés. Proof you walked it.
       </p>
       <div className="rounded-xl bg-[#F5F0E6] p-6 md:p-8 border border-black/[0.06]">
-        <div className="grid grid-cols-3 md:grid-cols-4 gap-4 md:gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-5">
           {stamps.map((stamp, i) => (
             <button
               key={i}

@@ -41,7 +41,7 @@ export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
           className="absolute inset-x-0 -bottom-6 h-6 bg-gradient-to-b from-surface/60 to-transparent pointer-events-none transition-opacity duration-200 ease-out motion-reduce:transition-none"
           style={{ opacity: isStuck ? 1 : 0 }}
         />
-        <div className="relative max-w-6xl mx-auto px-6 flex gap-2 overflow-x-auto no-scrollbar md:flex-wrap">
+        <div className="relative max-w-6xl mx-auto px-6 flex justify-center gap-2 flex-wrap">
           <button
             onClick={() => onSelect('full')}
             className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-medium border transition-colors ${

@@ -5,7 +5,7 @@ import { Footprints, CalendarDays, MapPin, Church, Clock, Mountain, Users, Coffe
 import NavRail from '@/components/NavRail';
 import GearModal from '@/components/modals/GearModal';
 import CostModal from '@/components/modals/CostModal';
-import CredencialModal from '@/components/modals/CredencialModal';
+import LodgingModal from '@/components/modals/LodgingModal';
 import DayChips from '@/components/DayChips';
 import StatCardRow from '@/components/StatCardRow';
 import TripOverviewContent from '@/components/TripOverviewContent';
@@ -16,7 +16,7 @@ import { days, tripOverview } from '@/data/days';
 
 type ActiveDay = number | 'full';
 
-const MODAL_HASHES = new Set(['gear', 'cost', 'credencial']);
+const MODAL_HASHES = new Set(['gear', 'cost', 'lodging']);
 
 function parseDayHash(hash: string): ActiveDay | null {
   if (!hash.startsWith('#day-')) return null;
@@ -67,15 +67,17 @@ export default function Home() {
       <NavRail />
       <GearModal />
       <CostModal />
-      <CredencialModal />
+      <LodgingModal />
 
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-6 md:pb-8">
-        <div className="max-w-6xl mx-auto px-6">
+        <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-[13px] uppercase tracking-[0.06em] text-ink-muted">Camino de Santiago · May 2026 · 71 miles</p>
-          <h1 className="mt-6 text-[44px] leading-[1.05] tracking-[-0.03em] font-semibold text-ink max-w-3xl">Ryan&apos;s Camino Francés</h1>
-          <p className="mt-6 text-[17px] leading-[1.6] text-ink-muted max-w-2xl">
-            {tripOverview.lead}
+          <h1 className="mt-6 text-[32px] md:text-[44px] leading-[1.05] tracking-[-0.03em] font-semibold text-ink max-w-3xl mx-auto">Ryan&apos;s Camino Francés</h1>
+          <p className="mt-6 text-[17px] leading-[1.6] text-ink-muted max-w-3xl mx-auto">
+            Five days on foot from Sarria to Santiago de Compostela. 71.4 miles through Galicia.
+            <br />
+            This is what I carried, what I spent, where I slept, and what I thought about along the way.
           </p>
         </div>
       </section>
@@ -133,7 +135,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 pt-20 pb-12">
           <h2 className="text-h2">About this site</h2>
           <p className="text-body text-ink-muted max-w-2xl mt-6">
-            I walked the last 100km of the Camino Francés in May 2026. This site is a record of
+            I walked the last 115km of the Camino Francés in May 2026. This site is a record of
             what I packed, what I spent, where I slept, and what I thought about along the way.
             Built as a reference for anyone planning the same walk, and a memory for me.
           </p>

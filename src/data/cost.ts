@@ -12,7 +12,7 @@ export type CostCategory = {
 };
 
 export const cost = {
-  totalEur: 2059.5,
+  totalEur: 1709.5,
   conversionRate: 1.08,
   narrative: '[Placeholder — Ryan to write]',
   categories: [
@@ -62,7 +62,7 @@ export const cost = {
     },
     {
       name: 'Gear',
-      totalEur: 1487,
+      totalEur: 1136,
       items: [
         { name: 'Osprey Stratos 34', amountEur: 185 },
         { name: 'Salomon Genesis Trail-Running Shoes', amountEur: 139 },
@@ -74,8 +74,7 @@ export const cost = {
         { name: 'Snow Peak Bucket Hat', amountEur: 46 },
         { name: 'Silk Sleeping Bag Liner', amountEur: 88 },
         { name: 'Anker Portable Charger', amountEur: 43 },
-        { name: 'Olympus Stylus TG-6', amountEur: 351 },
-        { name: 'Water Bladder / Camelback', amountEur: 32 },
+{ name: 'Water Bladder / Camelback', amountEur: 32 },
         { name: 'Miller Sunglasses', amountEur: 125 },
         { name: 'Journal + Pens', amountEur: 23 },
         { name: 'Eunzel Microfiber Quick-Dry Towel', amountEur: 14 },

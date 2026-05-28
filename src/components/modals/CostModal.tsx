@@ -7,8 +7,8 @@ import { StatCard } from '@/components/ui/Card';
 import { cost } from '@/data/cost';
 
 function fmt(value: number, currency: 'EUR' | 'USD') {
-  if (currency === 'USD') return `$${Math.round(value * cost.conversionRate)}`;
-  return `€${value}`;
+  const n = currency === 'USD' ? Math.round(value * cost.conversionRate) : Math.round(value);
+  return `${currency === 'USD' ? '$' : '€'}${n.toLocaleString()}`;
 }
 
 const tripCategories = cost.categories.filter((c) => c.name !== 'Gear');
@@ -42,10 +42,10 @@ export default function CostModal() {
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
-        <StatCard label="TOTAL" value={fmt(cost.totalEur, currency)} sublabel="trip + gear" icon={PiggyBank} />
-        <StatCard label="ON-TRIP" value={fmt(tripTotalEur, currency)} sublabel="6 days" icon={TrendingUp} />
-        <StatCard label="BED" value={fmt(bedPerNightEur, currency)} sublabel="avg per night" icon={BedDouble} />
-        <StatCard label="GEAR" value={fmt(gearCategory.totalEur, currency)} sublabel="one-time" icon={Backpack} />
+        <StatCard label="TOTAL" value={fmt(cost.totalEur, currency)} sublabel="trip + gear" icon={PiggyBank} compact />
+        <StatCard label="ON-TRIP" value={fmt(tripTotalEur, currency)} sublabel="6 days" icon={TrendingUp} compact />
+        <StatCard label="BED" value={fmt(bedPerNightEur, currency)} sublabel="avg per night" icon={BedDouble} compact />
+        <StatCard label="GEAR" value={fmt(gearCategory.totalEur, currency)} sublabel="one-time" icon={Backpack} compact />
       </div>
 
       {/* On-trip categories */}
@@ -57,9 +57,9 @@ export default function CostModal() {
           </div>
           <div className="space-y-1">
             {cat.items.map((item) => (
-              <div key={item.name} className="flex items-baseline justify-between text-body-sm">
-                <span className="text-ink-muted">{item.name}</span>
-                <span className="tabular-nums ml-4 flex-shrink-0">{fmt(item.amountEur, currency)}</span>
+              <div key={item.name} className="flex items-baseline justify-between text-body-sm gap-4">
+                <span className="text-ink-muted min-w-0">{item.name}</span>
+                <span className="tabular-nums flex-shrink-0 text-right min-w-[3.5rem]">{fmt(item.amountEur, currency)}</span>
               </div>
             ))}
           </div>
@@ -79,9 +79,9 @@ export default function CostModal() {
         </div>
         <div className="space-y-1">
           {gearCategory.items.map((item) => (
-            <div key={item.name} className="flex items-baseline justify-between text-body-sm">
-              <span className="text-ink-muted">{item.name}</span>
-              <span className="tabular-nums ml-4 flex-shrink-0">{fmt(item.amountEur, currency)}</span>
+            <div key={item.name} className="flex items-baseline justify-between text-body-sm gap-4">
+              <span className="text-ink-muted min-w-0">{item.name}</span>
+              <span className="tabular-nums flex-shrink-0 text-right min-w-[3.5rem]">{fmt(item.amountEur, currency)}</span>
             </div>
           ))}
         </div>

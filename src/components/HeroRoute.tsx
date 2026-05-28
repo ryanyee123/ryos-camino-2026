@@ -47,24 +47,32 @@ export default function HeroRoute() {
   const [ready, setReady] = useState(false);
   const [pathLength, setPathLength] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mq.matches);
 
+    const mqMobile = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mqMobile.matches);
+    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
+    mqMobile.addEventListener('change', handler);
+
     if (!pathRef.current) return;
     const len = pathRef.current.getTotalLength();
     setPathLength(len);
     requestAnimationFrame(() => setReady(true));
+
+    return () => mqMobile.removeEventListener('change', handler);
   }, []);
 
   const d = buildPath(towns);
 
   return (
     <div className="max-w-6xl mx-auto px-6" aria-hidden="true">
-      <div className="py-4 md:py-6">
+      <div className="py-6 md:py-6">
         <svg
-          viewBox="0 0 900 80"
+          viewBox={isMobile ? "100 -5 700 90" : "0 0 900 80"}
           preserveAspectRatio="xMidYMid meet"
           className="w-full h-auto"
           fill="none"
@@ -92,7 +100,7 @@ export default function HeroRoute() {
                     strokeDasharray: pathLength || 1000,
                     strokeDashoffset: ready ? 0 : pathLength || 1000,
                     transition:
-                      'stroke-dashoffset 2.4s cubic-bezier(0.22, 1, 0.36, 1)',
+                      'stroke-dashoffset 4.8s cubic-bezier(0.22, 1, 0.36, 1)',
                     opacity: 0.25,
                   }
             }
@@ -135,7 +143,7 @@ export default function HeroRoute() {
             x={towns[0].x}
             y={towns[0].y - 12}
             textAnchor="middle"
-            className="text-[11px] font-medium"
+            className="text-[14px] font-medium"
             fill="var(--color-ink-muted)"
             style={
               reducedMotion
@@ -156,7 +164,7 @@ export default function HeroRoute() {
             x={towns[towns.length - 1].x}
             y={towns[towns.length - 1].y - 12}
             textAnchor="middle"
-            className="text-[11px] font-medium"
+            className="text-[14px] font-medium"
             fill="var(--color-ink-muted)"
             style={
               reducedMotion

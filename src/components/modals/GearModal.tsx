@@ -15,7 +15,6 @@ export default function GearModal() {
         {gear.map((item) => (
           <PlaceCard
             key={item.name}
-            image={item.photo ? `/photos/gear/${item.photo}` : undefined}
             placeholderIcon={Backpack}
             eyebrow={item.category}
             name={item.name}

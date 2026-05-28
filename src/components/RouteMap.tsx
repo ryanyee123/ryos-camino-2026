@@ -23,6 +23,9 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
   const [segments, setSegments] = useState<RouteSegment[]>([]);
 
   const fetchRoute = useCallback(async (day: Day): Promise<RouteSegment | null> => {
+    // Skip rest days (same start/end)
+    if (day.from === day.to) return null;
+
     const waypoints: [number, number][] = [];
     waypoints.push(towns[day.from].coords);
     if (day.via) waypoints.push(towns[day.via].coords);
@@ -203,13 +206,18 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
     if (selectedDay !== null) {
       const day = days.find((d) => d.day === selectedDay);
       if (day) {
-        const coords: [number, number][] = [towns[day.from].coords, towns[day.to].coords];
-        if (day.via) coords.push(towns[day.via].coords);
-        const bounds = coords.reduce(
-          (b, c) => b.extend(c),
-          new mapboxgl.LngLatBounds(coords[0], coords[0])
-        );
-        map.fitBounds(bounds, { padding: 100, duration: 800 });
+        if (day.from === day.to) {
+          // Rest day — center on the town
+          map.flyTo({ center: towns[day.from].coords, zoom: 13, duration: 800 });
+        } else {
+          const coords: [number, number][] = [towns[day.from].coords, towns[day.to].coords];
+          if (day.via) coords.push(towns[day.via].coords);
+          const bounds = coords.reduce(
+            (b, c) => b.extend(c),
+            new mapboxgl.LngLatBounds(coords[0], coords[0])
+          );
+          map.fitBounds(bounds, { padding: 100, duration: 800 });
+        }
       }
     } else {
       const allCoords = Object.values(towns).map((t) => t.coords);

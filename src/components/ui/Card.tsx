@@ -11,16 +11,17 @@ type StatCardProps = {
   value: string;
   sublabel?: string;
   icon?: LucideIcon;
+  compact?: boolean;
 };
 
-export function StatCard({ label, value, sublabel, icon: Icon }: StatCardProps) {
+export function StatCard({ label, value, sublabel, icon: Icon, compact }: StatCardProps) {
   return (
-    <div className="relative bg-surface-raised shadow-card rounded-xl p-5">
+    <div className={`relative bg-surface-raised shadow-card rounded-xl ${compact ? 'p-4' : 'p-5'}`}>
       {Icon && (
-        <Icon size={16} className="absolute top-5 right-5 text-ink-faint" />
+        <Icon size={16} className={`absolute ${compact ? 'top-4 right-4' : 'top-5 right-5'} text-ink-faint`} />
       )}
       <p className="text-stat-label">{label}</p>
-      <p className="text-stat-number mt-1">{value}</p>
+      <p className={`${compact ? 'text-[22px] leading-[1] font-semibold tracking-[-0.01em] tabular-nums' : 'text-stat-number'} mt-1`}>{value}</p>
       {sublabel && (
         <p className="text-body-sm text-ink-muted mt-1">{sublabel}</p>
       )}
@@ -82,8 +83,13 @@ export function PlaceCard({
   }`;
 
   if (href) {
+    const isExternal = href.startsWith('http');
     return (
-      <Link href={href} className={`block ${classes}`}>
+      <Link
+        href={href}
+        className={`block ${classes}`}
+        {...(isExternal ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+      >
         {content}
       </Link>
     );
