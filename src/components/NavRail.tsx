@@ -48,7 +48,7 @@ export default function NavRail() {
               />
               {/* Tooltip */}
               <span
-                className="absolute left-full ml-3 px-3 py-1.5 rounded-lg bg-ink text-white text-body-sm whitespace-nowrap pointer-events-none transition-[opacity] duration-150 ease-out"
+                className="absolute left-full ml-3 px-3 py-1.5 rounded-lg bg-accent text-white text-body-sm whitespace-nowrap pointer-events-none transition-[opacity] duration-150 ease-out"
                 style={{ opacity: hoveredIndex === index ? 1 : 0 }}
               >
                 {item.label}
