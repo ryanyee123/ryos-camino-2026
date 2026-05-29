@@ -21,7 +21,7 @@ const MODAL_HASHES = new Set(['gear', 'cost', 'lodging']);
 function parseDayHash(hash: string): ActiveDay | null {
   if (!hash.startsWith('#day-')) return null;
   const n = parseInt(hash.slice(5), 10);
-  return n >= 1 && n <= 6 ? n : null;
+  return n >= 1 && n <= 7 ? n : null;
 }
 
 export default function Home() {

@@ -18,7 +18,7 @@ const tripTotalEur = tripCategories.reduce((sum, c) => sum + c.totalEur, 0);
 const lodgingCategory = cost.categories.find((c) => c.name === 'Lodging')!;
 const foodCategory = cost.categories.find((c) => c.name === 'Food')!;
 
-const perDayEur = Math.round(tripTotalEur / 6);
+const perDayEur = Math.round(tripTotalEur / 7);
 const bedPerNightEur = Math.round(lodgingCategory.totalEur / lodgingCategory.items.length);
 const foodPerDayEur = Math.round(foodCategory.totalEur / foodCategory.items.length);
 
@@ -29,7 +29,7 @@ export default function CostModal() {
     <Modal hashName="cost" title="What it cost">
       <div className="flex items-center justify-between mb-6">
         <p className="text-body text-ink-muted">
-          Six days, all in. A budget reference for anyone planning this route.
+          Seven days, all in. A budget reference for anyone planning this route.
         </p>
         <button
           onClick={() => setCurrency(currency === 'EUR' ? 'USD' : 'EUR')}
@@ -43,7 +43,7 @@ export default function CostModal() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">
         <StatCard label="TOTAL" value={fmt(cost.totalEur, currency)} sublabel="trip + gear" icon={PiggyBank} compact />
-        <StatCard label="ON-TRIP" value={fmt(tripTotalEur, currency)} sublabel="6 days" icon={TrendingUp} compact />
+        <StatCard label="ON-TRIP" value={fmt(tripTotalEur, currency)} sublabel="7 days" icon={TrendingUp} compact />
         <StatCard label="BED" value={fmt(bedPerNightEur, currency)} sublabel="avg per night" icon={BedDouble} compact />
         <StatCard label="GEAR" value={fmt(gearCategory.totalEur, currency)} sublabel="one-time" icon={Backpack} compact />
       </div>
