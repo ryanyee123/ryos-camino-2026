@@ -47,23 +47,15 @@ export default function HeroRoute() {
   const [ready, setReady] = useState(false);
   const [pathLength, setPathLength] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
     setReducedMotion(mq.matches);
 
-    const mqMobile = window.matchMedia('(max-width: 767px)');
-    setIsMobile(mqMobile.matches);
-    const handler = (e: MediaQueryListEvent) => setIsMobile(e.matches);
-    mqMobile.addEventListener('change', handler);
-
     if (!pathRef.current) return;
     const len = pathRef.current.getTotalLength();
     setPathLength(len);
     requestAnimationFrame(() => setReady(true));
-
-    return () => mqMobile.removeEventListener('change', handler);
   }, []);
 
   const d = buildPath(towns);
@@ -72,7 +64,7 @@ export default function HeroRoute() {
     <div className="max-w-6xl mx-auto px-6" aria-hidden="true">
       <div className="py-6 md:py-6">
         <svg
-          viewBox={isMobile ? "100 -5 700 90" : "0 0 900 80"}
+          viewBox="0 -5 900 90"
           preserveAspectRatio="xMidYMid meet"
           className="w-full h-auto"
           fill="none"
