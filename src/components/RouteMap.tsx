@@ -9,6 +9,7 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN!;
 type RouteSegment = {
   day: number;
   geometry: GeoJSON.LineString;
+  transit?: boolean;
 };
 
 type RouteMapProps = {
@@ -31,14 +32,15 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
     if (day.via) waypoints.push(towns[day.via].coords);
     waypoints.push(towns[day.to].coords);
 
+    const profile = day.transit ? 'driving' : 'walking';
     const coords = waypoints.map((c) => c.join(',')).join(';');
-    const url = `https://api.mapbox.com/directions/v5/mapbox/walking/${coords}?geometries=geojson&overview=full&access_token=${mapboxgl.accessToken}`;
+    const url = `https://api.mapbox.com/directions/v5/mapbox/${profile}/${coords}?geometries=geojson&overview=full&access_token=${mapboxgl.accessToken}`;
 
     try {
       const res = await fetch(url);
       const data = await res.json();
       if (data.routes?.[0]) {
-        return { day: day.day, geometry: data.routes[0].geometry };
+        return { day: day.day, geometry: data.routes[0].geometry, transit: !!day.transit };
       }
     } catch (e) {
       console.error(`Failed to fetch route for day ${day.day}`, e);
@@ -121,6 +123,7 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
             'line-color': ROUTE_COLOR,
             'line-width': 3.5,
             'line-opacity': 0.9,
+            'line-dasharray': seg.transit ? [3, 3] : [1],
           },
         });
       });
@@ -156,11 +159,13 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
         markersRef.current.push(marker);
       });
 
-      // Fit to full route on initial load
-      const allCoords = Object.values(towns).map((t) => t.coords);
-      const fullBounds = allCoords.reduce(
+      // Fit to Camino route on initial load (exclude Madrid)
+      const caminoCoords = Object.entries(towns)
+        .filter(([id]) => id !== 'madrid')
+        .map(([, t]) => t.coords);
+      const fullBounds = caminoCoords.reduce(
         (b, c) => b.extend(c),
-        new mapboxgl.LngLatBounds(allCoords[0], allCoords[0])
+        new mapboxgl.LngLatBounds(caminoCoords[0], caminoCoords[0])
       );
       map.fitBounds(fullBounds, { padding: 40 });
     });
@@ -223,10 +228,12 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
         }
       }
     } else {
-      const allCoords = Object.values(towns).map((t) => t.coords);
-      const fullBounds = allCoords.reduce(
+      const caminoCoords = Object.entries(towns)
+        .filter(([id]) => id !== 'madrid')
+        .map(([, t]) => t.coords);
+      const fullBounds = caminoCoords.reduce(
         (b, c) => b.extend(c),
-        new mapboxgl.LngLatBounds(allCoords[0], allCoords[0])
+        new mapboxgl.LngLatBounds(caminoCoords[0], caminoCoords[0])
       );
       map.fitBounds(fullBounds, { padding: 40, duration: 800 });
     }

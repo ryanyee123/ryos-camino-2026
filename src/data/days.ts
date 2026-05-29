@@ -70,6 +70,7 @@ export type Day = {
   elevation: number;
   townsCount: number;
   restDay?: boolean;
+  transit?: 'train' | 'bus';
   narrative: NarrativeBlock[];
   lodging: Lodging;
   meals: Meal[];
@@ -83,6 +84,7 @@ export const towns: Record<string, Town> = {
   arzua:      { id: 'arzua',      name: 'Arzúa',        coords: [-8.1610, 42.9286], type: 'stop'  },
   pedrouzo:   { id: 'pedrouzo',   name: 'O Pedrouzo',   coords: [-8.3650, 42.9067], type: 'stop'  },
   santiago:   { id: 'santiago',   name: 'Santiago',     coords: [-8.5448, 42.8806], type: 'end'   },
+  madrid:     { id: 'madrid',     name: 'Madrid',       coords: [-3.7038, 40.4168], type: 'end'   },
 };
 
 export const days: Day[] = [
@@ -258,10 +260,11 @@ export const days: Day[] = [
     day: 7,
     date: '2026-05-24',
     from: 'santiago',
-    to: 'santiago',
+    to: 'madrid',
     miles: 0,
     title: 'Santiago → Madrid',
     restDay: true,
+    transit: 'train',
     hours: 0,
     elevation: 0,
     townsCount: 0,
