@@ -39,6 +39,25 @@ export type CredencialStamp = {
   photo?: string;
 };
 
+export type TextBlock = {
+  type: 'text';
+  content: string;
+};
+
+export type ImageBlock = {
+  type: 'image';
+  filename: string;  // resolves to /photos/day-{N}/{filename}
+  aspectRatio?: '3/4' | '4/5' | '3/2' | 'square';  // default to '3/2' if omitted
+};
+
+export type ImagePairBlock = {
+  type: 'image-pair';
+  left: { filename: string; aspectRatio?: '3/4' | '4/5' | '3/2' | 'square' };
+  right: { filename: string; aspectRatio?: '3/4' | '4/5' | '3/2' | 'square' };
+};
+
+export type NarrativeBlock = TextBlock | ImageBlock | ImagePairBlock;
+
 export type Day = {
   day: number;
   date: string;
@@ -51,8 +70,7 @@ export type Day = {
   elevation: number;
   townsCount: number;
   restDay?: boolean;
-  narrative: string[];
-  photos: string[];
+  narrative: NarrativeBlock[];
   lodging: Lodging;
   meals: Meal[];
 };
@@ -79,12 +97,11 @@ export const days: Day[] = [
     elevation: 450,
     townsCount: 2,
     narrative: [
-      'Started walking at 7:15am from Sarria. The air was cool and the town was still mostly asleep — just a few other pilgrims loading up at the café near the trailhead. Café con leche, tortilla slice, out the door.',
-      'The first few kilometers wound through eucalyptus forest, damp and quiet. The trail markers are everywhere — yellow arrows on stone walls, trees, the occasional spray-painted reminder on asphalt. Hard to get lost.',
-      'The descent into Portomarín is dramatic. You cross a long bridge over the Belesar reservoir and climb stone stairs into a town that was literally moved uphill when the dam flooded the original village in the 1960s. The church of San Nicolás was relocated stone by stone.',
-      'Checked into the albergue by 2pm. Shower, laundry line, siesta. Dinner was a pilgrim menu at Casa Curro — three courses, bottle of Ribeiro, €13. The dining room was loud and full of languages I couldn\'t place.',
+      { type: 'text', content: 'Started walking at 7:15am from Sarria. The air was cool and the town was still mostly asleep — just a few other pilgrims loading up at the café near the trailhead. Café con leche, tortilla slice, out the door.' },
+      { type: 'text', content: 'The first few kilometers wound through eucalyptus forest, damp and quiet. The trail markers are everywhere — yellow arrows on stone walls, trees, the occasional spray-painted reminder on asphalt. Hard to get lost.' },
+      { type: 'text', content: 'The descent into Portomarín is dramatic. You cross a long bridge over the Belesar reservoir and climb stone stairs into a town that was literally moved uphill when the dam flooded the original village in the 1960s. The church of San Nicolás was relocated stone by stone.' },
+      { type: 'text', content: 'Checked into the albergue by 2pm. Shower, laundry line, siesta. Dinner was a pilgrim menu at Casa Curro — three courses, bottle of Ribeiro, €13. The dining room was loud and full of languages I couldn\'t place.' },
     ],
-    photos: [],
     lodging: {
       name: 'Novo Porto Albergue',
       town: 'Portomarín',
@@ -107,12 +124,11 @@ export const days: Day[] = [
     elevation: 780,
     townsCount: 2,
     narrative: [
-      'Left Portomarín early, climbing out of the river valley on a paved road before the trail cut back into farmland. Rolling hills, stone walls, cows watching you pass. Classic Galician countryside.',
-      'Today felt longer than the numbers suggested. The terrain between Portomarín and Palas de Rei is deceptively hilly — nothing steep, but constant up-and-down that wears on the legs. I started counting hamlets: Gonzar, Castromaior, Ventas de Narón.',
-      'Stopped for a bocadillo and Aquarius at a tiny bar in Hospital de la Cruz. The bartender had a stamp for the credencial and a dog that followed pilgrims to the edge of the village before turning back.',
-      'Arrived in Palas de Rei around 3pm. Small, quiet town. The albergue was clean and half-empty — apparently most people push further to Melide. Glad I didn\'t. The evening was warm and I sat on a bench reading until dark.',
+      { type: 'text', content: 'Left Portomarín early, climbing out of the river valley on a paved road before the trail cut back into farmland. Rolling hills, stone walls, cows watching you pass. Classic Galician countryside.' },
+      { type: 'text', content: 'Today felt longer than the numbers suggested. The terrain between Portomarín and Palas de Rei is deceptively hilly — nothing steep, but constant up-and-down that wears on the legs. I started counting hamlets: Gonzar, Castromaior, Ventas de Narón.' },
+      { type: 'text', content: 'Stopped for a bocadillo and Aquarius at a tiny bar in Hospital de la Cruz. The bartender had a stamp for the credencial and a dog that followed pilgrims to the edge of the village before turning back.' },
+      { type: 'text', content: 'Arrived in Palas de Rei around 3pm. Small, quiet town. The albergue was clean and half-empty — apparently most people push further to Melide. Glad I didn\'t. The evening was warm and I sat on a bench reading until dark.' },
     ],
-    photos: [],
     lodging: {
       name: 'Albergue Restaurante Castro',
       town: 'Palas de Rei',
@@ -136,12 +152,11 @@ export const days: Day[] = [
     elevation: 620,
     townsCount: 3,
     narrative: [
-      'The longest day. Left Palas de Rei at 6:45am knowing I had 18.6 miles ahead. The original plan was to stop in Melide, but the albergues were full by noon and I felt strong enough to keep going. Good decision.',
-      'Passed through a string of tiny villages before reaching Melide around noon. This is the town famous for pulpo — octopus cooked in copper pots and served on wooden plates with paprika, olive oil, and coarse salt. Stopped at Ezequiel, which has been doing it since the 1950s. Worth every minute.',
-      'The afternoon stretch from Melide to Arzúa was tough. My feet were starting to complain and the trail alternated between forest paths and asphalt road walking. Arzúa appeared just when I needed it — a real town with pharmacies and supermarkets.',
-      'Collapsed into Albergue Don Quijote, took an ice-cold shower (the hot water was gone), and ate a quiet dinner alone at a restaurant on the main square. Tetilla cheese and bread. Galicia does simple food better than anywhere.',
+      { type: 'text', content: 'The longest day. Left Palas de Rei at 6:45am knowing I had 18.6 miles ahead. The original plan was to stop in Melide, but the albergues were full by noon and I felt strong enough to keep going. Good decision.' },
+      { type: 'text', content: 'Passed through a string of tiny villages before reaching Melide around noon. This is the town famous for pulpo — octopus cooked in copper pots and served on wooden plates with paprika, olive oil, and coarse salt. Stopped at Ezequiel, which has been doing it since the 1950s. Worth every minute.' },
+      { type: 'text', content: 'The afternoon stretch from Melide to Arzúa was tough. My feet were starting to complain and the trail alternated between forest paths and asphalt road walking. Arzúa appeared just when I needed it — a real town with pharmacies and supermarkets.' },
+      { type: 'text', content: 'Collapsed into Albergue Don Quijote, took an ice-cold shower (the hot water was gone), and ate a quiet dinner alone at a restaurant on the main square. Tetilla cheese and bread. Galicia does simple food better than anywhere.' },
     ],
-    photos: [],
     lodging: {
       name: 'O Albergue deSelmo',
       town: 'Arzúa',
@@ -164,12 +179,11 @@ export const days: Day[] = [
     elevation: 380,
     townsCount: 2,
     narrative: [
-      'Short day — only 11.8 miles. Left Arzúa late, around 8am, because my legs needed the extra sleep. The trail out of town drops into a eucalyptus forest and stays there for a while.',
-      'Today\'s walking felt different. The path is getting busier — more pilgrims who started from Sarria just a day or two ago, tour groups, people with clean backpacks. The last 100km is the minimum for the Compostela certificate, so the trail fills up.',
-      'Stopped in Santa Irene for coffee and a stamp at a small chapel. The hospitalera was an older woman who\'d walked the Camino four times. She said the fifth time was just living next to it.',
-      'O Pedrouzo is not a pretty town — it\'s basically a highway stop that exists because pilgrims need somewhere to sleep before the final push to Santiago. But the albergue was fine, and the anticipation of tomorrow made everything feel charged.',
+      { type: 'text', content: 'Short day — only 11.8 miles. Left Arzúa late, around 8am, because my legs needed the extra sleep. The trail out of town drops into a eucalyptus forest and stays there for a while.' },
+      { type: 'text', content: 'Today\'s walking felt different. The path is getting busier — more pilgrims who started from Sarria just a day or two ago, tour groups, people with clean backpacks. The last 100km is the minimum for the Compostela certificate, so the trail fills up.' },
+      { type: 'text', content: 'Stopped in Santa Irene for coffee and a stamp at a small chapel. The hospitalera was an older woman who\'d walked the Camino four times. She said the fifth time was just living next to it.' },
+      { type: 'text', content: 'O Pedrouzo is not a pretty town — it\'s basically a highway stop that exists because pilgrims need somewhere to sleep before the final push to Santiago. But the albergue was fine, and the anticipation of tomorrow made everything feel charged.' },
     ],
-    photos: [],
     lodging: {
       name: 'Pensión Spa Cruceiro de Pedouzo',
       town: 'O Pedrouzo',
@@ -192,12 +206,11 @@ export const days: Day[] = [
     elevation: 520,
     townsCount: 2,
     narrative: [
-      'Woke up at 5:30am. Nobody needed an alarm — the whole albergue was rustling in the dark, headlamps bobbing, dry bags being stuffed. Everyone wanted to reach Santiago early.',
-      'The first hour was forest walking in pre-dawn light. Then the trail crossed the airport perimeter — planes taking off overhead while you walk through eucalyptus. A surreal transition from medieval pilgrimage to modern infrastructure.',
-      'Monte do Gozo — the Hill of Joy — is where you first see Santiago\'s cathedral spires in the distance. I stood there for a few minutes. Two German pilgrims were crying. A Korean couple took a selfie. I just looked.',
-      'Walked into the old city through the Porta do Camiño and followed the brass scallop shells embedded in the sidewalk to the cathedral. Arrived at 10:15am. The Praza do Obradoiro was full of pilgrims sitting on the ground, boots off, staring up at the facade. I joined them.',
+      { type: 'text', content: 'Woke up at 5:30am. Nobody needed an alarm — the whole albergue was rustling in the dark, headlamps bobbing, dry bags being stuffed. Everyone wanted to reach Santiago early.' },
+      { type: 'text', content: 'The first hour was forest walking in pre-dawn light. Then the trail crossed the airport perimeter — planes taking off overhead while you walk through eucalyptus. A surreal transition from medieval pilgrimage to modern infrastructure.' },
+      { type: 'text', content: 'Monte do Gozo — the Hill of Joy — is where you first see Santiago\'s cathedral spires in the distance. I stood there for a few minutes. Two German pilgrims were crying. A Korean couple took a selfie. I just looked.' },
+      { type: 'text', content: 'Walked into the old city through the Porta do Camiño and followed the brass scallop shells embedded in the sidewalk to the cathedral. Arrived at 10:15am. The Praza do Obradoiro was full of pilgrims sitting on the ground, boots off, staring up at the facade. I joined them.' },
     ],
-    photos: [],
     lodging: {
       name: 'Albergue SP 55 by Bossh! Hotels',
       town: 'Santiago de Compostela',
@@ -221,9 +234,8 @@ export const days: Day[] = [
     elevation: 0,
     townsCount: 0,
     narrative: [
-      '[Placeholder — Ryan will write this]',
+      { type: 'text', content: '[Placeholder — Ryan will write this]' },
     ],
-    photos: [],
     lodging: {
       name: 'Studio Apartment',
       town: 'Santiago de Compostela',
