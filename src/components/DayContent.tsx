@@ -1,7 +1,6 @@
-import { Bed, Utensils, Camera, ExternalLink } from 'lucide-react';
+import { Bed, Utensils, ExternalLink } from 'lucide-react';
 import { MediaCard } from '@/components/ui/Card';
-import PlaceholderImage from '@/components/ui/PlaceholderImage';
-import type { Day } from '@/data/days';
+import type { Day, NarrativeBlock } from '@/data/days';
 
 function formatDate(iso: string) {
   const d = new Date(iso + 'T12:00:00');
@@ -42,6 +41,43 @@ function CompactPlace({ icon: Icon, label, name, meta, href }: {
   return <div className={classes}>{content}</div>;
 }
 
+const ASPECT_MAP: Record<string, string> = {
+  '3/4': 'aspect-[3/4]',
+  '4/5': 'aspect-[4/5]',
+  '3/2': 'aspect-[3/2]',
+  'square': 'aspect-square',
+};
+
+function NarrativeBlockRenderer({ block, dayNumber }: { block: NarrativeBlock; dayNumber: number }) {
+  switch (block.type) {
+    case 'text':
+      return <p className="text-body leading-relaxed">{block.content}</p>;
+    case 'image':
+      return (
+        <MediaCard>
+          <div className={ASPECT_MAP[block.aspectRatio ?? '3/2']}>
+            <img src={`/photos/day-${dayNumber}/${block.filename}`} alt="" className="w-full h-full object-cover" />
+          </div>
+        </MediaCard>
+      );
+    case 'image-pair':
+      return (
+        <div className="grid grid-cols-2 gap-3">
+          <MediaCard>
+            <div className={ASPECT_MAP[block.left.aspectRatio ?? '3/2']}>
+              <img src={`/photos/day-${dayNumber}/${block.left.filename}`} alt="" className="w-full h-full object-cover" />
+            </div>
+          </MediaCard>
+          <MediaCard>
+            <div className={ASPECT_MAP[block.right.aspectRatio ?? '3/2']}>
+              <img src={`/photos/day-${dayNumber}/${block.right.filename}`} alt="" className="w-full h-full object-cover" />
+            </div>
+          </MediaCard>
+        </div>
+      );
+  }
+}
+
 export default function DayContent({ day }: { day: Day }) {
   return (
     <div>
@@ -50,9 +86,9 @@ export default function DayContent({ day }: { day: Day }) {
       </p>
       <h2 className="text-h1">{day.title}</h2>
 
-      <div className="mt-8 space-y-4">
-        {day.narrative.map((p, i) => (
-          <p key={i} className="text-body leading-relaxed">{p}</p>
+      <div className="mt-8 space-y-6">
+        {day.narrative.map((block, i) => (
+          <NarrativeBlockRenderer key={i} block={block} dayNumber={day.day} />
         ))}
       </div>
 
@@ -83,30 +119,6 @@ export default function DayContent({ day }: { day: Day }) {
         </div>
       </div>
 
-      <div className="mt-10">
-        <p className="text-caption mb-3">PHOTOS</p>
-        {day.photos.length > 0 ? (
-          <div className="grid grid-cols-2 gap-3">
-            {day.photos.map((photo, i) => (
-              <MediaCard key={photo}>
-                <div className={i === 0 ? 'aspect-[3/4]' : 'aspect-[3/2]'}>
-                  <img src={`/photos/day-${day.day}/${photo}`} alt="" className="w-full h-full object-cover" />
-                </div>
-              </MediaCard>
-            ))}
-          </div>
-        ) : (
-          <div className="grid grid-cols-2 gap-3">
-            {[0, 1, 2, 3].map((i) => (
-              <MediaCard key={i}>
-                <div className={i === 0 ? 'aspect-[3/4]' : 'aspect-[3/2]'}>
-                  <PlaceholderImage icon={Camera} />
-                </div>
-              </MediaCard>
-            ))}
-          </div>
-        )}
-      </div>
     </div>
   );
 }
