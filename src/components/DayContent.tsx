@@ -1,5 +1,8 @@
-import { Bed, Utensils, ExternalLink } from 'lucide-react';
-import { MediaCard } from '@/components/ui/Card';
+'use client';
+
+import { useState } from 'react';
+import { Bed, Utensils, Camera, ExternalLink } from 'lucide-react';
+import PlaceholderImage from '@/components/ui/PlaceholderImage';
 import type { Day, NarrativeBlock } from '@/data/days';
 
 function formatDate(iso: string) {
@@ -48,31 +51,53 @@ const ASPECT_MAP: Record<string, string> = {
   'square': 'aspect-square',
 };
 
+function InlineImage({ src, aspectRatio }: { src: string; aspectRatio?: string }) {
+  const [errored, setErrored] = useState(false);
+
+  return (
+    <div className={`${ASPECT_MAP[aspectRatio ?? '3/2']} bg-surface-raised shadow-card rounded-lg overflow-hidden`}>
+      {errored ? (
+        <PlaceholderImage icon={Camera} />
+      ) : (
+        <img
+          src={src}
+          alt=""
+          className="w-full h-full object-cover"
+          onError={() => setErrored(true)}
+        />
+      )}
+    </div>
+  );
+}
+
 function NarrativeBlockRenderer({ block, dayNumber }: { block: NarrativeBlock; dayNumber: number }) {
   switch (block.type) {
     case 'text':
       return <p className="text-body leading-relaxed">{block.content}</p>;
     case 'image':
       return (
-        <MediaCard>
-          <div className={ASPECT_MAP[block.aspectRatio ?? '3/2']}>
-            <img src={`/photos/day-${dayNumber}/${block.filename}`} alt="" className="w-full h-full object-cover" />
+        <div className="my-4 flex justify-center">
+          <div className="w-full sm:w-[85%]">
+            <InlineImage
+              src={`/photos/day-${dayNumber}/${block.filename}`}
+              aspectRatio={block.aspectRatio}
+            />
           </div>
-        </MediaCard>
+        </div>
       );
     case 'image-pair':
       return (
-        <div className="grid grid-cols-2 gap-3">
-          <MediaCard>
-            <div className={ASPECT_MAP[block.left.aspectRatio ?? '3/2']}>
-              <img src={`/photos/day-${dayNumber}/${block.left.filename}`} alt="" className="w-full h-full object-cover" />
-            </div>
-          </MediaCard>
-          <MediaCard>
-            <div className={ASPECT_MAP[block.right.aspectRatio ?? '3/2']}>
-              <img src={`/photos/day-${dayNumber}/${block.right.filename}`} alt="" className="w-full h-full object-cover" />
-            </div>
-          </MediaCard>
+        <div className="my-4 flex justify-center">
+          <div className="w-full sm:w-[85%] grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <InlineImage
+              src={`/photos/day-${dayNumber}/${block.left.filename}`}
+              aspectRatio={block.left.aspectRatio}
+            />
+            <InlineImage
+              src={`/photos/day-${dayNumber}/${block.right.filename}`}
+              aspectRatio={block.right.aspectRatio}
+            />
+          </div>
         </div>
       );
   }
@@ -86,7 +111,7 @@ export default function DayContent({ day }: { day: Day }) {
       </p>
       <h2 className="text-h1">{day.title}</h2>
 
-      <div className="mt-8 space-y-6">
+      <div className="mt-8 space-y-4">
         {day.narrative.map((block, i) => (
           <NarrativeBlockRenderer key={i} block={block} dayNumber={day.day} />
         ))}
