@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Backpack, Euro, Home } from 'lucide-react';
+import { Backpack, Euro, Home, Info } from 'lucide-react';
 
 const ITEM_SIZE = 40;
 const GAP = 4;
@@ -11,6 +11,7 @@ const items = [
   { icon: Backpack, label: 'Gear', action: () => { window.location.hash = 'gear'; } },
   { icon: Euro, label: 'Cost', action: () => { window.location.hash = 'cost'; } },
   { icon: Home, label: 'Lodging', action: () => { window.location.hash = 'lodging'; } },
+  { icon: Info, label: 'About', action: () => { window.location.hash = 'about'; } },
 ];
 
 export default function NavRail() {

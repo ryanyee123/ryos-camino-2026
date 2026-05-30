@@ -47,10 +47,14 @@ export default function HeroRoute() {
   const [ready, setReady] = useState(false);
   const [pathLength, setPathLength] = useState(0);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
-    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setReducedMotion(mq.matches);
+    const motionMq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    setReducedMotion(motionMq.matches);
+
+    const mobileMq = window.matchMedia('(max-width: 767px)');
+    setIsMobile(mobileMq.matches);
 
     if (!pathRef.current) return;
     const len = pathRef.current.getTotalLength();
@@ -64,7 +68,7 @@ export default function HeroRoute() {
     <div className="max-w-6xl mx-auto px-6" aria-hidden="true">
       <div className="py-6 md:py-6">
         <svg
-          viewBox="0 -5 900 90"
+          viewBox={isMobile ? '0 -30 900 140' : '0 -5 900 90'}
           preserveAspectRatio="xMidYMid meet"
           className="w-full h-auto"
           fill="none"
@@ -73,7 +77,7 @@ export default function HeroRoute() {
           <path
             d={d}
             stroke="var(--color-accent)"
-            strokeWidth="1.5"
+            strokeWidth={isMobile ? 3 : 1.5}
             strokeLinecap="round"
             opacity="0.08"
           />
@@ -83,7 +87,7 @@ export default function HeroRoute() {
             ref={pathRef}
             d={d}
             stroke="var(--color-accent)"
-            strokeWidth="2"
+            strokeWidth={isMobile ? 4 : 2}
             strokeLinecap="round"
             style={
               reducedMotion
@@ -106,7 +110,7 @@ export default function HeroRoute() {
                 key={town.label}
                 cx={town.x}
                 cy={town.y}
-                r={isEndpoint ? 3.5 : 2}
+                r={isEndpoint ? (isMobile ? 6 : 3.5) : (isMobile ? 3.5 : 2)}
                 fill={
                   isEndpoint
                     ? 'var(--color-accent)'
@@ -135,7 +139,7 @@ export default function HeroRoute() {
             x={towns[0].x}
             y={towns[0].y - 12}
             textAnchor="middle"
-            className="text-[14px] font-medium"
+            className={`${isMobile ? 'text-[22px]' : 'text-[14px]'} font-medium`}
             fill="var(--color-ink-muted)"
             style={
               reducedMotion
@@ -156,7 +160,7 @@ export default function HeroRoute() {
             x={towns[towns.length - 1].x}
             y={towns[towns.length - 1].y - 12}
             textAnchor="middle"
-            className="text-[14px] font-medium"
+            className={`${isMobile ? 'text-[22px]' : 'text-[14px]'} font-medium`}
             fill="var(--color-ink-muted)"
             style={
               reducedMotion

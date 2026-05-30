@@ -6,6 +6,7 @@ import NavRail from '@/components/NavRail';
 import GearModal from '@/components/modals/GearModal';
 import CostModal from '@/components/modals/CostModal';
 import LodgingModal from '@/components/modals/LodgingModal';
+import AboutModal from '@/components/modals/AboutModal';
 import DayChips from '@/components/DayChips';
 import StatCardRow from '@/components/StatCardRow';
 import TripOverviewContent from '@/components/TripOverviewContent';
@@ -16,7 +17,7 @@ import { days, tripOverview } from '@/data/days';
 
 type ActiveDay = number | 'full';
 
-const MODAL_HASHES = new Set(['gear', 'cost', 'lodging']);
+const MODAL_HASHES = new Set(['gear', 'cost', 'lodging', 'about']);
 
 function parseDayHash(hash: string): ActiveDay | null {
   if (!hash.startsWith('#day-')) return null;
@@ -74,6 +75,7 @@ export default function Home() {
       <GearModal />
       <CostModal />
       <LodgingModal />
+      <AboutModal />
 
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-6 md:pb-8">
@@ -136,26 +138,6 @@ export default function Home() {
         </div>
       </div>
 
-      {/* About */}
-      <section className="border-t border-border">
-        <div className="max-w-6xl mx-auto px-6 pt-20 pb-12">
-          <h2 className="text-h2">About this site</h2>
-          <p className="text-body text-ink-muted max-w-2xl mt-6">
-            I walked the last 115km of the Camino Francés in May 2026.
-            Built as a reference for anyone planning the same walk, and a memory for me.
-          </p>
-          <p className="text-body-sm text-ink-muted italic mt-4">— Ryan</p>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-border">
-        <div className="max-w-6xl mx-auto px-6 py-6 text-center">
-          <p className="text-caption text-ink-faint">
-            © 2026 Ryan Yee · Built in NYC after walking to Santiago
-          </p>
-        </div>
-      </footer>
     </div>
   );
 }
