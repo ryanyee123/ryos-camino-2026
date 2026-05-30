@@ -101,7 +101,7 @@ export default function Modal({ hashName, title, children }: ModalProps) {
       <div
         role="dialog"
         aria-modal="true"
-        className={`md:hidden bg-white rounded-t-2xl w-full max-h-[90vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
+        className={`md:hidden bg-white rounded-t-2xl w-full max-h-[calc(100vh-env(safe-area-inset-top)-1rem)] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 z-10 bg-surface-raised pt-3 pb-4 px-6">

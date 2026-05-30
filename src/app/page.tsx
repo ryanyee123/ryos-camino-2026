@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Footprints, CalendarDays, MapPin, Church, Clock, Mountain, Users, Coffee } from 'lucide-react';
 import NavRail from '@/components/NavRail';
 import GearModal from '@/components/modals/GearModal';
@@ -26,6 +26,7 @@ function parseDayHash(hash: string): ActiveDay | null {
 
 export default function Home() {
   const [activeDay, setActiveDay] = useState<ActiveDay>('full');
+  const mobileContentRef = useRef<HTMLDivElement>(null);
 
   // Read hash on mount
   useEffect(() => {
@@ -38,6 +39,11 @@ export default function Home() {
     setActiveDay(val);
     const newHash = val === 'full' ? '' : `#day-${val}`;
     history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
+
+    // On mobile, scroll to the content area when switching days
+    if (window.innerWidth < 768 && mobileContentRef.current) {
+      mobileContentRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   }, []);
 
   const fullRouteStats = [
@@ -115,7 +121,7 @@ export default function Home() {
         </div>
 
         {/* Mobile: stacked */}
-        <div className="md:hidden flex flex-col gap-6">
+        <div ref={mobileContentRef} className="md:hidden flex flex-col gap-6">
           <RouteMap activeDay={activeDay} className="h-[50vh]" />
           <StatCardRow stats={activeDay === 'full' ? fullRouteStats : dayStats} />
           <div className="border-t border-border pt-6">
