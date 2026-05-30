@@ -77,7 +77,7 @@ export default function Home() {
           <p className="mt-6 text-[17px] leading-[1.6] text-ink-muted max-w-3xl mx-auto">
             Five days on foot from Sarria to Santiago de Compostela. 71.4 miles through Galicia.
             <br />
-            This is what I carried, what I spent, where I slept, and what I thought about along the way.
+            This is what I carried, what I spent, where I slept, and what I experienced along the way.
           </p>
         </div>
       </section>
@@ -136,7 +136,7 @@ export default function Home() {
           <h2 className="text-h2">About this site</h2>
           <p className="text-body text-ink-muted max-w-2xl mt-6">
             I walked the last 115km of the Camino Francés in May 2026. This site is a record of
-            what I packed, what I spent, where I slept, and what I thought about along the way.
+            what I packed, what I spent, where I slept, and what I experienced along the way.
             Built as a reference for anyone planning the same walk, and a memory for me.
           </p>
           <p className="text-body-sm text-ink-muted italic mt-4">— Ryan</p>

@@ -341,7 +341,7 @@ export const tripHighlights: Array<{
 ];
 
 export const tripOverview = {
-  lead: 'Five days on foot from Sarria to Santiago de Compostela. 71.4 miles through Galicia. This is what I carried, what I spent, where I slept, and what happened along the way.',
+  lead: 'Five days on foot from Sarria to Santiago de Compostela. 71.4 miles through Galicia. This is what I carried, what I spent, where I slept, and what I experienced along the way.',
   paragraphs: [
     'The last 100 kilometers of the Camino Francés is the most walked section of the route and the minimum distance to receive the Compostela certificate. It runs through rural Galicia: eucalyptus forests, stone villages, muddy farm tracks, and the occasional stretch of highway shoulder. The terrain is rolling, not mountainous. The weather is unpredictable.',
     'I walked it in late May 2026 over five days, averaging about 14 miles per day. This site is the record of that walk.',
