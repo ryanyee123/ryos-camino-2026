@@ -12,7 +12,7 @@ export type CostCategory = {
 };
 
 export const cost = {
-  totalEur: 1709.5,
+  totalEur: 1552.5,
   conversionRate: 1.08,
   narrative: '[Placeholder — Ryan to write]',
   categories: [
@@ -62,7 +62,7 @@ export const cost = {
     },
     {
       name: 'Gear',
-      totalEur: 1136,
+      totalEur: 979,
       items: [
         { name: 'Osprey Stratos 34', amountEur: 185 },
         { name: 'Salomon Genesis Trail-Running Shoes', amountEur: 139 },
@@ -72,10 +72,10 @@ export const cost = {
         { name: 'REI Rainier Rain Jacket', amountEur: 93 },
         { name: 'Gramicci Nylon Paneled Trek Pants', amountEur: 137 },
         { name: 'Snow Peak Bucket Hat', amountEur: 46 },
-        { name: 'Silk Sleeping Bag Liner', amountEur: 88 },
+        { name: 'Sleeping Bag Liner', amountEur: 28 },
         { name: 'Anker Portable Charger', amountEur: 43 },
 { name: 'Water Bladder / Camelback', amountEur: 32 },
-        { name: 'Miller Sunglasses', amountEur: 125 },
+        { name: 'Meller Sunglasses', amountEur: 28 },
         { name: 'Journal + Pens', amountEur: 23 },
         { name: 'Eunzel Microfiber Quick-Dry Towel', amountEur: 14 },
         { name: 'First Aid Pouch', amountEur: 19 },

@@ -123,7 +123,7 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
             'line-color': ROUTE_COLOR,
             'line-width': 3.5,
             'line-opacity': 0.9,
-            'line-dasharray': seg.transit ? [3, 3] : [1],
+            'line-dasharray': [1],
           },
         });
       });
@@ -191,10 +191,12 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
       if (!map.getLayer(lineId)) return;
 
       if (selectedDay === null) {
-        map.setPaintProperty(lineId, 'line-opacity', 0.9);
+        // Hide transit routes on full-route view
+        const show = !seg.transit;
+        map.setPaintProperty(lineId, 'line-opacity', show ? 0.9 : 0);
         map.setPaintProperty(lineId, 'line-width', 3.5);
         if (map.getLayer(shadowId)) {
-          map.setPaintProperty(shadowId, 'line-opacity', 0.12);
+          map.setPaintProperty(shadowId, 'line-opacity', show ? 0.12 : 0);
         }
       } else if (seg.day === selectedDay) {
         map.setPaintProperty(lineId, 'line-opacity', 1);

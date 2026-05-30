@@ -19,7 +19,7 @@ export default function LodgingModal() {
             placeholderIcon={Home}
             eyebrow={`DAY ${day.day} · ${day.lodging.town}`}
             name={day.lodging.name}
-            note={day.lodging.note}
+
             href={day.lodging.googleMapsUrl || undefined}
           />
         ))}
