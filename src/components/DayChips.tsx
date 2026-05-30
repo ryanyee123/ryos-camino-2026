@@ -50,7 +50,7 @@ export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
                 : 'bg-surface border-border text-ink-muted hover:border-border-strong hover:text-ink'
             }`}
           >
-            Full route
+            Overview
           </button>
           {days.map((d) => (
             <button
