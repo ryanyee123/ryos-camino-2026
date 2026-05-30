@@ -18,7 +18,7 @@ export default function GearModal() {
             placeholderIcon={Backpack}
             eyebrow={item.category}
             name={item.name}
-            note={[item.weight, item.note].filter(Boolean).join('. ')}
+            note={item.weight}
           />
         ))}
       </div>
