@@ -70,7 +70,7 @@ export default function Home() {
     : [];
 
   return (
-    <div className="text-ink pb-20 md:pb-0">
+    <div className="text-ink pb-28 md:pb-16">
       <NavRail />
       <GearModal />
       <CostModal />
