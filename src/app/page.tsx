@@ -135,8 +135,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 pt-20 pb-12">
           <h2 className="text-h2">About this site</h2>
           <p className="text-body text-ink-muted max-w-2xl mt-6">
-            I walked the last 115km of the Camino Francés in May 2026. This site is a record of
-            what I packed, what I spent, where I slept, and what I experienced along the way.
+            I walked the last 115km of the Camino Francés in May 2026.
             Built as a reference for anyone planning the same walk, and a memory for me.
           </p>
           <p className="text-body-sm text-ink-muted italic mt-4">— Ryan</p>
