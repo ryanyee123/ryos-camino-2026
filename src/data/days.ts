@@ -296,6 +296,7 @@ export const days: Day[] = [
       { type: 'text', content: 'Checked out of the studio apartment in the morning. Walked to a really cute cafe, got a sandwich and a coffee, and journaled for a bit. Wrote about the people I met along the way and what I\'d learned about myself.' },
       { type: 'image', filename: 'day-7-cafe.jpeg' },
       { type: 'text', content: 'After that I went to Parque da Música and laid out in the sun for a while. Took my shoes off. Watched the geese. Napped.' },
+      { type: 'image', filename: 'day-7-park.png' },
       { type: 'text', content: 'Train back to Madrid was around 8pm. Got in around 11:30pm. Leo, a coworker, let me crash on his couch.' },
     ],
     lodging: {

@@ -65,10 +65,10 @@ export default function HeroRoute() {
   const d = buildPath(towns);
 
   return (
-    <div className="max-w-6xl mx-auto px-6" aria-hidden="true">
-      <div className="py-6 md:py-6">
+    <div className="mx-auto px-0 md:max-w-6xl md:px-6" aria-hidden="true">
+      <div className="py-6">
         <svg
-          viewBox={isMobile ? '0 -30 900 140' : '0 -5 900 90'}
+          viewBox={isMobile ? '20 -10 860 100' : '0 -5 900 90'}
           preserveAspectRatio="xMidYMid meet"
           className="w-full h-auto"
           fill="none"
@@ -77,9 +77,9 @@ export default function HeroRoute() {
           <path
             d={d}
             stroke="var(--color-accent)"
-            strokeWidth={isMobile ? 3 : 1.5}
+            strokeWidth={isMobile ? 4 : 1.5}
             strokeLinecap="round"
-            opacity="0.08"
+            opacity={isMobile ? 0.12 : 0.08}
           />
 
           {/* Animated route trace — draws right-to-left (Sarria → Santiago) */}
@@ -87,17 +87,17 @@ export default function HeroRoute() {
             ref={pathRef}
             d={d}
             stroke="var(--color-accent)"
-            strokeWidth={isMobile ? 4 : 2}
+            strokeWidth={isMobile ? 6 : 2}
             strokeLinecap="round"
             style={
               reducedMotion
-                ? { opacity: 0.25 }
+                ? { opacity: isMobile ? 0.35 : 0.25 }
                 : {
                     strokeDasharray: pathLength || 1000,
                     strokeDashoffset: ready ? 0 : pathLength || 1000,
                     transition:
                       'stroke-dashoffset 4.8s cubic-bezier(0.22, 1, 0.36, 1)',
-                    opacity: 0.25,
+                    opacity: isMobile ? 0.35 : 0.25,
                   }
             }
           />
@@ -110,7 +110,7 @@ export default function HeroRoute() {
                 key={town.label}
                 cx={town.x}
                 cy={town.y}
-                r={isEndpoint ? (isMobile ? 6 : 3.5) : (isMobile ? 3.5 : 2)}
+                r={isEndpoint ? (isMobile ? 8 : 3.5) : (isMobile ? 4.5 : 2)}
                 fill={
                   isEndpoint
                     ? 'var(--color-accent)'
@@ -118,12 +118,12 @@ export default function HeroRoute() {
                 }
                 style={
                   reducedMotion
-                    ? { opacity: isEndpoint ? 0.4 : 0.15 }
+                    ? { opacity: isEndpoint ? (isMobile ? 0.6 : 0.4) : (isMobile ? 0.25 : 0.15) }
                     : {
                         opacity: ready
                           ? isEndpoint
-                            ? 0.4
-                            : 0.15
+                            ? (isMobile ? 0.6 : 0.4)
+                            : (isMobile ? 0.25 : 0.15)
                           : 0,
                         transition:
                           'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
@@ -137,15 +137,15 @@ export default function HeroRoute() {
           {/* Sarria label (right endpoint) */}
           <text
             x={towns[0].x}
-            y={towns[0].y - 12}
+            y={towns[0].y - (isMobile ? 18 : 12)}
             textAnchor="middle"
-            className={`${isMobile ? 'text-[22px]' : 'text-[14px]'} font-medium`}
+            className={`${isMobile ? 'text-[26px]' : 'text-[14px]'} font-medium`}
             fill="var(--color-ink-muted)"
             style={
               reducedMotion
-                ? { opacity: 0.5 }
+                ? { opacity: isMobile ? 0.65 : 0.5 }
                 : {
-                    opacity: ready ? 0.5 : 0,
+                    opacity: ready ? (isMobile ? 0.65 : 0.5) : 0,
                     transition:
                       'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
                     transitionDelay: '0.7s',
@@ -158,15 +158,15 @@ export default function HeroRoute() {
           {/* Santiago label (left endpoint) */}
           <text
             x={towns[towns.length - 1].x}
-            y={towns[towns.length - 1].y - 12}
+            y={towns[towns.length - 1].y - (isMobile ? 18 : 12)}
             textAnchor="middle"
-            className={`${isMobile ? 'text-[22px]' : 'text-[14px]'} font-medium`}
+            className={`${isMobile ? 'text-[26px]' : 'text-[14px]'} font-medium`}
             fill="var(--color-ink-muted)"
             style={
               reducedMotion
-                ? { opacity: 0.5 }
+                ? { opacity: isMobile ? 0.65 : 0.5 }
                 : {
-                    opacity: ready ? 0.5 : 0,
+                    opacity: ready ? (isMobile ? 0.65 : 0.5) : 0,
                     transition:
                       'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1)',
                     transitionDelay: '2.2s',

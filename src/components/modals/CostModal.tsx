@@ -25,20 +25,26 @@ const foodPerDayEur = Math.round(foodCategory.totalEur / foodCategory.items.leng
 export default function CostModal() {
   const [currency, setCurrency] = useState<'EUR' | 'USD'>('EUR');
 
+  const currencyButton = (
+    <button
+      onClick={() => setCurrency(currency === 'EUR' ? 'USD' : 'EUR')}
+      className="flex-shrink-0 flex items-center gap-1 rounded-full border border-border-strong px-3 py-1.5 text-body-sm font-medium transition-colors hover:bg-stone-100"
+    >
+      <span className={currency === 'EUR' ? 'text-ink' : 'text-ink-muted'}>€</span>
+      <span className="text-ink-muted">/</span>
+      <span className={currency === 'USD' ? 'text-ink' : 'text-ink-muted'}>$</span>
+    </button>
+  );
+
   return (
-    <Modal hashName="cost" title="What it cost">
+    <Modal hashName="cost" title="What it cost" headerRight={currencyButton}>
       <div className="flex items-center justify-between mb-6">
         <p className="text-body text-ink-muted">
           Seven days, all in. A budget reference for anyone planning this route.
         </p>
-        <button
-          onClick={() => setCurrency(currency === 'EUR' ? 'USD' : 'EUR')}
-          className="flex-shrink-0 ml-4 flex items-center gap-1 rounded-full border border-border-strong px-3 py-1.5 text-body-sm font-medium transition-colors hover:bg-stone-100"
-        >
-          <span className={currency === 'EUR' ? 'text-ink' : 'text-ink-muted'}>€</span>
-          <span className="text-ink-muted">/</span>
-          <span className={currency === 'USD' ? 'text-ink' : 'text-ink-muted'}>$</span>
-        </button>
+        <div className="hidden md:block ml-4">
+          {currencyButton}
+        </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">

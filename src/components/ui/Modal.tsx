@@ -6,10 +6,11 @@ import { X } from 'lucide-react';
 type ModalProps = {
   hashName: string;
   title: string;
+  headerRight?: React.ReactNode;
   children: React.ReactNode;
 };
 
-export default function Modal({ hashName, title, children }: ModalProps) {
+export default function Modal({ hashName, title, headerRight, children }: ModalProps) {
   const [mounted, setMounted] = useState(false);
   const [visible, setVisible] = useState(false);
   const backdropRef = useRef<HTMLDivElement>(null);
@@ -101,19 +102,22 @@ export default function Modal({ hashName, title, children }: ModalProps) {
       <div
         role="dialog"
         aria-modal="true"
-        className={`md:hidden bg-white rounded-t-2xl w-full max-h-[calc(100vh-env(safe-area-inset-top)-1rem)] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
+        className={`md:hidden bg-white rounded-t-2xl w-full max-h-[calc(100dvh-env(safe-area-inset-top)-1rem)] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 z-10 bg-surface-raised pt-3 pb-4 px-6">
           <div className="w-10 h-1 rounded-full bg-stone-300 mx-auto mb-4" />
-          <div className="flex items-start justify-between">
+          <div className="flex items-center justify-between">
             <h2 className="text-h2">{title}</h2>
-            <button
-              onClick={close}
-              className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-stone-100 transition-colors"
-            >
-              <X size={18} className="text-ink-muted" />
-            </button>
+            <div className="flex items-center gap-2">
+              {headerRight}
+              <button
+                onClick={close}
+                className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-stone-100 transition-colors"
+              >
+                <X size={18} className="text-ink-muted" />
+              </button>
+            </div>
           </div>
         </div>
         <div className="px-6 pb-10">
