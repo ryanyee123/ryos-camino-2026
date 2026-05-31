@@ -15,7 +15,7 @@ const towns = [
   { x: 450, y: 24, label: 'Melide' },
   { x: 350, y: 32, label: 'Arzúa' },
   { x: 210, y: 42, label: 'O Pedrouzo' },
-  { x: 60, y: 48, label: 'Santiago' },
+  { x: 80, y: 48, label: 'Santiago' },
 ];
 
 /** Build a smooth cubic bezier path through points (Catmull-Rom → cubic bezier) */

@@ -1,6 +1,7 @@
 import type { LucideIcon } from 'lucide-react';
 import Link from 'next/link';
 import PlaceholderImage from './PlaceholderImage';
+import AnimatedValue from '@/components/AnimatedValue';
 
 // ---------------------------------------------------------------------------
 // StatCard
@@ -21,7 +22,9 @@ export function StatCard({ label, value, sublabel, icon: Icon, compact }: StatCa
         <Icon size={16} className={`absolute ${compact ? 'top-4 right-4' : 'top-5 right-5'} text-ink-faint`} />
       )}
       <p className="text-stat-label">{label}</p>
-      <p className={`${compact ? 'text-[22px] leading-[1] font-semibold tracking-[-0.01em] tabular-nums' : 'text-stat-number'} mt-1`}>{value}</p>
+      <p className={`${compact ? 'text-[22px] leading-[1] font-semibold tracking-[-0.01em] tabular-nums' : 'text-stat-number'} mt-1`}>
+        <AnimatedValue value={value} />
+      </p>
       {sublabel && (
         <p className="text-body-sm text-ink-muted mt-1">{sublabel}</p>
       )}

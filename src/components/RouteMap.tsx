@@ -52,6 +52,8 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return;
 
+    const isMobile = window.matchMedia('(max-width: 767px)').matches;
+
     const map = new mapboxgl.Map({
       container: containerRef.current,
       style: 'mapbox://styles/mapbox/light-v11',
@@ -59,12 +61,15 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
       zoom: 9,
       pitchWithRotate: false,
       dragRotate: false,
-      dragPan: true,
+      dragPan: !isMobile,
       touchPitch: false,
     });
 
     map.scrollZoom.disable();
     map.touchZoomRotate.disableRotation();
+    if (isMobile) {
+      map.touchZoomRotate.disable();
+    }
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
 
     mapRef.current = map;

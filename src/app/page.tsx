@@ -42,12 +42,18 @@ export default function Home() {
     const newHash = val === 'full' ? '' : `#day-${val}`;
     history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
 
-    // Scroll to the content area when switching days
-    if (window.innerWidth < 768 && mobileContentRef.current) {
-      mobileContentRef.current.scrollIntoView({ behavior: 'smooth' });
-    } else if (window.innerWidth >= 768 && desktopContentRef.current) {
-      desktopContentRef.current.scrollIntoView({ behavior: 'smooth' });
-    }
+    // Scroll to the content area when switching days.
+    // Use scrollTo with a computed offset instead of scrollIntoView,
+    // which is unreliable on mobile Safari (gets cancelled by address bar
+    // animation or rapid taps).
+    requestAnimationFrame(() => {
+      const target = window.innerWidth < 768 ? mobileContentRef.current : desktopContentRef.current;
+      if (!target) return;
+      const rect = target.getBoundingClientRect();
+      // Already near the top — no need to scroll
+      if (rect.top >= 0 && rect.top < 80) return;
+      window.scrollTo({ top: window.scrollY + rect.top - 80, behavior: 'smooth' });
+    });
   }, []);
 
   const fullRouteStats = [
