@@ -38,13 +38,10 @@ export default function CostModal() {
 
   return (
     <Modal hashName="cost" title="What it cost" headerRight={currencyButton}>
-      <div className="flex items-center justify-between mb-6">
+      <div className="mb-6">
         <p className="text-body text-ink-muted">
           Seven days, all in. A budget reference for anyone planning this route.
         </p>
-        <div className="hidden md:block ml-4">
-          {currencyButton}
-        </div>
       </div>
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-8">

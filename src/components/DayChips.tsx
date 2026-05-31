@@ -32,7 +32,7 @@ export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
       {/* Sentinel: sits right above the sticky element. When it scrolls out of view, chips are stuck. */}
       <div ref={sentinelRef} className="h-0 w-full" />
 
-      <div className="sticky top-0 z-40 py-4">
+      <div className="sticky top-0 z-40 py-4 pt-[calc(1rem+env(safe-area-inset-top))]">
         <div
           className="absolute inset-0 transition-opacity duration-200 ease-out motion-reduce:transition-none bg-surface/80 backdrop-blur-md backdrop-saturate-150"
           style={{ opacity: isStuck ? 1 : 0 }}

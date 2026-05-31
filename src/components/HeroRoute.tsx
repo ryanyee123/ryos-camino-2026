@@ -68,7 +68,7 @@ export default function HeroRoute() {
     <div className="mx-auto px-0 md:max-w-6xl md:px-6" aria-hidden="true">
       <div className="py-6">
         <svg
-          viewBox={isMobile ? '20 -10 860 100' : '0 -5 900 90'}
+          viewBox={isMobile ? '-10 -10 920 100' : '0 -5 900 90'}
           preserveAspectRatio="xMidYMid meet"
           className="w-full h-auto"
           fill="none"

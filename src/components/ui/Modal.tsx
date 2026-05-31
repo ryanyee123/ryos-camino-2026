@@ -50,7 +50,7 @@ export default function Modal({ hashName, title, headerRight, children }: ModalP
     const onEnd = () => setMounted(false);
     el.addEventListener('transitionend', onEnd, { once: true });
     // Fallback in case transitionend doesn't fire
-    const timeout = setTimeout(onEnd, 250);
+    const timeout = setTimeout(onEnd, 400);
     return () => { el.removeEventListener('transitionend', onEnd); clearTimeout(timeout); };
   }, [visible, mounted]);
 
@@ -86,8 +86,11 @@ export default function Modal({ hashName, title, headerRight, children }: ModalP
         className={`hidden md:block bg-white rounded-xl border border-black/[0.05] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)] w-full max-w-[740px] mt-12 mb-12 p-8 max-h-[85vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="flex items-start justify-between mb-6">
-          <h2 className="text-h2">{title}</h2>
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center gap-3">
+            <h2 className="text-h2">{title}</h2>
+            {headerRight}
+          </div>
           <button
             onClick={close}
             className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-stone-100 transition-colors"
@@ -102,22 +105,27 @@ export default function Modal({ hashName, title, headerRight, children }: ModalP
       <div
         role="dialog"
         aria-modal="true"
-        className={`md:hidden bg-white rounded-t-2xl w-full max-h-[calc(100dvh-env(safe-area-inset-top)-1rem)] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
+        className={`md:hidden bg-white rounded-t-2xl w-full max-h-[calc(100dvh-env(safe-area-inset-top)-1rem)] overflow-y-auto overscroll-none relative will-change-transform ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-full'}`}
+        style={{
+          transition: visible
+            ? 'transform 350ms cubic-bezier(0.32, 0.72, 0, 1), opacity 300ms ease-out'
+            : 'transform 250ms cubic-bezier(0.32, 0.72, 0, 1), opacity 200ms ease-in',
+        }}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 z-10 bg-surface-raised pt-3 pb-4 px-6">
           <div className="w-10 h-1 rounded-full bg-stone-300 mx-auto mb-4" />
           <div className="flex items-center justify-between">
-            <h2 className="text-h2">{title}</h2>
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-3">
+              <h2 className="text-h2">{title}</h2>
               {headerRight}
-              <button
-                onClick={close}
-                className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-stone-100 transition-colors"
-              >
-                <X size={18} className="text-ink-muted" />
-              </button>
             </div>
+            <button
+              onClick={close}
+              className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-stone-100 transition-colors"
+            >
+              <X size={18} className="text-ink-muted" />
+            </button>
           </div>
         </div>
         <div className="px-6 pb-10">

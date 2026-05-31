@@ -28,6 +28,7 @@ function parseDayHash(hash: string): ActiveDay | null {
 export default function Home() {
   const [activeDay, setActiveDay] = useState<ActiveDay>('full');
   const mobileContentRef = useRef<HTMLDivElement>(null);
+  const desktopContentRef = useRef<HTMLDivElement>(null);
 
   // Read hash on mount
   useEffect(() => {
@@ -41,9 +42,11 @@ export default function Home() {
     const newHash = val === 'full' ? '' : `#day-${val}`;
     history.replaceState(null, '', window.location.pathname + window.location.search + newHash);
 
-    // On mobile, scroll to the content area when switching days
+    // Scroll to the content area when switching days
     if (window.innerWidth < 768 && mobileContentRef.current) {
       mobileContentRef.current.scrollIntoView({ behavior: 'smooth' });
+    } else if (window.innerWidth >= 768 && desktopContentRef.current) {
+      desktopContentRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   }, []);
 
@@ -102,7 +105,7 @@ export default function Home() {
         <div className="hidden md:grid grid-cols-5 gap-8">
           {/* Left column — scrollable content */}
           <div className="col-span-3">
-            <StatCardRow stats={activeDay === 'full' ? fullRouteStats : dayStats} />
+            <StatCardRow ref={desktopContentRef} stats={activeDay === 'full' ? fullRouteStats : dayStats} />
             <div className="border-t border-border mt-8 pt-8">
               <div key={activeDay} className="animate-fade-in">
                 {activeDay === 'full' ? (

@@ -59,7 +59,7 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
       zoom: 9,
       pitchWithRotate: false,
       dragRotate: false,
-      dragPan: false,
+      dragPan: true,
       touchPitch: false,
     });
 
