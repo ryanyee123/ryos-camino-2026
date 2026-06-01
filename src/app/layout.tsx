@@ -1,13 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistPixelSquare } from "geist/font/pixel";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "./globals.css";
 import TopoBackground from "@/components/TopoBackground";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
 export const viewport: Viewport = {
   width: 'device-width',
@@ -16,7 +12,7 @@ export const viewport: Viewport = {
 };
 
 export const metadata: Metadata = {
-  title: "Ryan's Trip on the Camino Francés",
+  title: "Ryan's Camino de Santiago",
   description: "Sarria to Santiago de Compostela, May 2026",
 };
 
@@ -26,7 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} h-full antialiased`}>
+    <html lang="en" className={`${GeistSans.variable} ${GeistPixelSquare.variable} h-full antialiased`}>
       <body className="min-h-full flex flex-col">
         <TopoBackground />
         <div className="relative z-10 min-h-full">{children}</div>
