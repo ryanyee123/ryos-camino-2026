@@ -343,7 +343,8 @@ export const tripHighlights: Array<{
 
 export const tripOverview = {
   paragraphs: [
-    'The last 100 kilometers of the Camino Francés is the most walked section of the route and the minimum distance to receive the Compostela certificate. It runs through rural Galicia: eucalyptus forests, stone villages, muddy farm tracks, and the occasional stretch of highway shoulder. The terrain is rolling, not mountainous. The weather is unpredictable.',
+    'The last 100 kilometers of the Camino Francés is the most walked section of the route and the minimum distance to receive the Compostela certificate.',
+    'It runs through rural Galicia: eucalyptus forests, stone villages, muddy farm tracks, and the occasional stretch of highway shoulder. The terrain is rolling, not mountainous. The weather is unpredictable.',
     'I walked it in late May 2026 over five days, averaging about 14 miles per day. This site is the record of that walk.',
   ],
 };

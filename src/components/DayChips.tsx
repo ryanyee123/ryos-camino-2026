@@ -44,7 +44,7 @@ export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
         <div className="relative max-w-6xl mx-auto px-6 flex justify-center gap-2 flex-wrap">
           <button
             onClick={() => onSelect('full')}
-            className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-medium border transition-colors ${
+            className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-medium font-pixel border transition-colors ${
               activeDay === 'full'
                 ? 'bg-accent text-white border-accent'
                 : 'bg-surface border-border text-ink-muted hover:border-border-strong hover:text-ink'
@@ -56,7 +56,7 @@ export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
             <button
               key={d.day}
               onClick={() => onSelect(d.day)}
-              className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-medium border transition-colors ${
+              className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-medium font-pixel border transition-colors ${
                 activeDay === d.day
                   ? 'bg-accent text-white border-accent'
                   : 'bg-surface border-border text-ink-muted hover:border-border-strong hover:text-ink'

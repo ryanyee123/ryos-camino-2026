@@ -77,7 +77,7 @@ function NarrativeBlockRenderer({ block, dayNumber }: { block: NarrativeBlock; d
     case 'image':
       return (
         <div className="my-4 flex justify-center">
-          <div className="w-full sm:w-[85%]">
+          <div className="w-full">
             <InlineImage
               src={`/photos/day-${dayNumber}/${block.filename}`}
               aspectRatio={block.aspectRatio}
@@ -88,7 +88,7 @@ function NarrativeBlockRenderer({ block, dayNumber }: { block: NarrativeBlock; d
     case 'image-pair':
       return (
         <div className="my-4 flex justify-center">
-          <div className="w-full sm:w-[85%] grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3">
             <InlineImage
               src={`/photos/day-${dayNumber}/${block.left.filename}`}
               aspectRatio={block.left.aspectRatio}
