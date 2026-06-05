@@ -263,7 +263,7 @@ export const days: Day[] = [
     elevation: 0,
     townsCount: 0,
     narrative: [
-      { type: 'text', content: 'Slept in for the first time in a week. Migrated from the albergue to a studio apartment for the night, which felt like an upgrade from a bunk bed in a room with twenty people. On the way I met a guy named Carlos who had this really cool vintage camera he\'d built himself. He took my photo, and then asked if I\'d be in a separate photo series he was working on later that day. It was hilarious. He made me hit the Willem Dafoe pose shirtless.' },
+      { type: 'text', content: 'Slept in for the first time in a week. Migrated from the albergue to a studio apartment for the night, which felt like an upgrade from a bunk bed in a room with twenty people. On the way I met a guy named Carlos who had this really cool vintage camera he\'d built himself. He took my photo.' },
       { type: 'image-pair', left: { filename: 'day-6-camera.jpeg' }, right: { filename: 'day-6-photo.jpeg' } },
       { type: 'text', content: 'Spent the rest of the day exploring Santiago. Wandered through some of the parks, which were beautiful with the weather we had. Parque da Alameda was full of locals on a Saturday afternoon, kids playing, old couples walking arm in arm. Got a poke bowl for lunch then walked around a few other parks.' },
       { type: 'image', filename: 'day-6-park.jpeg' },
