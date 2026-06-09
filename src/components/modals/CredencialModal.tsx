@@ -45,8 +45,8 @@ export default function CredencialModal() {
                   opacity: expanded === i ? 1 : 0,
                 }}
               >
-                <p className="text-[12px] font-medium text-ink">{stamp.source}</p>
-                <p className="text-[11px] text-ink-muted">{stamp.location} · {stamp.date}</p>
+                <p className="text-body-sm font-medium font-pixel text-ink">{stamp.source}</p>
+                <p className="text-caption text-ink-muted">{stamp.location} · {stamp.date}</p>
               </div>
             </button>
           ))}

@@ -11,7 +11,6 @@ function RollingDigit({ digit, delay }: { digit: number; delay: number }) {
   useEffect(() => {
     if (isFirst.current) {
       isFirst.current = false;
-      // Animate from 0 to target after first paint
       requestAnimationFrame(() => setCurrent(digit));
       return;
     }
@@ -23,7 +22,7 @@ function RollingDigit({ digit, delay }: { digit: number; delay: number }) {
       <span
         className="flex flex-col will-change-transform"
         style={{
-          transition: `transform 600ms cubic-bezier(0.22, 1, 0.36, 1) ${delay}ms`,
+          transition: `transform 500ms cubic-bezier(0.16, 1, 0.3, 1) ${delay}ms`,
           transform: `translateY(${-current * 10}%)`,
         }}
       >
@@ -49,7 +48,7 @@ export default function AnimatedValue({ value }: { value: string }) {
       {value.split('').map((char, i) => {
         const n = parseInt(char, 10);
         if (!isNaN(n)) {
-          const stagger = digitIndex * 40;
+          const stagger = digitIndex * 30;
           digitIndex++;
           return <RollingDigit key={i} digit={n} delay={stagger} />;
         }

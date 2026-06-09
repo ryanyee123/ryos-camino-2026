@@ -345,6 +345,7 @@ export const tripHighlights: Array<{
 
 export const tripOverview = {
   paragraphs: [
+    'The Camino de Santiago is a network of pilgrimage routes across Europe that all end at the Cathedral of Santiago de Compostela in northwest Spain. People have been walking it for over a thousand years.',
     'The final stretch of the Camino Francés runs through rural Galicia: eucalyptus forests, stone villages, muddy farm tracks, and the occasional stretch of highway shoulder. The terrain is rolling, not mountainous. The weather is unpredictable.',
     'It\'s the most walked section of the route and the minimum distance required to receive the Compostela certificate. Most people start in Sarria. I averaged about 14 miles a day, arriving in Santiago on day five.',
   ],

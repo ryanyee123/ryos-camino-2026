@@ -55,7 +55,7 @@ export default function CostModal() {
       {tripCategories.map((cat) => (
         <div key={cat.name} className="mb-6">
           <div className="flex items-baseline justify-between border-b border-border-strong pb-2 mb-2">
-            <h3 className="text-body-sm font-semibold">{cat.name}</h3>
+            <h3 className="text-body-sm font-semibold font-pixel">{cat.name}</h3>
             <span className="text-body-sm font-semibold tabular-nums">{fmt(cat.totalEur, currency)}</span>
           </div>
           <div className="space-y-1">
@@ -70,14 +70,14 @@ export default function CostModal() {
       ))}
 
       <div className="border-t border-border-strong pt-4 mb-8 flex items-baseline justify-between">
-        <span className="text-body font-semibold">On-trip subtotal</span>
+        <span className="text-body font-semibold font-pixel">On-trip subtotal</span>
         <span className="text-body font-semibold tabular-nums">{fmt(tripTotalEur, currency)}</span>
       </div>
 
       {/* Gear category */}
       <div className="mb-6">
         <div className="flex items-baseline justify-between border-b border-border-strong pb-2 mb-2">
-          <h3 className="text-body-sm font-semibold">{gearCategory.name}</h3>
+          <h3 className="text-body-sm font-semibold font-pixel">{gearCategory.name}</h3>
           <span className="text-body-sm font-semibold tabular-nums">{fmt(gearCategory.totalEur, currency)}</span>
         </div>
         <div className="space-y-1">
@@ -91,7 +91,7 @@ export default function CostModal() {
       </div>
 
       <div className="border-t border-border-strong pt-4 flex items-baseline justify-between">
-        <span className="text-body font-semibold">Grand total</span>
+        <span className="text-body font-semibold font-pixel">Grand total</span>
         <span className="text-body font-semibold tabular-nums">{fmt(cost.totalEur, currency)}</span>
       </div>
     </Modal>

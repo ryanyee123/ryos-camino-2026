@@ -89,7 +89,7 @@ export default function Home() {
       {/* Hero */}
       <section className="pt-12 md:pt-20 pb-6 md:pb-8">
         <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-[13px] uppercase tracking-[0.06em] text-ink-muted">May 2026</p>
+          <p className="text-caption text-ink-muted">May 2026</p>
           <h1 className="mt-6 text-[32px] md:text-[44px] leading-[1.05] tracking-[-0.03em] font-semibold text-ink max-w-3xl mx-auto font-heading">Ryan&apos;s Camino de Santiago</h1>
           <p className="mt-6 text-[17px] leading-[1.6] text-ink-muted max-w-3xl mx-auto">
             Five days on foot from Sarria to Santiago de Compostela. 71.4 miles through Galicia.

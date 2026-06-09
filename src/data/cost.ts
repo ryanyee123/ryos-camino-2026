@@ -12,13 +12,13 @@ export type CostCategory = {
 };
 
 export const cost = {
-  totalEur: 1552.5,
+  totalEur: 1678.5,
   conversionRate: 1.08,
   narrative: '[Placeholder — Ryan to write]',
   categories: [
     {
       name: 'Lodging',
-      totalEur: 217.5,
+      totalEur: 227.5,
       items: [
         { name: 'Albergue O Durmiñento (Sarria)', amountEur: 11, url: 'https://maps.app.goo.gl/ibwbpkAcxDRHBrwk7' },
         { name: 'Novo Porto Albergue (Portomarín)', amountEur: 15.5, url: 'https://maps.app.goo.gl/1pmaLY8iV38QBpoE8' },
@@ -26,27 +26,27 @@ export const cost = {
         { name: 'O Albergue deSelmo (Arzúa)', amountEur: 15.5, url: 'https://maps.app.goo.gl/rYkE9vr8WCEdXYs79' },
         { name: 'Pensión Spa Cruceiro de Pedouzo', amountEur: 30, url: 'https://maps.app.goo.gl/eEDHBME73Ap3FG9Z6' },
         { name: 'Albergue SP 55 by Bossh! Hotels (Santiago)', amountEur: 40, url: 'https://maps.app.goo.gl/rMYgYeVTjr9h4dAp8' },
-        { name: 'Studio Apartment (Santiago)', amountEur: 90 },
+        { name: 'Studio Apartment (Santiago)', amountEur: 100 },
       ],
     },
     {
       name: 'Food',
-      totalEur: 221,
+      totalEur: 233,
       items: [
         { name: 'Day 1 — meals + café', amountEur: 32 },
         { name: 'Day 2 — meals + café', amountEur: 32 },
         { name: 'Day 3 — pulpo lunch + dinner + café', amountEur: 35 },
         { name: 'Day 4 — meals + café', amountEur: 32 },
-        { name: 'Day 5 — celebration lunch + dinner + café', amountEur: 40 },
-        { name: 'Day 6 — Koa Poke + Lúcuma', amountEur: 50 },
+        { name: 'Day 5 — celebration lunch + dinner + café', amountEur: 46 },
+        { name: 'Day 6 — Koa Poke + Lúcuma', amountEur: 56 },
       ],
     },
     {
       name: 'Transit',
-      totalEur: 100,
+      totalEur: 174,
       items: [
-        { name: 'Madrid → Sarria (train)', amountEur: 50 },
-        { name: 'Santiago → Madrid (train)', amountEur: 50 },
+        { name: 'Madrid → Sarria (train)', amountEur: 91 },
+        { name: 'Santiago → Madrid (train)', amountEur: 83 },
       ],
     },
     {
@@ -62,11 +62,11 @@ export const cost = {
     },
     {
       name: 'Gear',
-      totalEur: 979,
+      totalEur: 1009,
       items: [
-        { name: 'Osprey Stratos 34', amountEur: 185 },
+        { name: 'Osprey Stratos 34', amountEur: 208 },
         { name: 'Salomon Genesis Trail-Running Shoes', amountEur: 139 },
-        { name: 'Darn Tough Hiker Micro Crew Socks ×3', amountEur: 72 },
+        { name: 'Darn Tough Hiker Micro Crew Socks ×3', amountEur: 79 },
         { name: 'Smartwool Merino Short Sleeve', amountEur: 60 },
         { name: 'REI Merino Long Sleeve', amountEur: 60 },
         { name: 'REI Rainier Rain Jacket', amountEur: 93 },

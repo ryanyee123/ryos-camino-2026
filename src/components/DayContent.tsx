@@ -23,7 +23,7 @@ function CompactPlace({ icon: Icon, label, name, meta, href }: {
         <Icon size={18} className="text-ink-muted" />
       </div>
       <div className="min-w-0 flex-1">
-        <p className="text-body-sm font-medium truncate">{name}</p>
+        <p className="text-body-sm font-semibold font-pixel truncate">{name}</p>
         <p className="text-caption text-ink-muted">{[label, meta].filter(Boolean).join(' · ')}</p>
       </div>
       {href && <ExternalLink size={18} className="flex-shrink-0 text-ink-faint" />}
