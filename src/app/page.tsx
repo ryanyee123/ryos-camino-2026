@@ -131,7 +131,7 @@ export default function Home() {
 
         {/* Mobile: stacked */}
         <div ref={mobileContentRef} className="md:hidden flex flex-col gap-6">
-          <RouteMap activeDay={activeDay} className="h-[38vh]" />
+          <RouteMap activeDay={activeDay} className="h-[32vh]" />
           <StatCardRow stats={activeDay === 'full' ? fullRouteStats : dayStats} />
           <div className="border-t border-border pt-6">
             <div key={activeDay} className="animate-fade-in">
