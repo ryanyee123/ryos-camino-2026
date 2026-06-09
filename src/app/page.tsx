@@ -92,9 +92,9 @@ export default function Home() {
           <p className="text-caption text-ink-muted">May 2026</p>
           <h1 className="mt-6 text-[32px] md:text-[44px] leading-[1.05] tracking-[-0.03em] font-semibold text-ink max-w-3xl mx-auto font-heading">Ryan&apos;s Camino de Santiago</h1>
           <p className="mt-6 text-[17px] leading-[1.6] text-ink-muted max-w-3xl mx-auto">
-            Five days on foot from Sarria to Santiago de Compostela. 71.4 miles through Galicia.
+            Walking 71.4 miles in 5 days through northern Spain.
             <br />
-            This is what I carried, what I spent, where I slept, and what I experienced along the way.
+            What I carried, spent, slept, and experienced along the way.
           </p>
         </div>
       </section>
