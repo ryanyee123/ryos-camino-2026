@@ -91,7 +91,7 @@ export default function Home() {
         <div className="max-w-6xl mx-auto px-6 text-center">
           <p className="text-caption text-ink-muted">May 2026</p>
           <h1 className="mt-6 text-[32px] md:text-[44px] leading-[1.05] tracking-[-0.03em] font-semibold text-ink max-w-3xl mx-auto font-heading">Ryan&apos;s Camino de Santiago</h1>
-          <p className="mt-6 text-[15px] md:text-[17px] leading-[1.6] text-ink-muted max-w-3xl mx-auto">
+          <p className="mt-6 text-[16px] md:text-[17px] leading-[1.6] text-ink-muted max-w-3xl mx-auto">
             Walking 71.4 miles in 5 days through northern Spain.
           </p>
         </div>
