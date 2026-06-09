@@ -99,7 +99,8 @@ export const days: Day[] = [
     elevation: 450,
     townsCount: 2,
     narrative: [
-      { type: 'text', content: 'Woke up early in Sarria around 6:30am and started walking by 7:30am. The weather was beautiful, blue sky, cool air. I had a really good walk to Portomarín. The walk itself moved through a mix of farmland and forest. Mostly small dirt paths, some sections on quiet country roads, the occasional stone marker carved with a scallop and a yellow arrow pointing the way. The yellow arrows are everywhere on the Camino. Painted on rocks, sprayed on asphalt, nailed to trees. You really can\'t get lost.' },
+      { type: 'text', content: 'Woke up early in Sarria around 6:30am and started walking by 7:30am. The weather was beautiful. Blue sky, cool air. I had a really good walk to Portomarín. The walk itself moved through a mix of farmland and forest. Mostly small dirt paths, some sections on quiet country roads.' },
+      { type: 'text', content: 'The occasional stone marker carved with a scallop and a yellow arrow pointing the way. The yellow arrows are everywhere on the Camino. Painted on rocks, sprayed on asphalt, nailed to trees. You really can\'t get lost.' },
       { type: 'image', filename: 'day-1-sarria.jpeg' },
       { type: 'text', content: 'I didn\'t stop the entire route, maybe one or two short rest breaks where I sat on a stone wall, but I didn\'t eat anything the whole way. First day energy carried me through. I think I underestimated how much fuel I\'d need. By the time I got into town I was starving.' },
       { type: 'image', filename: 'day-1-100km.jpeg' },
@@ -138,11 +139,11 @@ export const days: Day[] = [
       { type: 'image', filename: 'day-2-selfie.jpeg' },
       { type: 'text', content: 'There\'s a big climb right out of Portomarín. You cross a long pedestrian bridge over the reservoir and then the trail just keeps going up for the first kilometer or so. That\'s the push at the beginning, and after that it settles into rolling farmland. Pigs, cows, sheep, the occasional village that\'s three stone houses and a chapel. A few more technical sections.' },
       { type: 'image', filename: 'day-2-sign.jpeg' },
-      { type: 'text', content: 'By the time I got to Palas de Rei the sun had broken back through. I checked into the albergue and the room had only one other person in it. Javi, 50, from Palencia. I\'d actually met him briefly the night before in Portomarín because we were bunk mates. He helped me look for a lost earbud that morning. So he said the first hello in Palas de Rei, and then offered to take me to find replacements.' },
+      { type: 'text', content: 'By the time I got to Palas de Rei the sun had broken back through. I checked into the albergue and the room had only one other person in it. Javi, 50, from Palencia. I\'d actually met him briefly the night before in Portomarín because we were bunk mates. He helped me look for a lost earbud that morning.' },
       { type: 'image', filename: 'day-2-beer.jpeg' },
       { type: 'text', content: 'We went to a hardware store, found some, and on the way back he introduced me to Sisco, 32, another Spaniard he\'d met in Sarria. Sisco was quieter, a little gruff at first, warmed up over the course of the evening. Then Javi introduced me to Paula, 25, from Barcelona, who\'d been walking on her own and joined the three of us.' },
       { type: 'image-pair', left: { filename: 'day-2-dinner.jpeg' }, right: { filename: 'day-2-dinner2.jpeg' } },
-      { type: 'text', content: 'The four of us shared beers and snacks in a plaza before dinner. At dinner I accidentally ordered an extra side of fries and aioli when I just meant to order some aioli. Everyone was very chill about it. That was the first night I spoke to anyone else.' },
+      { type: 'text', content: 'The four of us shared beers and snacks in a plaza before dinner. At dinner I accidentally ordered an extra side of fries and aioli when I just meant to order some aioli. Everyone was very chill about it.' },
       { type: 'image', filename: 'day-2-dinner3.jpeg' },
     ],
     lodging: {
@@ -169,12 +170,12 @@ export const days: Day[] = [
     townsCount: 3,
     narrative: [
       { type: 'text', content: 'The longest day. I\'d originally planned to split it into two, stopping in Melide for the night, but Javi mentioned the whole group was going all the way to Arzúa. I figured it could be fun to get the extra day in Santiago and spend a bit more time with them, so I sent it.' },
-      { type: 'text', content: 'The walk that day was through proper eucalyptus forest. Quiet, fragrant, the trail soft underfoot, the kind of walking where you can just stop thinking and let your legs do the work. Sometimes I\'d be walking with Paula. Sometimes with Javi. But we mainly stuck together.' },
-      { type: 'text', content: 'We stopped in Melide for lunch and had pulpo at Pulpería A Garnacha. Melide is the town famous for octopus on the Camino, and the version there is what you\'d hope for. Tender, dressed with paprika and olive oil and coarse salt, served on a wooden plate. The pulperia was full of pilgrims and locals, loud, the kind of place where you eat at communal tables. We each ordered our own quarter octopus. We ate it all.' },
+      { type: 'text', content: 'The walk that day was through proper eucalyptus forest. Quiet, tranquil, the kind of walking where you can just stop thinking and let your legs do the work. Sometimes I\'d be walking with Paula. Sometimes with Javi.' },
+      { type: 'text', content: 'We stopped in Melide for lunch and had pulpo at Pulpería A Garnacha. Melide is the town famous for octopus on the Camino. Tender, dressed with paprika and olive oil and coarse salt, served on a wooden plate. The pulperia was full of pilgrims and locals. The kind of place where you eat at communal tables. We each ordered our own quarter octopus.' },
       { type: 'image-pair', left: { filename: 'day-3-pulpo.jpeg' }, right: { filename: 'day-3-pulpogroup.jpeg' } },
-      { type: 'text', content: 'Past Melide, we stopped at a river. The water was freezing. We took our shoes off and dunked our feet, and then Sisco got us ice cream. We sat on a nearby bench enjoying our sweet treats. It was one of those stops you had to do.' },
+      { type: 'text', content: 'Past Melide, we stopped at a river. The water was freezing. We took our shoes off and dunked our feet, and then Sisco got us ice cream.' },
       { type: 'image-pair', left: { filename: 'day-3-river.jpeg' }, right: { filename: 'day-3-sweettreat.jpeg' } },
-      { type: 'text', content: 'Arzúa was the part of the day I was the most tired for. At the hostel I also wanted to catch up on my journalling, so I took a moment to myself before meeting up with the group again where I shared a few reflections before turning in for the night.' },
+
     ],
     lodging: {
       name: 'O Albergue deSelmo',
@@ -199,11 +200,11 @@ export const days: Day[] = [
     townsCount: 2,
     narrative: [
       { type: 'text', content: 'A shorter day. The trail out of Arzúa drops back into eucalyptus forest pretty quickly and stays there for most of the morning. The path was busier than the previous days, with more pilgrims who\'d started in Sarria a day or two behind us, plus some tour groups with clean backpacks and matching shirts. The last hundred kilometers of the Camino Francés is the most walked section of any Camino route, because it\'s the minimum distance you need to complete to get the Compostela certificate at the end.' },
-      { type: 'text', content: 'Partway through we stopped at a bar for a few beers. The place had a thing where after you finish your beer, you write your name on the bottom of the bottle and they collect them along the back wall. There must have been a thousand bottles up there, names in every language, dates going back years. While we were there a bunch of Spanish locals were dancing and singing. Really good vibes. The kind of stop you couldn\'t plan for, where you walk in for one beer and stay for three.' },
+      { type: 'text', content: 'Partway through we stopped at a bar for a few beers. While we were there a bunch of Spanish locals were dancing and singing. Really good vibes. The kind of stop you couldn\'t plan for, where you walk in for one beer and stay for three.' },
       { type: 'image-pair', left: { filename: 'day-4-beer.jpeg' }, right: { filename: 'day-4-beer2.jpeg' } },
       { type: 'image', filename: 'day-4-group.jpeg' },
-      { type: 'text', content: 'The albergue in O Pedrouzo turned out to be a pension spa. Hot sauna, steam room, hot tubs. I used all of it. I sat in the sauna for as long as I could stand it, then cold plunged. First time I did it properly. Felt rejuvenated after.' },
-      { type: 'text', content: 'For dinner we ate pizza. I got one with ham, mushrooms, onions, and what looked like sprinkled egg with oregano. It was solid. Not Italian pizza, not American pizza. Galician pizza, which is its own thing.' },
+      { type: 'text', content: 'The albergue in O Pedrouzo turned out to be a pension spa. Hot sauna, steam room, hot tubs. I used all of it. I sat in the sauna for as long as I could, then cold plunged. Felt rejuvenated after.' },
+      { type: 'text', content: 'For dinner we ate pizza. I got one with ham, mushrooms, onions and oregano. It was solid. Not Italian pizza, not American pizza. Galician pizza, which is its own thing.' },
       { type: 'image', filename: 'day-4-pizza.jpeg' },
     ],
     lodging: {
@@ -228,16 +229,16 @@ export const days: Day[] = [
     elevation: 520,
     townsCount: 2,
     narrative: [
-      { type: 'text', content: 'We started around 8am. The trail out of O Pedrouzo runs through more eucalyptus forest, and for the first hour it\'s still cool and damp and quiet. Then it got quite hot and sunny, first time I applied sunscreen.' },
-      { type: 'text', content: 'About an hour in we met Jacob, 23, from Florida. He\'d been walking on his own and slotted into our group after I struck up convo with him. The five of us walked the final leg together.' },
+      { type: 'text', content: 'We started around 8am. The trail out of O Pedrouzo runs through more eucalyptus forest, and for the first hour it\'s still cool and damp and quiet. Then it got quite hot and sunny.' },
+      { type: 'text', content: 'About an hour in I met Jacob, 23, from Florida. He\'d been walking on his own too. The five of us walked the final leg together.' },
       { type: 'image', filename: 'day-5-group.jpeg' },
       { type: 'text', content: 'Somewhere along the way I finally got my concha, the scallop shell that pilgrims attach to their packs. It\'s the symbol of the Camino, you see them on every albergue and every trail marker, and most pilgrims pick one up at the start. I procrastinated but wanted it by the end.' },
       { type: 'image', filename: 'day-5-concha.jpeg' },
-      { type: 'text', content: 'About an hour out from Santiago I asked the group if I could finish the last stretch on my own. Nobody made it a thing. They walked ahead, and I finished the final hour and a half solo. Stopped for lunch at a pulpería for a burger with a fat slice of cheese.' },
+      { type: 'text', content: 'About an hour out from Santiago I asked the group if I could finish the last stretch on my own. I finished the final hour and a half solo. Stopped for lunch at a pulpería for a burger with a fat slice of cheese.' },
       { type: 'image', filename: 'day-5-burger.jpeg' },
-      { type: 'text', content: 'I got to the Praza do Obradoiro around 3:30. The cathedral was stunning. I sat on the ground for a while looking at it and taking it in before I did anything. There were pilgrims everywhere doing the same thing. Some were crying, some were laughing, some were just lying flat on their backs looking up. Eventually I found the group again. We took photos in front of the facade.' },
+      { type: 'text', content: 'I got to the Praza do Obradoiro around 3:30. The cathedral was stunning. I sat on the ground for a while looking at it and taking it in before I did anything. There were pilgrims everywhere doing the same thing.' },
       { type: 'image-pair', left: { filename: 'day-5-jumpshot.jpeg' }, right: { filename: 'day-5-credential.jpeg' } },
-      { type: 'text', content: 'Then I went back to the hostel, rested for a bit, and we all got dinner together. I had a huge steak. Earned every bite.' },
+      { type: 'text', content: 'Then I went back to the hostel, rested for a bit, and we all got dinner together. I had a huge steak.' },
       { type: 'image', filename: 'day-5-steak.jpeg' },
     ],
     lodging: {
@@ -263,9 +264,10 @@ export const days: Day[] = [
     elevation: 0,
     townsCount: 0,
     narrative: [
-      { type: 'text', content: 'Slept in for the first time in a week. Migrated from the albergue to a studio apartment for the night, which felt like an upgrade from a bunk bed in a room with twenty people. On the way I met a guy named Carlos who had this really cool vintage camera he\'d built himself. He took my photo.' },
+      { type: 'text', content: 'Slept in for the first time in a week. Migrated from the albergue to a studio apartment for the night. It was a huge upgrade from a bunk bed in a room with twenty people.' },
+      { type: 'text', content: 'On the way I met a guy named Carlos who had this really cool vintage camera he\'d built himself. He took my photo.' },
       { type: 'image-pair', left: { filename: 'day-6-camera.jpeg' }, right: { filename: 'day-6-photo.jpeg' } },
-      { type: 'text', content: 'Spent the rest of the day exploring Santiago. Wandered through some of the parks, which were beautiful with the weather we had. Parque da Alameda was full of locals on a Saturday afternoon, kids playing, old couples walking arm in arm. Got a poke bowl for lunch then walked around a few other parks.' },
+      { type: 'text', content: 'Spent the rest of the day exploring Santiago. Wandered through some of the parks, which were beautiful with the weather we had. Parque da Alameda was full of locals on a Saturday afternoon, kids playing, old couples walking arm in arm.' },
       { type: 'image', filename: 'day-6-park.jpeg' },
       { type: 'text', content: 'Had dinner at a Peruvian restaurant before turning in early. Slept in a private room for the first time in a week. The bed felt enormous.' },
     ],
@@ -343,9 +345,8 @@ export const tripHighlights: Array<{
 
 export const tripOverview = {
   paragraphs: [
-    'The last 100 kilometers of the Camino Francés is the most walked section of the route and the minimum distance to receive the Compostela certificate.',
-    'It runs through rural Galicia: eucalyptus forests, stone villages, muddy farm tracks, and the occasional stretch of highway shoulder. The terrain is rolling, not mountainous. The weather is unpredictable.',
-    'I walked it in late May 2026 over five days, averaging about 14 miles per day. This site is the record of that walk.',
+    'The final stretch of the Camino Francés runs through rural Galicia: eucalyptus forests, stone villages, muddy farm tracks, and the occasional stretch of highway shoulder. The terrain is rolling, not mountainous. The weather is unpredictable.',
+    'It\'s the most walked section of the route and the minimum distance required to receive the Compostela certificate. Most people start in Sarria. I averaged about 14 miles a day, arriving in Santiago on day five.',
   ],
 };
 
