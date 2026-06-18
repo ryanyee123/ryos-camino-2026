@@ -41,10 +41,10 @@ export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
           className="absolute inset-x-0 -bottom-6 h-6 bg-gradient-to-b from-surface/60 to-transparent pointer-events-none transition-opacity duration-200 ease-out motion-reduce:transition-none"
           style={{ opacity: isStuck ? 1 : 0 }}
         />
-        <div className="relative max-w-6xl mx-auto px-6 flex justify-center gap-2 flex-wrap">
+        <div className="relative max-w-6xl mx-auto px-4 md:px-6 flex justify-center gap-1.5 md:gap-2 flex-wrap">
           <button
             onClick={() => onSelect('full')}
-            className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-semibold font-pixel border transition-colors ${
+            className={`shrink-0 rounded-full px-3 md:px-4 py-2 text-body-sm font-semibold font-pixel border transition-colors ${
               activeDay === 'full'
                 ? 'bg-accent text-white border-accent'
                 : 'bg-surface border-border text-ink-muted hover:bg-accent/10 hover:border-accent/30 hover:text-ink'
@@ -56,7 +56,7 @@ export default function DayChips({ activeDay, onSelect }: DayChipsProps) {
             <button
               key={d.day}
               onClick={() => onSelect(d.day)}
-              className={`shrink-0 rounded-full px-4 py-2 text-body-sm font-semibold font-pixel border transition-colors ${
+              className={`shrink-0 rounded-full px-3 md:px-4 py-2 text-body-sm font-semibold font-pixel border transition-colors ${
                 activeDay === d.day
                   ? 'bg-accent text-white border-accent'
                   : 'bg-surface border-border text-ink-muted hover:bg-accent/10 hover:border-accent/30 hover:text-ink'

@@ -53,8 +53,11 @@ export default function GearModal() {
 
   return (
     <Modal hashName="gear" title="What's in my bag" headerRight={currencyButton}>
-      <p className="text-body text-ink-muted mb-6">
-        Everything I carried for 5 days on foot. {totalLbs} lbs / {totalKg} kg base weight.
+      <p className="text-body text-ink-muted mb-1">
+        Everything I carried for 5 days on foot.
+      </p>
+      <p className="text-body font-semibold text-ink mb-6">
+        {totalLbs} lbs / {totalKg} kg base weight
       </p>
       <div className="space-y-6">
         {grouped.map((group) => (
@@ -64,18 +67,18 @@ export default function GearModal() {
               {group.items.map((item) => {
                 const eur = gearCosts.find((c) => c.name === item.name)?.amountEur ?? 0;
                 return (
-                  <div key={item.name} className="px-4 py-3.5 flex items-center justify-between gap-4">
-                    <p className="text-body font-medium font-pixel">{item.name}</p>
-                    <div className="flex items-center gap-3 shrink-0">
-                      {item.weight && (
-                        <p className="text-body-sm text-ink-faint tabular-nums">
-                          {formatWeight(item.weight)}
-                        </p>
-                      )}
-                      <p className="text-body text-ink-muted tabular-nums">
+                  <div key={item.name} className="px-4 py-3.5">
+                    <div className="flex items-center justify-between gap-4">
+                      <p className="text-body font-medium font-pixel">{item.name}</p>
+                      <p className="text-body text-ink-muted tabular-nums shrink-0">
                         {fmt(eur, currency)}
                       </p>
                     </div>
+                    {item.weight && (
+                      <p className="text-body-sm text-ink-faint tabular-nums mt-0.5">
+                        {formatWeight(item.weight)}
+                      </p>
+                    )}
                   </div>
                 );
               })}
