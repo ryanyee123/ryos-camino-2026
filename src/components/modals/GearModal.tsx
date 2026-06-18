@@ -23,7 +23,7 @@ function formatWeight(grams: number) {
 }
 
 const totalGrams = gear.reduce((sum, item) => sum + (item.weight ?? 0), 0);
-const totalLbs = (totalGrams / 453.592).toFixed(1);
+const totalLbs = Math.round(totalGrams / 453.592);
 const totalKg = (totalGrams / 1000).toFixed(1);
 
 // Group gear by category, preserving order of first appearance
