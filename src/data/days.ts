@@ -356,7 +356,7 @@ export const tripOverview = {
 
 
 export const gear: GearItem[] = [
-  { category: 'PACK', name: 'Osprey Stratos 34', weight: 1190, note: '[Placeholder — Ryan to write]', photo: 'osprey-stratos-34.jpg' },
+  { category: 'PACK', name: 'Osprey Stratos 34', weight: 1360, note: '[Placeholder — Ryan to write]', photo: 'osprey-stratos-34.jpg' },
   { category: 'FOOTWEAR', name: 'Salomon Genesis Trail-Running Shoes', weight: 595, note: '[Placeholder — Ryan to write]', photo: 'salomon-genesis.jpg' },
   { category: 'FOOTWEAR', name: 'Darn Tough Hiker Micro Crew Socks ×3', weight: 255, note: '[Placeholder — Ryan to write]', photo: 'darn-tough-socks.jpg' },
   { category: 'BASE LAYER', name: 'Smartwool Merino Short Sleeve', weight: 156, note: '[Placeholder — Ryan to write]', photo: 'smartwool-short-sleeve.jpg' },
@@ -371,6 +371,20 @@ export const gear: GearItem[] = [
   { category: 'ACCESSORIES', name: 'Journal + Pens', weight: 227, note: '[Placeholder — Ryan to write]', photo: 'journal.jpg' },
   { category: 'TOILETRIES', name: 'Eunzel Microfiber Quick-Dry Towel', weight: 113, note: '[Placeholder — Ryan to write]', photo: 'quickdry-towel.jpg' },
   { category: 'HEALTH', name: 'First Aid Pouch', weight: 170, note: '[Placeholder — Ryan to write]', photo: 'first-aid-pouch.jpg' },
+  { category: 'ELECTRONICS', name: 'iPhone + Case', weight: 240, note: '[Placeholder — Ryan to write]' },
+  { category: 'ELECTRONICS', name: 'Charging Cables + Adapter', weight: 100, note: '[Placeholder — Ryan to write]' },
+  { category: 'TOILETRIES', name: 'Toiletry Kit', weight: 600, note: 'Toothbrush, toothpaste, sunscreen, etc.' },
+  { category: 'ACCESSORIES', name: 'Wallet + Passport + Credencial', weight: 100, note: '[Placeholder — Ryan to write]' },
+  { category: 'ACCESSORIES', name: 'Ear Plugs + Sleep Mask', weight: 30, note: '[Placeholder — Ryan to write]' },
+  { category: 'CLOTHING', name: 'Extra Underwear ×3', weight: 150, note: '[Placeholder — Ryan to write]' },
+  { category: 'FOOTWEAR', name: 'Camp Sandals', weight: 300, note: '[Placeholder — Ryan to write]' },
+  { category: 'ACCESSORIES', name: 'Headlamp', weight: 80, note: '[Placeholder — Ryan to write]' },
+  { category: 'HYDRATION', name: 'Water (2L)', weight: 2000, note: 'Full bladder on the trail.' },
+  { category: 'SNACKS', name: 'Trail Snacks & Candy', weight: 400, note: '[Placeholder — Ryan to write]' },
+  { category: 'ACCESSORIES', name: 'Card Game', weight: 150, note: '[Placeholder — Ryan to write]' },
+  { category: 'ELECTRONICS', name: 'Olympus Stylus Infinity', weight: 220, note: '[Placeholder — Ryan to write]' },
+  { category: 'ELECTRONICS', name: '35mm Film ×3', weight: 90, note: '[Placeholder — Ryan to write]' },
+  { category: 'SHELL', name: 'Lululemon Sherpa-Lined Jacket', weight: 680, note: '[Placeholder — Ryan to write]' },
 ];
 
 export const stamps: CredencialStamp[] = [
