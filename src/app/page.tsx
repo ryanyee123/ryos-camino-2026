@@ -57,7 +57,7 @@ export default function Home() {
   }, []);
 
   const fullRouteStats = [
-    { label: 'KM', value: '115', sublabel: 'walked', icon: Footprints },
+    { label: 'MILES', value: '71.5', sublabel: 'walked', icon: Footprints },
     { label: 'DAYS', value: '5', sublabel: 'on the trail', icon: CalendarDays },
     { label: 'TOWNS', value: '6', sublabel: 'passed through', icon: MapPin },
     { label: 'CATHEDRAL', value: '1', sublabel: 'reached', icon: Church },
