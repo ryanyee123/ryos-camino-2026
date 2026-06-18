@@ -4,7 +4,7 @@ export default function TripOverviewContent() {
   return (
     <div>
       <p className="text-caption text-accent-text mb-2">OVERVIEW</p>
-      <h2 className="text-h1">The Last 100 km</h2>
+      <h2 className="text-h1">The Last 115 km</h2>
 
       <div className="mt-8 space-y-4">
         <p className="text-body leading-relaxed">{tripOverview.paragraphs[0]}</p>
