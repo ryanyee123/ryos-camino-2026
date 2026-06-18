@@ -26,7 +26,7 @@ export type Meal = {
 export type GearItem = {
   category: string;
   name: string;
-  weight?: string;
+  weight?: number; // grams
   note: string;
   photo?: string;
 };
@@ -307,7 +307,9 @@ export const days: Day[] = [
       note: '[Placeholder — Ryan to write]',
       googleMapsUrl: '',
     },
-    meals: [],
+    meals: [
+      { label: 'LUNCH', name: 'Costa Vella Garden Cafe', location: 'Santiago de Compostela', note: 'Acai bowl in the garden before the train.', googleMapsUrl: 'https://maps.app.goo.gl/McUrh6AJBy87GafKA' },
+    ],
   },
 ];
 
@@ -354,21 +356,21 @@ export const tripOverview = {
 
 
 export const gear: GearItem[] = [
-  { category: 'PACK', name: 'Osprey Stratos 34', note: '[Placeholder — Ryan to write]', photo: 'osprey-stratos-34.jpg' },
-  { category: 'FOOTWEAR', name: 'Salomon Genesis Trail-Running Shoes', note: '[Placeholder — Ryan to write]', photo: 'salomon-genesis.jpg' },
-  { category: 'FOOTWEAR', name: 'Darn Tough Hiker Micro Crew Socks ×3', note: '[Placeholder — Ryan to write]', photo: 'darn-tough-socks.jpg' },
-  { category: 'BASE LAYER', name: 'Smartwool Merino Short Sleeve', note: '[Placeholder — Ryan to write]', photo: 'smartwool-short-sleeve.jpg' },
-  { category: 'BASE LAYER', name: 'REI Merino Long Sleeve', note: '[Placeholder — Ryan to write]', photo: 'rei-long-sleeve.jpg' },
-  { category: 'SHELL', name: 'REI Rainier Rain Jacket', note: '[Placeholder — Ryan to write]', photo: 'rei-rainier.jpg' },
-  { category: 'PANTS', name: 'Gramicci Nylon Paneled Trek Pants', note: '[Placeholder — Ryan to write]', photo: 'gramicci-pants.jpg' },
-  { category: 'HEADWEAR', name: 'Snow Peak Bucket Hat', note: '[Placeholder — Ryan to write]', photo: 'snowpeak-bucket-hat.jpg' },
-  { category: 'SLEEP', name: 'Sleeping Bag Liner', note: '[Placeholder — Ryan to write]', photo: 'silk-liner.jpg' },
-  { category: 'ELECTRONICS', name: 'Anker Portable Charger', note: '[Placeholder — Ryan to write]', photo: 'anker-charger.jpg' },
-{ category: 'HYDRATION', name: 'Water Bladder / Camelback', note: '[Placeholder — Ryan to write]', photo: 'water-bladder.jpg' },
-  { category: 'ACCESSORIES', name: 'Meller Sunglasses', note: '[Placeholder — Ryan to write]', photo: 'miller-sunglasses.jpg' },
-  { category: 'ACCESSORIES', name: 'Journal + Pens', note: '[Placeholder — Ryan to write]', photo: 'journal.jpg' },
-  { category: 'TOILETRIES', name: 'Eunzel Microfiber Quick-Dry Towel', note: '[Placeholder — Ryan to write]', photo: 'quickdry-towel.jpg' },
-  { category: 'HEALTH', name: 'First Aid Pouch', note: '[Placeholder — Ryan to write]', photo: 'first-aid-pouch.jpg' },
+  { category: 'PACK', name: 'Osprey Stratos 34', weight: 1190, note: '[Placeholder — Ryan to write]', photo: 'osprey-stratos-34.jpg' },
+  { category: 'FOOTWEAR', name: 'Salomon Genesis Trail-Running Shoes', weight: 595, note: '[Placeholder — Ryan to write]', photo: 'salomon-genesis.jpg' },
+  { category: 'FOOTWEAR', name: 'Darn Tough Hiker Micro Crew Socks ×3', weight: 255, note: '[Placeholder — Ryan to write]', photo: 'darn-tough-socks.jpg' },
+  { category: 'BASE LAYER', name: 'Smartwool Merino Short Sleeve', weight: 156, note: '[Placeholder — Ryan to write]', photo: 'smartwool-short-sleeve.jpg' },
+  { category: 'BASE LAYER', name: 'REI Merino Long Sleeve', weight: 184, note: '[Placeholder — Ryan to write]', photo: 'rei-long-sleeve.jpg' },
+  { category: 'SHELL', name: 'REI Rainier Rain Jacket', weight: 354, note: '[Placeholder — Ryan to write]', photo: 'rei-rainier.jpg' },
+  { category: 'PANTS', name: 'Gramicci Nylon Paneled Trek Pants', weight: 340, note: '[Placeholder — Ryan to write]', photo: 'gramicci-pants.jpg' },
+  { category: 'HEADWEAR', name: 'Snow Peak Bucket Hat', weight: 71, note: '[Placeholder — Ryan to write]', photo: 'snowpeak-bucket-hat.jpg' },
+  { category: 'SLEEP', name: 'Sleeping Bag Liner', weight: 142, note: '[Placeholder — Ryan to write]', photo: 'silk-liner.jpg' },
+  { category: 'ELECTRONICS', name: 'Anker Portable Charger', weight: 181, note: '[Placeholder — Ryan to write]', photo: 'anker-charger.jpg' },
+  { category: 'HYDRATION', name: 'Water Bladder / Camelback', weight: 170, note: '[Placeholder — Ryan to write]', photo: 'water-bladder.jpg' },
+  { category: 'ACCESSORIES', name: 'Meller Sunglasses', weight: 28, note: '[Placeholder — Ryan to write]', photo: 'miller-sunglasses.jpg' },
+  { category: 'ACCESSORIES', name: 'Journal + Pens', weight: 227, note: '[Placeholder — Ryan to write]', photo: 'journal.jpg' },
+  { category: 'TOILETRIES', name: 'Eunzel Microfiber Quick-Dry Towel', weight: 113, note: '[Placeholder — Ryan to write]', photo: 'quickdry-towel.jpg' },
+  { category: 'HEALTH', name: 'First Aid Pouch', weight: 170, note: '[Placeholder — Ryan to write]', photo: 'first-aid-pouch.jpg' },
 ];
 
 export const stamps: CredencialStamp[] = [

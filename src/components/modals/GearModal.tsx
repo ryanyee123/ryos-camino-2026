@@ -12,6 +12,20 @@ function fmt(eur: number, currency: 'EUR' | 'USD') {
   return `${currency === 'USD' ? '$' : '€'}${n}`;
 }
 
+function formatWeight(grams: number) {
+  const oz = grams / 28.3495;
+  if (oz >= 16) {
+    const lbs = Math.floor(oz / 16);
+    const remainOz = Math.round(oz % 16);
+    return `${lbs} lb ${remainOz} oz / ${grams}g`;
+  }
+  return `${oz.toFixed(1)} oz / ${grams}g`;
+}
+
+const totalGrams = gear.reduce((sum, item) => sum + (item.weight ?? 0), 0);
+const totalLbs = (totalGrams / 453.592).toFixed(1);
+const totalKg = (totalGrams / 1000).toFixed(1);
+
 // Group gear by category, preserving order of first appearance
 const grouped = gear.reduce<{ category: string; items: typeof gear }[]>((acc, item) => {
   const existing = acc.find((g) => g.category === item.category);
@@ -40,7 +54,7 @@ export default function GearModal() {
   return (
     <Modal hashName="gear" title="What's in my bag" headerRight={currencyButton}>
       <p className="text-body text-ink-muted mb-6">
-        Everything I carried for 5 days on foot. 7.8 kg base weight.
+        Everything I carried for 5 days on foot. {totalLbs} lbs / {totalKg} kg base weight.
       </p>
       <div className="space-y-6">
         {grouped.map((group) => (
@@ -52,9 +66,16 @@ export default function GearModal() {
                 return (
                   <div key={item.name} className="px-4 py-3.5 flex items-center justify-between gap-4">
                     <p className="text-body font-medium font-pixel">{item.name}</p>
-                    <p className="text-body text-ink-muted tabular-nums shrink-0">
-                      {fmt(eur, currency)}
-                    </p>
+                    <div className="flex items-center gap-3 shrink-0">
+                      {item.weight && (
+                        <p className="text-body-sm text-ink-faint tabular-nums">
+                          {formatWeight(item.weight)}
+                        </p>
+                      )}
+                      <p className="text-body text-ink-muted tabular-nums">
+                        {fmt(eur, currency)}
+                      </p>
+                    </div>
                   </div>
                 );
               })}
