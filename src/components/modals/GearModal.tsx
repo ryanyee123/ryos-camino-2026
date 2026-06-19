@@ -1,16 +1,5 @@
-'use client';
-
-import { useState } from 'react';
 import Modal from '@/components/ui/Modal';
 import { gear } from '@/data/days';
-import { cost } from '@/data/cost';
-
-const gearCosts = cost.categories.find((c) => c.name === 'Gear')!.items;
-
-function fmt(eur: number, currency: 'EUR' | 'USD') {
-  const n = currency === 'USD' ? Math.round(eur * cost.conversionRate) : Math.round(eur);
-  return `${currency === 'USD' ? '$' : '€'}${n}`;
-}
 
 function formatWeight(grams: number) {
   const oz = grams / 28.3495;
@@ -38,21 +27,8 @@ const grouped = gear.reduce<{ category: string; items: typeof gear }[]>((acc, it
 }, []);
 
 export default function GearModal() {
-  const [currency, setCurrency] = useState<'EUR' | 'USD'>('USD');
-
-  const currencyButton = (
-    <button
-      onClick={() => setCurrency(currency === 'EUR' ? 'USD' : 'EUR')}
-      className="flex-shrink-0 flex items-center gap-1 rounded-full border border-border-strong px-3 py-1.5 text-body-sm font-medium transition-colors hover:bg-stone-100"
-    >
-      <span className={currency === 'EUR' ? 'text-ink' : 'text-ink-muted'}>€</span>
-      <span className="text-ink-muted">/</span>
-      <span className={currency === 'USD' ? 'text-ink' : 'text-ink-muted'}>$</span>
-    </button>
-  );
-
   return (
-    <Modal hashName="gear" title="What's in my bag" headerRight={currencyButton}>
+    <Modal hashName="gear" title="What's in my bag">
       <p className="text-body text-ink-muted mb-1">
         Everything I carried for 5 days on foot.
       </p>
@@ -64,24 +40,16 @@ export default function GearModal() {
           <div key={group.category}>
             <p className="text-caption text-ink-muted mb-2">{group.category}</p>
             <div className="bg-surface-raised shadow-card rounded-xl overflow-hidden divide-y divide-border">
-              {group.items.map((item) => {
-                const eur = gearCosts.find((c) => c.name === item.name)?.amountEur ?? 0;
-                return (
-                  <div key={item.name} className="px-4 py-3.5">
-                    <div className="flex items-center justify-between gap-4">
-                      <p className="text-body font-medium font-pixel">{item.name}</p>
-                      <p className="text-body text-ink-muted tabular-nums shrink-0">
-                        {fmt(eur, currency)}
-                      </p>
-                    </div>
-                    {item.weight && (
-                      <p className="text-body-sm text-ink-faint tabular-nums mt-0.5">
-                        {formatWeight(item.weight)}
-                      </p>
-                    )}
-                  </div>
-                );
-              })}
+              {group.items.map((item) => (
+                <div key={item.name} className="px-4 py-3.5 flex items-center justify-between gap-4">
+                  <p className="text-body font-medium font-pixel">{item.name}</p>
+                  {item.weight && (
+                    <p className="text-body-sm text-ink-muted tabular-nums shrink-0">
+                      {formatWeight(item.weight)}
+                    </p>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
         ))}
