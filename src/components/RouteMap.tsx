@@ -247,6 +247,6 @@ export default function RouteMap({ activeDay = 'full', className }: RouteMapProp
   }, [activeDay, segments]);
 
   return (
-    <div ref={containerRef} className={`w-full rounded-lg border border-black/[0.06] overflow-hidden bg-stone-100 ${className ?? 'h-[500px]'}`} />
+    <div ref={containerRef} className={`w-full rounded-xl border border-border shadow-card overflow-hidden bg-surface-hover ${className ?? 'h-[500px]'}`} />
   );
 }

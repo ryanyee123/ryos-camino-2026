@@ -42,7 +42,7 @@ export default function GearModal() {
             <div className="bg-surface-raised shadow-card rounded-xl overflow-hidden divide-y divide-border">
               {group.items.map((item) => (
                 <div key={item.name} className="px-4 py-3.5 flex items-center justify-between gap-4">
-                  <p className="text-body font-medium font-pixel">{item.name}</p>
+                  <p className="text-body font-semibold font-pixel">{item.name}</p>
                   {item.weight && (
                     <p className="text-body-sm text-ink-muted tabular-nums shrink-0">
                       {formatWeight(item.weight)}

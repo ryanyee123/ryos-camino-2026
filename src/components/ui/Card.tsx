@@ -67,7 +67,7 @@ export function PlaceCard({
         ) : placeholderIcon ? (
           <PlaceholderImage icon={placeholderIcon} />
         ) : (
-          <div className="w-full h-full bg-stone-200" />
+          <div className="w-full h-full bg-surface-muted" />
         )}
       </div>
       <div className="p-5">

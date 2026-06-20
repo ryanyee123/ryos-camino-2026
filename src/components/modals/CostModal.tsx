@@ -28,7 +28,7 @@ export default function CostModal() {
   const currencyButton = (
     <button
       onClick={() => setCurrency(currency === 'EUR' ? 'USD' : 'EUR')}
-      className="flex-shrink-0 flex items-center gap-1 rounded-full border border-border-strong px-3 py-1.5 text-body-sm font-medium transition-colors hover:bg-stone-100"
+      className="flex-shrink-0 flex items-center gap-1 rounded-full border border-border-strong px-3 py-1.5 text-body-sm font-medium transition-colors hover:bg-surface-hover"
     >
       <span className={currency === 'EUR' ? 'text-ink' : 'text-ink-muted'}>€</span>
       <span className="text-ink-muted">/</span>

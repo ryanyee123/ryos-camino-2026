@@ -27,7 +27,7 @@ export default function NavRail() {
         <div className="relative bg-surface-raised rounded-2xl p-2 flex flex-col gap-1 shadow-nav">
           {/* Sliding hover indicator */}
           <div
-            className="absolute left-2 right-2 h-10 rounded-xl bg-stone-100 transition-[transform,opacity] duration-200 ease-out"
+            className="absolute left-2 right-2 h-10 rounded-xl bg-surface-hover transition-[transform,opacity] duration-200 ease-out"
             style={{
               opacity: hoveredIndex !== null ? 1 : 0,
               transform: `translateY(${PADDING + (hoveredIndex ?? lastIndex) * (ITEM_SIZE + GAP) - PADDING}px)`,
@@ -65,7 +65,7 @@ export default function NavRail() {
           <button
             key={item.label}
             onClick={item.action}
-            className="flex items-center justify-center w-10 h-10 rounded-xl transition-[background-color] duration-150 hover:bg-stone-100"
+            className="flex items-center justify-center w-10 h-10 rounded-xl transition-[background-color] duration-150 hover:bg-surface-hover"
           >
             <item.icon size={20} className="text-ink-muted" />
           </button>

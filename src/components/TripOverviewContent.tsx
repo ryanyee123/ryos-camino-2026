@@ -9,7 +9,7 @@ export default function TripOverviewContent() {
       <div className="mt-8 space-y-4">
         <p className="text-body leading-relaxed">{tripOverview.paragraphs[0]}</p>
         <div className="my-4">
-          <div className="bg-surface-raised shadow-card rounded-lg overflow-hidden">
+          <div className="bg-surface-raised shadow-card rounded-xl overflow-hidden">
             <img src="/photos/camino-map.webp" alt="Main routes of the Camino de Santiago" className="w-full h-auto" />
           </div>
         </div>

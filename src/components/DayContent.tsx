@@ -19,7 +19,7 @@ function CompactPlace({ icon: Icon, label, name, meta, href }: {
 }) {
   const content = (
     <div className="flex items-center gap-4 px-4 py-3.5">
-      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-stone-100 flex items-center justify-center">
+      <div className="flex-shrink-0 w-10 h-10 rounded-xl bg-surface-hover flex items-center justify-center">
         <Icon size={18} className="text-ink-muted" />
       </div>
       <div className="min-w-0 flex-1">
@@ -55,7 +55,7 @@ function InlineImage({ src, aspectRatio }: { src: string; aspectRatio?: string }
   const [errored, setErrored] = useState(false);
 
   return (
-    <div className={`${ASPECT_MAP[aspectRatio ?? '3/2']} bg-surface-raised shadow-card rounded-lg overflow-hidden`}>
+    <div className={`${ASPECT_MAP[aspectRatio ?? '3/2']} bg-surface-raised shadow-card rounded-xl overflow-hidden`}>
       {errored ? (
         <PlaceholderImage icon={Camera} />
       ) : (

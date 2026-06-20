@@ -20,7 +20,7 @@ export default function CredencialModal() {
       <p className="text-body text-ink-muted mb-6">
         Two stamps a day, from churches, albergues, and cafés. Proof you walked it.
       </p>
-      <div className="rounded-xl bg-[#F5F0E6] p-6 md:p-8 border border-black/[0.06]">
+      <div className="rounded-xl bg-surface-parchment p-6 md:p-8 border border-border">
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 md:gap-5">
           {stamps.map((stamp, i) => (
             <button
@@ -29,7 +29,7 @@ export default function CredencialModal() {
               className="group flex flex-col items-center text-center"
             >
               <div
-                className="w-full aspect-square rounded-lg border border-black/[0.08] bg-white/60 shadow-[inset_0_1px_3px_rgba(0,0,0,0.06)] overflow-hidden motion-safe:transition-transform motion-safe:duration-200"
+                className="w-full aspect-square rounded-lg border border-border-strong bg-white/60 shadow-[inset_0_1px_3px_rgba(0,0,0,0.06)] overflow-hidden motion-safe:transition-transform motion-safe:duration-200"
                 style={{ transform: `rotate(${stampRotation(i)}deg)` }}
               >
                 {stamp.photo ? (

@@ -83,7 +83,7 @@ export default function Modal({ hashName, title, headerRight, children }: ModalP
       <div
         role="dialog"
         aria-modal="true"
-        className={`hidden md:block bg-white rounded-xl border border-black/[0.05] shadow-[0_20px_50px_-12px_rgba(0,0,0,0.25)] w-full max-w-[740px] mt-12 mb-12 p-8 max-h-[85vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
+        className={`hidden md:block bg-white rounded-xl border border-border shadow-modal w-full max-w-[740px] mt-12 mb-12 p-8 max-h-[85vh] overflow-y-auto overscroll-none relative transition-[opacity,transform] duration-200 ease-out ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2'}`}
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between mb-6">
@@ -93,7 +93,7 @@ export default function Modal({ hashName, title, headerRight, children }: ModalP
           </div>
           <button
             onClick={close}
-            className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-stone-100 transition-colors"
+            className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-surface-hover transition-colors"
           >
             <X size={18} className="text-ink-muted" />
           </button>
@@ -114,7 +114,7 @@ export default function Modal({ hashName, title, headerRight, children }: ModalP
         onClick={(e) => e.stopPropagation()}
       >
         <div className="sticky top-0 z-10 bg-surface-raised pt-3 pb-4 px-6">
-          <div className="w-10 h-1 rounded-full bg-stone-300 mx-auto mb-4" />
+          <div className="w-10 h-1 rounded-full bg-surface-muted mx-auto mb-4" />
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <h2 className="text-h2">{title}</h2>
@@ -122,7 +122,7 @@ export default function Modal({ hashName, title, headerRight, children }: ModalP
             </div>
             <button
               onClick={close}
-              className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-stone-100 transition-colors"
+              className="flex items-center justify-center w-8 h-8 rounded-lg hover:bg-surface-hover transition-colors"
             >
               <X size={18} className="text-ink-muted" />
             </button>
